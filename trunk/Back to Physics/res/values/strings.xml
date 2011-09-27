@@ -2,4 +2,11 @@
 <resources>
     <string name="hello">Hello World, BacktoPhysics!</string>
     <string name="app_name">Back to Physics</string>
+    <string name="lblJuegoNuevo">Juego Nuevo</string>
+    <string name="lblContinuar">Continuar</string>
+    <string name="lblScores">High Scores</string>
+    <string name="lblOpciones">Opciones</string>
+    <string name="lblAcercaD"></string>
+    <string name="lblAcercaDe">Acerca De</string>
+    <string name="lblTitulo">BACK TO PHISICS</string>
 </resources>

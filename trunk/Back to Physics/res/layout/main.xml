@@ -4,9 +4,10 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     >
-<TextView  
-    android:layout_width="fill_parent" 
-    android:layout_height="wrap_content" 
-    android:text="@string/hello"
-    />
+    <TextView android:layout_gravity="center" android:layout_marginBottom="12dp" android:layout_marginTop="12dp" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceLarge" android:layout_height="wrap_content" android:id="@+id/txvTitulo" android:text="@string/lblTitulo"></TextView>
+<Button android:layout_gravity="center" android:layout_marginBottom="12dp" android:layout_width="wrap_content" android:id="@+id/btnJuegoNuevo" android:layout_height="wrap_content" android:text="@string/lblJuegoNuevo"></Button>
+<Button android:layout_gravity="center" android:layout_marginBottom="12dp" android:layout_width="wrap_content" android:id="@+id/btnContinuar" android:layout_height="wrap_content" android:text="@string/lblContinuar" android:gravity="center"></Button>
+<Button android:layout_gravity="center" android:layout_marginBottom="12dp" android:layout_width="wrap_content" android:id="@+id/btnScores" android:layout_height="wrap_content" android:text="@string/lblScores" android:gravity="center"></Button>
+<Button android:layout_gravity="center" android:layout_marginBottom="12dp" android:layout_width="wrap_content" android:id="@+id/btnOpciones" android:layout_height="wrap_content" android:text="@string/lblOpciones" android:gravity="center"></Button>
+<Button android:layout_gravity="center"  android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/btnAcercaDe" android:text="@string/lblAcercaDe" android:gravity="center"></Button>
 </LinearLayout>
