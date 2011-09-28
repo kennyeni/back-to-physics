@@ -3,12 +3,14 @@ package menu;
 import graficas.Juego;
 import android.app.Activity;
 import android.os.Bundle;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 public class PantallJuego extends Activity implements Runnable
 {
-	private Juego juego;
+	
 	private boolean corriendo;
+	private Juego juego = null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -39,18 +41,13 @@ public class PantallJuego extends Activity implements Runnable
 	
 	
 	@Override
-	public void run() 
-	{
-		corriendo = true;
-		while (corriendo)
-		{
-			juego.leerEntrada(); // Leer la entrada, Detectar eventos
-			juego.actualizar(); //ctualizar juego
-			juego.postInvalidate();      //Dibuja un juego   //Ejecuta de manera indirecta el método onDraw
+	public void run() {
+		corriendo=true;
+		while(corriendo){
+			juego.postInvalidate(); //ejecuta de manera indirecta onDraw
 			try {
-				Thread.sleep(5);
-			} catch (InterruptedException e) {
-			}
+				Thread.sleep(34);
+			} catch (InterruptedException e) {}
 		}
 	}
 }
