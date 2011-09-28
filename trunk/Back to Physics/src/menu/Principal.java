@@ -24,6 +24,7 @@ public class Principal extends Activity{
         public void onClick(View arg0) {
             // TODO Auto-generated method stub
             IniciarJuego();
+            
         }
     });
     
@@ -34,7 +35,7 @@ public class Principal extends Activity{
         @Override
         public void onClick(View arg0) {
             // TODO Auto-generated method stub
-            ContinuarJuego();
+            //ContinuarJuego();
             
         }
     });
@@ -47,7 +48,7 @@ public class Principal extends Activity{
         @Override
         public void onClick(View arg0) {
             // TODO Auto-generated method stub
-            Scores();
+            //Scores();
         }
     });
     
@@ -58,7 +59,7 @@ public class Principal extends Activity{
         @Override
         public void onClick(View arg0) {
             // TODO Auto-generated method stub
-            MenuOpciones();     
+            //MenuOpciones();     
         }
     });
     
@@ -69,7 +70,7 @@ public class Principal extends Activity{
         @Override
         public void onClick(View arg0) {
             // TODO Auto-generated method stub
-            AcercaDe();     
+            //AcercaDe();     
         }
     });
     
