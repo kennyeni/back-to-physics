@@ -1,5 +1,3 @@
-////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 package menu;
 
 import mx.itesm.btp.*;
@@ -25,53 +23,53 @@ public class Principal extends Activity{
         @Override
         public void onClick(View arg0) {
             // TODO Auto-generated method stub
-            //IniciarJuego();
+            IniciarJuego();
         }
     });
     
     
-    Button continuar = (Button)findViewById(mx.itesm.btp.R.id.btnJuegoNuevo);
+    Button continuar = (Button)findViewById(mx.itesm.btp.R.id.btnContinuar);
     continuar.setOnClickListener(new View.OnClickListener() {
         
         @Override
         public void onClick(View arg0) {
             // TODO Auto-generated method stub
-            //ContinuarJuego();
+            ContinuarJuego();
             
         }
     });
 
     
     
-    Button Scores = (Button)findViewById(mx.itesm.btp.R.id.btnJuegoNuevo);
+    Button Scores = (Button)findViewById(mx.itesm.btp.R.id.btnScores);
     Scores.setOnClickListener(new View.OnClickListener() {
         
         @Override
         public void onClick(View arg0) {
             // TODO Auto-generated method stub
-            //Scores();
+            Scores();
         }
     });
     
     
-    Button Opciones = (Button)findViewById(mx.itesm.btp.R.id.btnJuegoNuevo);
+    Button Opciones = (Button)findViewById(mx.itesm.btp.R.id.btnOpciones);
     Opciones.setOnClickListener(new View.OnClickListener() {
         
         @Override
         public void onClick(View arg0) {
             // TODO Auto-generated method stub
-            //MenuOpciones();     
+            MenuOpciones();     
         }
     });
     
     
-    Button AcercaDe = (Button)findViewById(mx.itesm.btp.R.id.btnJuegoNuevo);
+    Button AcercaDe = (Button)findViewById(mx.itesm.btp.R.id.btnAcercaDe);
     AcercaDe.setOnClickListener(new View.OnClickListener() {
         
         @Override
         public void onClick(View arg0) {
             // TODO Auto-generated method stub
-            //AcercaDe();     
+            AcercaDe();     
         }
     });
     
@@ -79,11 +77,11 @@ public class Principal extends Activity{
     }
 
     
-    /*
+    
     
     private void  IniciarJuego()
     {
-        Intent intencion = new Intent (Principal.this, PantallJuego.class); 
+        Intent intencion = new Intent(Principal.this, PantallJuego.class);
         startActivity (intencion);
     }
     
@@ -110,6 +108,6 @@ public class Principal extends Activity{
         Intent intencion = new Intent (Principal.this, PantallJuego.class); 
         startActivity (intencion);
     }
-    */
+    
 
 }
