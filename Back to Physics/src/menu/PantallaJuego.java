@@ -2,6 +2,7 @@ package menu;
 
 import graficas.Juego;
 
+import graficas.Pantalla;
 import android.app.Activity;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -12,11 +13,13 @@ public class PantallaJuego  extends Activity implements Runnable{
 	private Juego juego;
 	private boolean corriendo;
 	private MediaPlayer player;
+	private Pantalla pantalla;
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
-		juego = new Juego(this);
+		
+		pantalla = new Pantalla();
+		juego = new Juego(this, pantalla);
 		setContentView(juego);
 		reproducirAudio();
 

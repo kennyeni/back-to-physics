@@ -2,6 +2,7 @@ package graficas;
 
 
 
+import mx.itesm.btp.R;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -25,17 +26,17 @@ public class Juego extends View{
 	private Bitmap bm;
 	private Paint p;
 	private boolean pausado;
-	private Bitmap imgFondo;
+	private Fondo imgFondo;
 	private Bitmap imgMonito;
 	private Bitmap imgRoca;
 	private Bitmap imgbtn;
 	private Bitmap arrow;
 	private Bitmap mira;
-	public Juego(Context context) {
+	public Juego(Context context, Pantalla pantalla) {
 		super(context);
 		p=new Paint();
-		
-		imgFondo = BitmapFactory.decodeResource(getResources(), mx.itesm.btp.R.drawable.valley);
+		pantalla.setContext(context);
+		imgFondo = new Fondo(R.drawable.valley, pantalla, getResources());
 		arrow = BitmapFactory.decodeResource(getResources(), mx.itesm.btp.R.drawable.arrow);
 		mira=BitmapFactory.decodeResource(getResources(), mx.itesm.btp.R.drawable.mira1);
 		imgMonito = BitmapFactory.decodeResource(getResources(), mx.itesm.btp.R.drawable.cat1);
@@ -50,7 +51,7 @@ public class Juego extends View{
 		
 		
 		mira = Bitmap.createScaledBitmap(mira, canvas.getWidth(), canvas.getHeight(), false);
-		canvas.drawBitmap(imgFondo, z, -100, p);
+		//canvas.drawBitmap(imgFondo.getBitmap());
 		canvas.drawBitmap(mira, 0, 0, p);
 		canvas.drawBitmap(imgMonito, 200, 500, p);
 		canvas.drawBitmap(imgbtn, x, 630,p);
