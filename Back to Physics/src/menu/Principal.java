@@ -36,8 +36,22 @@ public class Principal extends Activity{
 					startActivity(intencion);
 				}
 			});
+    
+    
+    
+    ((Button)findViewById(mx.itesm.btp.R.id.btnOpciones)).setOnClickListener(new OnClickListener() {
+        
+		
+		public void onClick(View v) {
+			Intent intencion = new Intent(Principal.this,Opciones.class);
+			startActivity(intencion);
+		}
+	});
+    
+    
 	    }
 
+    
     
     
     

@@ -1,6 +1,7 @@
 package menu;
 
 import android.app.Activity;
+
 import android.content.pm.LabeledIntent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -10,7 +11,8 @@ import mx.itesm.btp.*;
 
 public class acercaDe extends Activity {
 
-	public void onCreate(Bundle savedInstanceState){
+	public void onCreate(Bundle savedInstanceState)
+	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.acercade);
 	}
