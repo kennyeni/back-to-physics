@@ -17,13 +17,7 @@ public class Fondo {
 		grafico = BitmapFactory.decodeResource(resources, mx.itesm.btp.R.drawable.valley); // Se crea el grafico con la imagen de parametro
 		this.pantalla = pantalla;
 		try {
-			int gHeight = grafico.getHeight()/2;
-			int gWidth = grafico.getWidth()/2;
-			int pHeight = pantalla.getHeight()/2;
-			int pWidth = pantalla.getWidth()/2;
-			
-			pos.y = (gHeight-pHeight); //La imagen se centra
-			pos.x = (gWidth-pWidth);
+			this.center();
 		} catch (NoContextProvidedException e) {
 			e.printStackTrace();
 		}
@@ -38,36 +32,51 @@ public class Fondo {
 		return null;
 	}
 	
-	public boolean mueveX(int X){
+	public boolean mueveX(int X) throws NoContextProvidedException{
 		boolean exitoso;
 		pos.x+=X;
-		if(pos.x<grafico.getWidth())
+		if(pos.x<grafico.getWidth()-pantalla.getWidth()-10)
 			if(pos.x>0)
 				exitoso = true;
-			else
+			else{
+				pos.x=0;
 				exitoso = false;
+			}
 		else{
-			pos.x = grafico.getWidth();
+			pos.x = grafico.getWidth()-pantalla.getWidth()-10;
 			exitoso = false;
 		}
 		
 		return exitoso;
 	}
 	
-	public boolean mueveY(int Y){
+	public boolean mueveY(int Y) throws NoContextProvidedException{
 		boolean exitoso;
 		pos.y+=Y;
-		if(pos.y<grafico.getHeight())
+		if(pos.y<(grafico.getHeight()-pantalla.getHeight())-10)
 			if(pos.y>0)
 				exitoso = true;
-			else
+			else{
+				pos.y =0;
 				exitoso = false;
+			}
 		else{
-			pos.y = grafico.getHeight();
+			pos.y = grafico.getHeight()-pantalla.getHeight()-10;
 			exitoso = false;
 		}
 		
 		return exitoso;
+	}
+
+	public void center() throws NoContextProvidedException {
+		int gHeight = grafico.getHeight()/2;
+		int gWidth = grafico.getWidth()/2;
+		int pHeight = pantalla.getHeight()/2;
+		int pWidth = pantalla.getWidth()/2;
+		
+		pos.y = (gHeight-pHeight); //La imagen se centra
+		pos.x = (gWidth-pWidth);
+		
 	}
 	
 
