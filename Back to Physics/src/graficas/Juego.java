@@ -38,7 +38,7 @@ public class Juego extends View{
 		mira=BitmapFactory.decodeResource(getResources(), mx.itesm.btp.R.drawable.crosshair2);
 		imgMonito = BitmapFactory.decodeResource(getResources(), mx.itesm.btp.R.drawable.cat1);
 		imgRoca= BitmapFactory.decodeResource(getResources(), mx.itesm.btp.R.drawable.rock);
-		imgbtn= BitmapFactory.decodeResource(getResources(), mx.itesm.btp.R.drawable.btn1);
+		imgbtn= BitmapFactory.decodeResource(getResources(), mx.itesm.btp.R.drawable.btnb);
 
 	}
 	
