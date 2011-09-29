@@ -27,6 +27,12 @@ public class Juego extends View{
 	private Bitmap imgbtn;
 	private Bitmap arrow;
 	private Bitmap mira;
+	private Bitmap barra1;
+	private Bitmap barra2;
+	private Bitmap barra3;
+	private Bitmap barra4;
+	private Bitmap barra5;
+	private int x=0;
 	
 	public Juego(Context context, Pantalla pantalla){
 		super(context);
@@ -39,6 +45,16 @@ public class Juego extends View{
 		imgMonito = BitmapFactory.decodeResource(getResources(), mx.itesm.btp.R.drawable.cat1);
 		imgRoca= BitmapFactory.decodeResource(getResources(), mx.itesm.btp.R.drawable.rock);
 		imgbtn= BitmapFactory.decodeResource(getResources(), mx.itesm.btp.R.drawable.btnb);
+		barra1= BitmapFactory.decodeResource(getResources(), mx.itesm.btp.R.drawable.barra1);
+		barra2= BitmapFactory.decodeResource(getResources(), mx.itesm.btp.R.drawable.barra2);
+		barra3= BitmapFactory.decodeResource(getResources(), mx.itesm.btp.R.drawable.barra3);
+		barra4= BitmapFactory.decodeResource(getResources(), mx.itesm.btp.R.drawable.barra4);
+		barra5= BitmapFactory.decodeResource(getResources(), mx.itesm.btp.R.drawable.barra5);
+
+
+
+
+
 
 	}
 	
@@ -112,4 +128,37 @@ public class Juego extends View{
 		}
 		
 	}
+	
+	private void marcarVida(Bitmap enemigo, Bitmap bala,Canvas canvas) {
+		
+		
+		if(enemigo.getHeight()==bala.getHeight()&&enemigo.getWidth()==bala.getWidth()){
+		x=x++;
+	}
+	else{
+		x=0;
+	}
+	switch(x){
+	case 1: if(x==0){
+		canvas.drawBitmap(barra1, 200, 100,p);
+	}break;
+	case 2:if(x==1){
+		canvas.drawBitmap(barra2, 200, 100,p);
+	}break;
+	case 3: if(x==2){
+		canvas.drawBitmap(barra3, 200, 100,p);
+	}break;
+	case 4: if(x==3){
+		canvas.drawBitmap(barra4, 200, 100,p);
+	}break;
+	case 5: if(x==4){
+		canvas.drawBitmap(barra5, 200, 100,p);
+	}break;
+		
+	}
+		
+
+}
+
+
 }
