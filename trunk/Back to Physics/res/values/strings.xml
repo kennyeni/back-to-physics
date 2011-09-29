@@ -9,5 +9,24 @@
     <string name="lblAcercaD"/>
     <string name="lblAcercaDe">Acerca De</string>
     <string name="lblTitulo">BACK TO PHISICS</string>
-    <string name="txtAcercaDe">Hola Mundo</string>
+    <string name="txtAcercaDe">
+    \nBack to Physics
+    \n
+    \nAutores: 
+    \n
+    \n Verónica Fajardo A01163407
+    \n Andrés Duran Kenny Espinoza A01162492 
+    \n Gerardo Caballero Soto A01163487
+    \n Luis Ivan Campos Soriano A01163407
+    \n
+    \n
+    \nVersion: 1.0
+    \n
+    \nEsta aplicación no hace nada solo muestra algunos conceptos
+    \n
+    \nCopyright 2001, ITESM
+    </string>
+    <string name="txtSonido"></string>
+    <string name="lblSonidos"></string>
+    <string name="txtOpciones"></string>
 </resources>
