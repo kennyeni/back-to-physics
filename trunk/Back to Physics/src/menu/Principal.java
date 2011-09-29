@@ -3,9 +3,11 @@ package menu;
 import mx.itesm.btp.*;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.view.View.OnClickListener;
 
 
@@ -16,7 +18,15 @@ public class Principal extends Activity{
          super.onCreate(savedInstanceState);
             setContentView(mx.itesm.btp.R.layout.main);
             
-    ((Button)findViewById(mx.itesm.btp.R.id.btnJuegoNuevo)).setOnClickListener(new OnClickListener() {
+            Typeface font = Typeface.createFromAsset(getAssets(), "fonts/spin.otf");
+            TextView texto = (TextView)findViewById(R.id.txtTitulo);
+            texto.setTypeface(font);
+            
+            ((TextView)findViewById(mx.itesm.btp.R.id.btnJuegoNuevo)).setTypeface(font);
+            
+            
+            
+    ((TextView)findViewById(mx.itesm.btp.R.id.btnJuegoNuevo)).setOnClickListener(new OnClickListener() {
 	        
 				
 				public void onClick(View v) {
@@ -28,7 +38,7 @@ public class Principal extends Activity{
     
     
     
-    ((Button)findViewById(mx.itesm.btp.R.id.btnAcercaDe)).setOnClickListener(new OnClickListener() {
+    ((TextView)findViewById(mx.itesm.btp.R.id.btnAcercaDe)).setOnClickListener(new OnClickListener() {
         
 		
 				public void onClick(View v) {
@@ -39,7 +49,7 @@ public class Principal extends Activity{
     
     
     
-    ((Button)findViewById(mx.itesm.btp.R.id.btnOpciones)).setOnClickListener(new OnClickListener() {
+    ((TextView)findViewById(mx.itesm.btp.R.id.btnOpciones)).setOnClickListener(new OnClickListener() {
         
 		
 		public void onClick(View v) {
