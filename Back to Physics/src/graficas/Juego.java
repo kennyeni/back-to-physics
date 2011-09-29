@@ -36,7 +36,7 @@ public class Juego extends View{
 		super(context);
 		p=new Paint();
 		pantalla.setContext(context);
-		imgFondo = new Fondo(R.drawable.valley, pantalla, getResources());
+		imgFondo = new Fondo(mx.itesm.btp.R.drawable.valley, pantalla, getResources());
 		arrow = BitmapFactory.decodeResource(getResources(), mx.itesm.btp.R.drawable.arrow);
 		mira=BitmapFactory.decodeResource(getResources(), mx.itesm.btp.R.drawable.mira1);
 		imgMonito = BitmapFactory.decodeResource(getResources(), mx.itesm.btp.R.drawable.cat1);
@@ -51,7 +51,7 @@ public class Juego extends View{
 		
 		
 		mira = Bitmap.createScaledBitmap(mira, canvas.getWidth(), canvas.getHeight(), false);
-		//canvas.drawBitmap(imgFondo.getBitmap());
+		canvas.drawBitmap(imgFondo.getBitmap(), 0, 0, p);
 		canvas.drawBitmap(mira, 0, 0, p);
 		canvas.drawBitmap(imgMonito, 200, 500, p);
 		canvas.drawBitmap(imgbtn, x, 630,p);

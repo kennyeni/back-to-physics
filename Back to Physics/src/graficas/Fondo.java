@@ -9,16 +9,21 @@ import android.graphics.Canvas;
 public class Fondo {
 	
 	private Bitmap grafico;
-	private Posicion pos;
+	private Posicion pos = new Posicion();
 	private Pantalla pantalla;
 	
 	
 	public Fondo(int idAImagen, Pantalla pantalla, Resources resources){
-		grafico = BitmapFactory.decodeResource(resources, idAImagen); // Se crea el grafico con la imagen de parametro
+		grafico = BitmapFactory.decodeResource(resources, mx.itesm.btp.R.drawable.valley); // Se crea el grafico con la imagen de parametro
 		this.pantalla = pantalla;
 		try {
-			pos.Y = (grafico.getHeight()/2-pantalla.getHeight()/2); //La imagen se centra
-			pos.X = (grafico.getWidth()/2-pantalla.getWidth()/2);
+			int gHeight = grafico.getHeight()/2;
+			int gWidth = grafico.getWidth()/2;
+			int pHeight = pantalla.getHeight()/2;
+			int pWidth = pantalla.getWidth()/2;
+			
+			pos.y = (gHeight-pHeight); //La imagen se centra
+			pos.x = (gWidth-pWidth);
 		} catch (NoContextProvidedException e) {
 			e.printStackTrace();
 		}
@@ -26,7 +31,7 @@ public class Fondo {
 	
 	public Bitmap getBitmap(){ //regresa el fondo cortado a la medida y pos
 		try {
-			return Bitmap.createBitmap(grafico, pos.X, pos.Y, pantalla.getWidth(), pantalla.getHeight());
+			return Bitmap.createBitmap(grafico, pos.x, pos.y, pantalla.getWidth(), pantalla.getHeight());
 		} catch (NoContextProvidedException e) {
 			e.printStackTrace();
 		} 
@@ -35,14 +40,14 @@ public class Fondo {
 	
 	public boolean mueveX(int X){
 		boolean exitoso;
-		pos.X+=X;
-		if(pos.X<grafico.getWidth())
-			if(pos.X>0)
+		pos.x+=X;
+		if(pos.x<grafico.getWidth())
+			if(pos.x>0)
 				exitoso = true;
 			else
 				exitoso = false;
 		else{
-			pos.X = grafico.getWidth();
+			pos.x = grafico.getWidth();
 			exitoso = false;
 		}
 		
@@ -51,14 +56,14 @@ public class Fondo {
 	
 	public boolean mueveY(int Y){
 		boolean exitoso;
-		pos.Y+=Y;
-		if(pos.Y<grafico.getHeight())
-			if(pos.Y>0)
+		pos.y+=Y;
+		if(pos.y<grafico.getHeight())
+			if(pos.y>0)
 				exitoso = true;
 			else
 				exitoso = false;
 		else{
-			pos.Y = grafico.getHeight();
+			pos.y = grafico.getHeight();
 			exitoso = false;
 		}
 		
