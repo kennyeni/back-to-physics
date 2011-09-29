@@ -1,11 +1,16 @@
 package menu;
 
+import exceptions.NoContextProvidedException;
 import graficas.Juego;
+import graficas.Posicion;
 
 import graficas.Pantalla;
 import android.app.Activity;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.View.OnTouchListener;
 import android.widget.Toast;
 
 
@@ -35,6 +40,7 @@ public class PantallaJuego  extends Activity implements Runnable{
 
 	protected void onResume() {
 		super.onResume();
+		juego.refresh();
 		Thread th = new Thread(this);
 		th.start();
 		
@@ -54,9 +60,11 @@ public class PantallaJuego  extends Activity implements Runnable{
 
 	}
 	
+
+	
 	public void run() {
-		corriendo = true;
-		while (corriendo) {
+		//corriendo = true;
+		while (true) {
 			juego.postInvalidate();
 			try {
 				Thread.sleep(34);
