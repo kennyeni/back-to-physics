@@ -2,6 +2,7 @@ package graficas;
 
 
 
+import exceptions.NoContextProvidedException;
 import mx.itesm.btp.R;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -15,6 +16,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.view.View.OnTouchListener;
 
 public class Juego extends View{
 	
@@ -26,22 +28,28 @@ public class Juego extends View{
 	private Bitmap bm;
 	private Paint p;
 	private boolean pausado;
-	private Fondo imgFondo;
+	public Fondo fondo;
 	private Bitmap imgMonito;
 	private Bitmap imgRoca;
 	private Bitmap imgbtn;
 	private Bitmap arrow;
 	private Bitmap mira;
-	public Juego(Context context, Pantalla pantalla) {
+	private Bitmap listener;
+	private Pantalla pantalla;
+	
+	public Juego(Context context, Pantalla pantalla){
 		super(context);
 		p=new Paint();
+		this.pantalla=pantalla;
 		pantalla.setContext(context);
-		imgFondo = new Fondo(mx.itesm.btp.R.drawable.valley, pantalla, getResources());
+		fondo = new Fondo(mx.itesm.btp.R.drawable.valley, pantalla, getResources());
+		
 		arrow = BitmapFactory.decodeResource(getResources(), mx.itesm.btp.R.drawable.arrow);
-		mira=BitmapFactory.decodeResource(getResources(), mx.itesm.btp.R.drawable.crosshair2);
+		mira=BitmapFactory.decodeResource(getResources(), mx.itesm.btp.R.drawable.mira1);
 		imgMonito = BitmapFactory.decodeResource(getResources(), mx.itesm.btp.R.drawable.cat1);
 		imgRoca= BitmapFactory.decodeResource(getResources(), mx.itesm.btp.R.drawable.rock);
 		imgbtn= BitmapFactory.decodeResource(getResources(), mx.itesm.btp.R.drawable.btn1);
+		ImageView listener = new ImageView(this.getContext());
 
 	}
 	
@@ -51,14 +59,20 @@ public class Juego extends View{
 		
 		
 		mira = Bitmap.createScaledBitmap(mira, canvas.getWidth(), canvas.getHeight(), false);
-		
-		canvas.drawBitmap(imgFondo.getBitmap(), 0, 0, p);
+		canvas.drawBitmap(fondo.getBitmap(), 0, 0, p);
 		canvas.drawBitmap(mira, 0, 0, p);
 		canvas.drawBitmap(imgMonito, 200, 500, p);
 		canvas.drawBitmap(imgbtn, x, 630,p);
 		canvas.drawBitmap(arrow, canvas.getWidth()-140,630 ,p);
-		
 		canvas.drawBitmap(imgRoca, 230, -100,p);
+		
+		
+		
+		
+		/*
+		iv.setOnTouchListener(this);
+		*/
+		
 //	    dibujarRoca(canvas, y,x, p);
 		y = (y+20)%canvas.getWidth();
 		//lanzarRoca(canvas);
@@ -84,12 +98,24 @@ public class Juego extends View{
 	}
 	public Bitmap getBm(){
 		if(bm==null){
-			
-			
 			bm=Bitmap.createBitmap(iv.getWidth(),iv.getHeight(),Bitmap.Config.ARGB_8888);
 		}
 		return bm;
 	}
+
+	public void refresh() {
+		try {
+			fondo.center();
+		} catch (NoContextProvidedException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	
+
+
+	
 	
 	
 	
