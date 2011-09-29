@@ -10,11 +10,12 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.widget.Toast;
 
 
-public class PantallaJuego  extends Activity implements Runnable{
+public class PantallaJuego  extends Activity implements Runnable, OnTouchListener{
 	private Juego juego;
 	private boolean corriendo;
 	private MediaPlayer player;
@@ -25,6 +26,7 @@ public class PantallaJuego  extends Activity implements Runnable{
 		
 		pantalla = new Pantalla();
 		juego = new Juego(this, pantalla);
+		juego.setOnTouchListener(this);
 		setContentView(juego);
 		reproducirAudio();
 
@@ -58,6 +60,15 @@ public class PantallaJuego  extends Activity implements Runnable{
 	   	 super.onStop();
 		
 
+	}
+	
+	public boolean onTouch(View v, MotionEvent event) {
+		try {
+			juego.fondo.mueveX(10);
+			juego.fondo.mueveY(10);
+		} catch (NoContextProvidedException e){}
+		
+		return true;
 	}
 	
 
