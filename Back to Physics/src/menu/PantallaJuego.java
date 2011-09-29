@@ -2,17 +2,13 @@ package menu;
 
 import exceptions.NoContextProvidedException;
 import graficas.Juego;
-import graficas.Posicion;
-
 import graficas.Pantalla;
 import android.app.Activity;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
-import android.widget.Toast;
 
 
 public class PantallaJuego  extends Activity implements Runnable, OnTouchListener{
@@ -23,7 +19,7 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+	
 		pantalla = new Pantalla();
 		juego = new Juego(this, pantalla);
 		juego.setOnTouchListener(this);
@@ -50,6 +46,7 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 	
 	protected void onStop() {
 		super.onStop();
+		juego.refresh();
 		corriendo = false;
 		if(player!=null){
 	   		 if(player.isPlaying()){
@@ -61,6 +58,12 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 		
 
 	}
+	
+	//////////////////////////////////////////////////
+	//////////// Manejar aqui eventos
+	/////////// Para todo lo que suceda :)
+	/////////////////////////////////////////////////
+	
 	
 	public boolean onTouch(View v, MotionEvent event) {
 		try {
@@ -74,8 +77,8 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 
 	
 	public void run() {
-		//corriendo = true;
-		while (true) {
+		corriendo = true;
+		while (corriendo) {
 			juego.postInvalidate();
 			try {
 				Thread.sleep(34);
