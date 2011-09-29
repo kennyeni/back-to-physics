@@ -65,6 +65,7 @@ public class Juego extends View{
 		canvas.drawBitmap(fondo.getBitmap(), 0, 0, p);
 		
 		canvas.drawBitmap(mira, 0, 0, p);
+		canvas.drawBitmap(imgbtn, canvas.getWidth()-850, canvas.getHeight()-150,p);
 		
 		
 		///////////////////////////////////////////////////////
