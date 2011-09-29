@@ -14,6 +14,7 @@ public class Pantalla {
 	private Display display = null;
 	
 	public Pantalla(Context context){
+		this.context = context;
 		display = ((WindowManager) context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
 		width = display.getWidth();
 		height = display.getHeight();
@@ -36,6 +37,7 @@ public class Pantalla {
     }
     
     public void setContext(Context context){
+    	this.context = context;
     	display = ((WindowManager) context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
 		width = display.getWidth();
 		height = display.getHeight();
