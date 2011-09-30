@@ -40,7 +40,7 @@ public class Juego extends View{
 		pantalla.setContext(context);
 		fondo = new Fondo(mx.itesm.btp.R.drawable.valley, pantalla, getResources());
 		
-		arrow = BitmapFactory.decodeResource(getResources(), mx.itesm.btp.R.drawable.arrow);
+		arrow = BitmapFactory.decodeResource(getResources(), mx.itesm.btp.R.drawable.cpad);
 		mira=BitmapFactory.decodeResource(getResources(), mx.itesm.btp.R.drawable.crosshair2);
 		imgMonito = BitmapFactory.decodeResource(getResources(), mx.itesm.btp.R.drawable.cat1);
 		imgRoca= BitmapFactory.decodeResource(getResources(), mx.itesm.btp.R.drawable.rock);
@@ -77,7 +77,9 @@ public class Juego extends View{
 		
 		//canvas.drawBitmap(imgMonito, 200, 500, p);
 		//canvas.drawBitmap(imgbtn, x, 630,p);
-		//canvas.drawBitmap(arrow, canvas.getWidth()-140,630 ,p);
+		
+		
+		canvas.drawBitmap(arrow, 50, 50,p);
 		//canvas.drawBitmap(imgRoca, 230, -100,p);
 	}
 	
