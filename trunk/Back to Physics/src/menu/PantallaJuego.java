@@ -1,6 +1,7 @@
 package menu;
 
 import exceptions.NoContextProvidedException;
+import graficas.Coordenadas;
 import graficas.Juego;
 import graficas.Pantalla;
 import android.app.Activity;
@@ -16,6 +17,7 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 	private boolean corriendo;
 	private MediaPlayer player;
 	private Pantalla pantalla;
+	private Coordenadas coordenadas;
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -63,6 +65,19 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 	//////////// Manejar aqui eventos
 	/////////// Para todo lo que suceda :)
 	/////////////////////////////////////////////////
+	
+	
+	
+	public Coordenadas getPos(int x, int y){
+		coordenadas = new Coordenadas(x,y);
+		
+		return coordenadas;
+	}
+	
+	
+	
+	
+	
 	
 	
 	public boolean onTouch(View v, MotionEvent event) {
