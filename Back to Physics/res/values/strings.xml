@@ -27,5 +27,7 @@
     </string>
     <string name="txtOpciones">OPCIONES</string>
     <string name="txtSonidos">Sonido</string>
-    <string>txt</string>
+    <string name="txtMusica">Musica</string>
+    <string name="txtAcelerometro">Acelerometro</string>
+    <string name="txtAyuda">Ayuda</string>
 </resources>
