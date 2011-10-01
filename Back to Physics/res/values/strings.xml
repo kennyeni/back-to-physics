@@ -29,8 +29,25 @@
     <string name="txtSonidos">Sonido</string>
     <string name="txtMusica">Musica</string>
     <string name="txtAcelerometro">Acelerometro</string>
-    <string name="txtAyuda">Ayuda</string>
+    <string name="txtAyuda">   \nAYUDA
+    \n
+    \nRules: 
+    \n
+    \n Aqui se declarán las reglas del juego
+    \n 
+    \n 
+    \n 
+    \n
+    \n
+    \n
+    \n
+    \n
+    \n
+    \n</string>
     <string name="lblLoading">Cargando...</string>
     <string name="lblSabiasQue">¿Sabia que…?</string>
     <string name="cntSabiasQue">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis placerat cursus ipsum vitae mollis. Pellentesque.</string>
+    <string name="lblSonido"></string>
+    <string name="lblMusica"></string>
+    <string name="lblAyuda">Ayuda</string>
 </resources>

@@ -4,7 +4,13 @@
   android:orientation="vertical"
   android:layout_width="fill_parent"
   android:layout_height="fill_parent" android:weightSum="1">
-    <TextView android:textAppearance="?android:attr/textAppearanceLarge" android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/lblOpciones"></TextView>
+    <TextView android:layout_gravity="center" android:layout_marginBottom="12dp" android:layout_marginTop="12dp" android:textAppearance="?android:attr/textAppearanceLarge" android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/txtOpciones" android:text="@string/txtOpciones" android:textSize="30dp"></TextView>
+    <TextView android:layout_gravity="center" android:layout_marginBottom="12dp" android:layout_marginTop="12dp" android:textAppearance="?android:attr/textAppearanceLarge" android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/lblOpciones"></TextView>
+    <TextView android:layout_gravity="center" android:layout_marginBottom="12dp" android:layout_marginTop="12dp" android:textAppearance="?android:attr/textAppearanceMedium" android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/txtSonido" android:text="@string/txtSonidos"></TextView>
+    <RadioButton android:layout_gravity="center" android:layout_marginBottom="12dp" android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/txtSonido" android:text="@string/lblSonido"></RadioButton>
+    <TextView android:layout_gravity="center" android:layout_marginBottom="12dp" android:layout_marginTop="12dp" android:textAppearance="?android:attr/textAppearanceMedium" android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/txtMusica" android:text="@string/txtMusica"></TextView>
+    <RadioButton android:layout_gravity="center" android:layout_marginBottom="20dp" android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/lblMusica" android:text="@string/lblMusica"></RadioButton>
+    <TextView android:layout_gravity="center"  android:layout_marginTop="30dp" android:textAppearance="?android:attr/textAppearanceMedium" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/lblAyuda" android:id="@+id/btnAyuda"></TextView>
     
     
 </LinearLayout>
