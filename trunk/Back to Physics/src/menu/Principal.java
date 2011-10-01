@@ -26,6 +26,7 @@ public class Principal extends Activity implements OnTouchListener{
          super.onCreate(savedInstanceState);
          setContentView(mx.itesm.btp.R.layout.main);   
          Typeface font = Typeface.createFromAsset(getAssets(), "fonts/spin.otf");
+         
          TextView texto = (TextView)findViewById(R.id.txtTitulo);
          texto.setTypeface(font);
             
