@@ -6,7 +6,6 @@
     <string name="lblContinuar">Continuar</string>
     <string name="lblScores">High Scores</string>
     <string name="lblOpciones">Opciones</string>
-    <string name="lblAcercaD"/>
     <string name="lblAcercaDe">Acerca De</string>
     <string name="lblTitulo">BACK TO PHISICS</string>
     <string name="txtAcercaDe">
@@ -26,7 +25,7 @@
     \n
     \nCopyright 2011, ITESM
     </string>
-    <string name="txtSonido"></string>
-    <string name="lblSonidos"></string>
-    <string name="txtOpciones"></string>
+    <string name="txtOpciones">OPCIONES</string>
+    <string name="txtSonidos">Sonido</string>
+    <string>txt</string>
 </resources>

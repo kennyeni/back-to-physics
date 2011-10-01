@@ -1,6 +1,7 @@
 package menu;
 
 import mx.itesm.btp.*;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -22,22 +23,23 @@ public class Principal extends Activity{
             TextView texto = (TextView)findViewById(R.id.txtTitulo);
             texto.setTypeface(font);
             
-            ((TextView)findViewById(mx.itesm.btp.R.id.btnJuegoNuevo)).setTypeface(font);
+          
+           
             
             
-            
-    ((TextView)findViewById(mx.itesm.btp.R.id.btnJuegoNuevo)).setOnClickListener(new OnClickListener() {
-	        
-				
-				public void onClick(View v) {
+    ((TextView)findViewById(mx.itesm.btp.R.id.btnJuegoNuevo)).setTypeface(font);       
+    ((TextView)findViewById(mx.itesm.btp.R.id.btnJuegoNuevo)).setOnClickListener(new OnClickListener() 
+    {
+	        	
+				public void onClick(View v) 
+				{
 					Intent intencion = new Intent(Principal.this,PantallaJuego.class);
 					startActivity(intencion);
 				}
-			});
+	});
     
-    
-    
-    
+          
+    ((TextView)findViewById(mx.itesm.btp.R.id.btnAcercaDe)).setTypeface(font);
     ((TextView)findViewById(mx.itesm.btp.R.id.btnAcercaDe)).setOnClickListener(new OnClickListener() {
         
 		
@@ -48,7 +50,7 @@ public class Principal extends Activity{
 			});
     
     
-    
+    ((TextView)findViewById(mx.itesm.btp.R.id.btnOpciones)).setTypeface(font); 
     ((TextView)findViewById(mx.itesm.btp.R.id.btnOpciones)).setOnClickListener(new OnClickListener() {
         
 		
@@ -57,6 +59,30 @@ public class Principal extends Activity{
 			startActivity(intencion);
 		}
 	});
+    
+    
+    ((TextView)findViewById(mx.itesm.btp.R.id.btnContinuar)).setTypeface(font);
+    
+    ((TextView)findViewById(mx.itesm.btp.R.id.btnContinuar)).setOnClickListener(new OnClickListener() {
+        
+		
+  		public void onClick(View v) {
+  			Intent intencion = new Intent(Principal.this,Opciones.class);
+  			startActivity(intencion);
+  		}
+  	});
+    
+    
+    
+      ((TextView)findViewById(mx.itesm.btp.R.id.btnScores)).setTypeface(font);
+      ((TextView)findViewById(mx.itesm.btp.R.id.btnScores)).setOnClickListener(new OnClickListener() {
+        
+		
+  		public void onClick(View v) {
+  			Intent intencion = new Intent(Principal.this,Opciones.class);
+  			startActivity(intencion);
+  		}
+  	});
     
     
 	    }
