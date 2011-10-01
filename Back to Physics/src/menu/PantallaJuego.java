@@ -22,6 +22,9 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 	private Pantalla pantalla;
 	private Coordenadas coordenadas;
 	
+	float widthArrow;
+	float heightArrow;
+	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 	
@@ -30,6 +33,12 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 		juego.setOnTouchListener(this);
 		setContentView(juego);
 		reproducirAudio();
+		
+		widthArrow = juego.getArrow().getWidth();
+		heightArrow =juego.getArrow().getHeight();
+		
+
+		
 
 	}
 	private void reproducirAudio(){
@@ -91,8 +100,48 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 	public boolean onTouch(View v, MotionEvent event) {
 		
 		try {
-			juego.fondo.mueveX(10);
-			juego.fondo.mueveY(10);
+			
+			float posx = event.getX();
+			float posy = event.getY();
+			int widthPantalla = pantalla.getWidth();
+			int heightPantalla = pantalla.getHeight();
+			
+			
+
+
+			
+			if( (posx > (4*widthPantalla/5)  && posx < (4*widthPantalla/5)+ 2*widthArrow/5 ) &&
+					(posy > (3*heightPantalla/5)  && posy < (3*heightPantalla/5)+2*heightArrow/5)		 
+					){
+				juego.fondo.mueveY(-10);
+			}
+			
+			
+			
+			if( (posx > (4*widthPantalla/5)  && posx < (4*widthPantalla/5)+ 2*widthArrow/5 ) &&
+					(posy > (4*heightPantalla/5)  && posy < (4*heightPantalla/5)+2*heightArrow/5)		 
+					){
+				juego.fondo.mueveY(10);
+			}
+			
+			
+			
+
+			if (((posx > 7*widthPantalla/10)&&(posx < 7*widthPantalla/10 + 2*widthArrow/5))&&((posy > 3*heightPantalla/5+2*heightArrow/5 )&&(posy < 3*heightPantalla/5+4*heightArrow/5))){
+				juego.fondo.mueveX(-10);
+			}
+			
+			
+			if (((posx > (4*widthPantalla/5)+ 2*widthArrow/5)&&(posx < (4*widthPantalla/5)+ 4*widthArrow/5))&&((posy > 3*heightPantalla/5+2*heightArrow/5 )&&(posy < 3*heightPantalla/5+4*heightArrow/5))){
+				juego.fondo.mueveX(10);
+			}
+
+			
+			
+
+			
+			// juego.fondo.mueveX(10);
+			 //juego.fondo.mueveY(10);
 		} catch (NoContextProvidedException e){}
 		
 		return true;

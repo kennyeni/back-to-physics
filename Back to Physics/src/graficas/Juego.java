@@ -79,7 +79,9 @@ public class Juego extends View{
 		//canvas.drawBitmap(imgbtn, x, 630,p);
 		
 		
-		canvas.drawBitmap(arrow, 50, 50,p);
+		arrow=Bitmap.createScaledBitmap(arrow,canvas.getWidth()/4, canvas.getHeight()/3, false);
+		canvas.drawBitmap(arrow, canvas.getWidth()-canvas.getWidth()/4, canvas.getHeight()- canvas.getHeight()/3,p);
+		
 		//canvas.drawBitmap(imgRoca, 230, -100,p);
 	}
 	
@@ -121,6 +123,12 @@ public class Juego extends View{
 			bm=Bitmap.createBitmap(iv.getWidth(),iv.getHeight(),Bitmap.Config.ARGB_8888);
 		}
 		return bm;
+	}
+	
+	
+	
+	public Bitmap getArrow(){
+		return arrow;
 	}
 
 	public void refresh() {
