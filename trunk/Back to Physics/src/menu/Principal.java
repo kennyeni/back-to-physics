@@ -9,83 +9,58 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+import android.view.MotionEvent;
 import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
 
 
-public class Principal extends Activity{
+public class Principal extends Activity implements OnTouchListener{
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
          super.onCreate(savedInstanceState);
-            setContentView(mx.itesm.btp.R.layout.main);
+         setContentView(mx.itesm.btp.R.layout.main);   
+         Typeface font = Typeface.createFromAsset(getAssets(), "fonts/spin.otf");
+         TextView texto = (TextView)findViewById(R.id.txtTitulo);
+         texto.setTypeface(font);
             
-            Typeface font = Typeface.createFromAsset(getAssets(), "fonts/spin.otf");
-            TextView texto = (TextView)findViewById(R.id.txtTitulo);
-            texto.setTypeface(font);
-            
-          
-           
-            
-            
-    ((TextView)findViewById(mx.itesm.btp.R.id.btnJuegoNuevo)).setTypeface(font);       
-    ((TextView)findViewById(mx.itesm.btp.R.id.btnJuegoNuevo)).setOnClickListener(new OnClickListener() 
-    {
-	        	
-				public void onClick(View v) 
-				{
-					Intent intencion = new Intent(Principal.this,PantallaJuego.class);
-					startActivity(intencion);
-				}
-	});
-    
-          
-    ((TextView)findViewById(mx.itesm.btp.R.id.btnAcercaDe)).setTypeface(font);
-    ((TextView)findViewById(mx.itesm.btp.R.id.btnAcercaDe)).setOnClickListener(new OnClickListener() {
-        
-		
-				public void onClick(View v) {
-					Intent intencion = new Intent(Principal.this,acercaDe.class);
-					startActivity(intencion);
-				}
-			});
-    
-    
-    ((TextView)findViewById(mx.itesm.btp.R.id.btnOpciones)).setTypeface(font); 
-    ((TextView)findViewById(mx.itesm.btp.R.id.btnOpciones)).setOnClickListener(new OnClickListener() {
-        
-		
-		public void onClick(View v) {
-			Intent intencion = new Intent(Principal.this,Opciones.class);
-			startActivity(intencion);
+         TextView botonJuegoNuevo = (TextView)findViewById(mx.itesm.btp.R.id.btnJuegoNuevo);
+         botonJuegoNuevo.setTypeface(font);
+         botonJuegoNuevo.setOnTouchListener(this);
+         
+         TextView botonAcercaDe = (TextView)findViewById(mx.itesm.btp.R.id.btnAcercaDe);
+         botonAcercaDe.setTypeface(font);
+         botonAcercaDe.setOnTouchListener(this);
+         
+         TextView botonOpciones = (TextView)findViewById(mx.itesm.btp.R.id.btnOpciones);
+         botonOpciones.setTypeface(font);
+         botonOpciones.setOnTouchListener(this);
+         
+         TextView botonContinuar = (TextView)findViewById(mx.itesm.btp.R.id.btnContinuar);
+         botonContinuar.setTypeface(font);
+         botonContinuar.setOnTouchListener(this);
+         
+         TextView botonHighscores = (TextView)findViewById(mx.itesm.btp.R.id.btnScores);
+         botonHighscores.setTypeface(font);
+         botonHighscores.setOnTouchListener(this);
+         
+    }
+
+	@Override
+	public boolean onTouch(View v, MotionEvent event) {
+		Intent intencion = null;
+		switch (v.getId()) {
+		case R.id.btnJuegoNuevo:intencion = new Intent(Principal.this,PantallaJuego.class); break;
+		case R.id.btnOpciones:intencion = new Intent(Principal.this,Opciones.class); break;
+		case R.id.btnAcercaDe:intencion = new Intent(Principal.this,acercaDe.class); break;
+		case R.id.btnContinuar:intencion = new Intent(Principal.this,Principal.class); break; //Implementar
+		case R.id.btnScores:intencion = new Intent(Principal.this, Principal.class); break;
 		}
-	});
-    
-    
-    ((TextView)findViewById(mx.itesm.btp.R.id.btnContinuar)).setTypeface(font);
-    
-    ((TextView)findViewById(mx.itesm.btp.R.id.btnContinuar)).setOnClickListener(new OnClickListener() {
-        
 		
-  		public void onClick(View v) {
-  			Intent intencion = new Intent(Principal.this,Opciones.class);
-  			startActivity(intencion);
-  		}
-  	});
-    
-    
-    
-      ((TextView)findViewById(mx.itesm.btp.R.id.btnScores)).setTypeface(font);
-      ((TextView)findViewById(mx.itesm.btp.R.id.btnScores)).setOnClickListener(new OnClickListener() {
-        
-		
-  		public void onClick(View v) {
-  			Intent intencion = new Intent(Principal.this,Opciones.class);
-  			startActivity(intencion);
-  		}
-  	});
-    
-    
-	    }
+		startActivity(intencion);
+		return false;
+	}
 
     
     

@@ -18,7 +18,7 @@ public class Opciones extends Activity
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		 setContentView(mx.itesm.btp.R.layout.main);
+		 setContentView(mx.itesm.btp.R.layout.opciones);
          
          Typeface font = Typeface.createFromAsset(getAssets(), "fonts/spin.otf");
          
