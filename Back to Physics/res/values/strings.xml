@@ -30,4 +30,7 @@
     <string name="txtMusica">Musica</string>
     <string name="txtAcelerometro">Acelerometro</string>
     <string name="txtAyuda">Ayuda</string>
+    <string name="lblLoading">Cargando...</string>
+    <string name="lblSabiasQue">¿Sabia que…?</string>
+    <string name="cntSabiasQue">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis placerat cursus ipsum vitae mollis. Pellentesque.</string>
 </resources>
