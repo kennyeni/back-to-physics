@@ -13,7 +13,7 @@ public class Fondo {
 	
 	
 	public Fondo(int idAImagen, Pantalla pantalla, Resources resources){
-		grafico = BitmapFactory.decodeResource(resources, mx.itesm.btp.R.drawable.valley); // Se crea el grafico con la imagen de parametro
+		grafico = BitmapFactory.decodeResource(resources, idAImagen); // Se crea el grafico con la imagen de parametro
 		this.pantalla = pantalla;
 		try {
 			this.center();
