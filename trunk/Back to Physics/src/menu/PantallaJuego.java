@@ -135,6 +135,16 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 			if (((posx > (4*widthPantalla/5)+ 2*widthArrow/5)&&(posx < (4*widthPantalla/5)+ 4*widthArrow/5))&&((posy > 3*heightPantalla/5+2*heightArrow/5 )&&(posy < 3*heightPantalla/5+4*heightArrow/5))){
 				juego.fondo.mueveX(10);
 			}
+			
+			
+			if (((posx > widthPantalla-850)&&(posx < widthPantalla-750))&&((posy > heightPantalla-150 )&&(posy < heightPantalla-50))){
+				juego.disparar();
+			}
+			
+			
+			
+			
+			
 
 			
 			
