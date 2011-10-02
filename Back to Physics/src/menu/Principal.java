@@ -29,7 +29,7 @@ public class Principal extends Activity implements OnTouchListener{
          
          TextView texto = (TextView)findViewById(R.id.txtTitulo);
          texto.setTypeface(font);
-            
+         
          TextView botonJuegoNuevo = (TextView)findViewById(mx.itesm.btp.R.id.btnJuegoNuevo);
          botonJuegoNuevo.setTypeface(font);
          botonJuegoNuevo.setOnTouchListener(this);
