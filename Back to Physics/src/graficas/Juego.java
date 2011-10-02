@@ -32,7 +32,12 @@ public class Juego extends View{
 	private Bitmap barra3;
 	private Bitmap barra4;
 	private Bitmap barra5;
+	private Bitmap missile;
 	private int x=0;
+	private boolean disparo;
+	int missileworiginal;
+	int missilehoriginal;
+	int contador;
 	
 	public Juego(Context context, Pantalla pantalla){
 		super(context);
@@ -50,6 +55,21 @@ public class Juego extends View{
 		barra3= BitmapFactory.decodeResource(getResources(), mx.itesm.btp.R.drawable.barra3);
 		barra4= BitmapFactory.decodeResource(getResources(), mx.itesm.btp.R.drawable.barra4);
 		barra5= BitmapFactory.decodeResource(getResources(), mx.itesm.btp.R.drawable.barra5);
+		missile= BitmapFactory.decodeResource(getResources(), mx.itesm.btp.R.drawable.cat2);
+		contador = 0;
+		
+		
+		int missilew = missile.getWidth();
+		int missileh = missile.getHeight();
+		missile=Bitmap.createScaledBitmap(missile,5*missilew, 5*missileh, false);
+		
+		missileworiginal = missile.getWidth();
+		missilehoriginal = missile.getHeight();
+		disparo = false;
+		
+		
+
+		
 
 
 
@@ -81,6 +101,29 @@ public class Juego extends View{
 		
 		arrow=Bitmap.createScaledBitmap(arrow,canvas.getWidth()/4, canvas.getHeight()/3, false);
 		canvas.drawBitmap(arrow, canvas.getWidth()-canvas.getWidth()/4, canvas.getHeight()- canvas.getHeight()/3,p);
+		
+		
+		
+		missile=Bitmap.createScaledBitmap(missile, missileworiginal, missilehoriginal, false);
+		canvas.drawBitmap(missile, canvas.getWidth()/2-missile.getWidth()/2, canvas.getHeight()/2-missile.getHeight(),p);
+		
+		
+		//if(disparo==true){
+			
+			//if(contador!=0){
+				//missile=Bitmap.createScaledBitmap(missile, (int).9*missile.getWidth(), (int).9*missile.getHeight(), false);
+				//canvas.drawBitmap(missile, canvas.getWidth()/2-missile.getWidth()/2, canvas.getHeight()/2-missile.getHeight(),p);
+				//contador --;
+			//}else{
+			//	disparo = false;
+		//	}
+			
+			
+		//}else{
+			
+			//missile=Bitmap.createScaledBitmap(missile, missileworiginal, missilehoriginal, false);
+			//canvas.drawBitmap(missile, canvas.getWidth()/2-missile.getWidth()/2, canvas.getHeight()/2-missile.getHeight(),p);
+		//}
 		
 		//canvas.drawBitmap(imgRoca, 230, -100,p);
 	}
@@ -130,6 +173,18 @@ public class Juego extends View{
 	public Bitmap getArrow(){
 		return arrow;
 	}
+	
+	
+	public void disparar(){
+		disparo=true;
+		contador=3;
+		
+	}
+	
+	public Bitmap getBoton(){
+		return imgbtn;
+	}
+	
 
 	public void refresh() {
 		try {
