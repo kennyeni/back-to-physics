@@ -85,7 +85,7 @@ public class Juego extends View{
 		canvas.drawBitmap(fondo.getBitmap(), 0, 0, p);
 		
 		canvas.drawBitmap(mira, 0, 0, p);
-		canvas.drawBitmap(imgbtn, canvas.getWidth()-850, canvas.getHeight()-150,p);
+		canvas.drawBitmap(imgbtn,0,canvas.getHeight(),p);
 		
 		
 		///////////////////////////////////////////////////////
@@ -105,7 +105,7 @@ public class Juego extends View{
 		
 		
 		missile=Bitmap.createScaledBitmap(missile, missileworiginal, missilehoriginal, false);
-		canvas.drawBitmap(missile, canvas.getWidth()/2-missile.getWidth()/2, canvas.getHeight()/2-missile.getHeight(),p);
+		canvas.drawBitmap(missile, canvas.getWidth()/2-missile.getWidth()/2, canvas.getHeight()/2-missile.getHeight()/2,p);
 		
 		
 		//if(disparo==true){
