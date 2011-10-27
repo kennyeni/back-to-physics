@@ -1,6 +1,7 @@
 package graficas;
 
 import exceptions.NoContextProvidedException;
+
 import mx.itesm.btp.R;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -85,7 +86,9 @@ public class Juego extends View{
 		canvas.drawBitmap(fondo.getBitmap(), 0, 0, p);
 		
 		canvas.drawBitmap(mira, 0, 0, p);
-		canvas.drawBitmap(imgbtn,0,canvas.getHeight(),p);
+		
+		
+		canvas.drawBitmap(imgbtn,canvas.getWidth()/60,(5)*canvas.getHeight()/7,p);
 		
 		
 		///////////////////////////////////////////////////////
