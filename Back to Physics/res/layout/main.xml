@@ -2,8 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    >
+    android:layout_height="fill_parent">
     <TextView android:layout_gravity="center" android:layout_marginBottom="12dp" android:layout_marginTop="12dp" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceLarge" android:layout_height="wrap_content" android:text="@string/lblTitulo" android:typeface="sans" android:id="@+id/txtTitulo"></TextView>
     <TextView android:textAppearance="?android:attr/textAppearanceMedium" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/lblJuegoNuevo" android:id="@+id/btnJuegoNuevo" android:layout_gravity="center" android:layout_marginTop="20dp" android:textSize="25dp"></TextView>
     <TextView android:textAppearance="?android:attr/textAppearanceMedium" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/lblContinuar" android:id="@+id/btnContinuar" android:layout_gravity="center" android:layout_marginTop="20dp" android:textSize="25dp"></TextView>
