@@ -1,6 +1,8 @@
 package graficas;
 
+
 import exceptions.NoContextProvidedException;
+
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -31,7 +33,7 @@ public class Fondo {
 		return null;
 	}
 	
-	public boolean mueveX(int X) throws NoContextProvidedException{
+	public boolean mueveX(double X) throws NoContextProvidedException{
 		boolean exitoso;
 		pos.x+=X;
 		if(pos.x<grafico.getWidth()-pantalla.getWidth()-10)
@@ -49,7 +51,7 @@ public class Fondo {
 		return exitoso;
 	}
 	
-	public boolean mueveY(int Y) throws NoContextProvidedException{
+	public boolean mueveY(double Y) throws NoContextProvidedException{
 		boolean exitoso;
 		pos.y+=Y;
 		if(pos.y<(grafico.getHeight()-pantalla.getHeight())-10)
