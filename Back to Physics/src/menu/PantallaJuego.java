@@ -6,6 +6,8 @@ import graficas.Juego;
 import graficas.Pantalla;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -22,12 +24,18 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 	private Pantalla pantalla;
 	private Coordenadas coordenadas;
 	
+	//private Bitmap imgbtn = BitmapFactory.decodeResource(getResources(), mx.itesm.btp.R.drawable.btnb);
+
+	
 	float widthArrow;
 	float heightArrow;
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 	
+		
+		
+		
 		pantalla = new Pantalla();
 		juego = new Juego(this, pantalla);
 		juego.setOnTouchListener(this);
@@ -105,6 +113,7 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 			float posy = event.getY();
 			int widthPantalla = pantalla.getWidth();
 			int heightPantalla = pantalla.getHeight();
+			Bitmap imgbtn = BitmapFactory.decodeResource(getResources(), mx.itesm.btp.R.drawable.btnb);
 			
 			
 
@@ -113,7 +122,7 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 			if( (posx > (4*widthPantalla/5)  && posx < (4*widthPantalla/5)+ 2*widthArrow/5 ) &&
 					(posy > (3*heightPantalla/5)  && posy < (3*heightPantalla/5)+2*heightArrow/5)		 
 					){
-				juego.fondo.mueveY(-10);
+				juego.fondo.mueveY(-10.5);
 			}
 			
 			
@@ -121,7 +130,7 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 			if( (posx > (4*widthPantalla/5)  && posx < (4*widthPantalla/5)+ 2*widthArrow/5 ) &&
 					(posy > (4*heightPantalla/5)  && posy < (4*heightPantalla/5)+2*heightArrow/5)		 
 					){
-				juego.fondo.mueveY(10);
+				juego.fondo.mueveY(10.5);
 			}
 			
 			
@@ -137,7 +146,7 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 			}
 			
 			
-			if (((posx > widthPantalla-850)&&(posx < widthPantalla-750))&&((posy > heightPantalla-150 )&&(posy < heightPantalla-50))){
+			if (((posx > (1/60)*widthPantalla)&&(posx < imgbtn.getWidth()))&&((posy > (5)*heightPantalla/7 )&&(posy < heightPantalla))){
 				juego.disparar();
 			}
 			
@@ -150,8 +159,7 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 			
 
 			
-			// juego.fondo.mueveX(10);
-			 //juego.fondo.mueveY(10);
+		
 		} catch (NoContextProvidedException e){}
 		
 		return true;
