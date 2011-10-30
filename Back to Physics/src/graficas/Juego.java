@@ -2,6 +2,7 @@ package graficas;
 
 import exceptions.NoContextProvidedException;
 
+
 import mx.itesm.btp.R;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -15,6 +16,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 import android.view.View.OnTouchListener;
 
 public class Juego extends View{
@@ -179,8 +181,15 @@ public class Juego extends View{
 	
 	
 	public void disparar(){
-		disparo=true;
-		contador=3;
+		//disparo=true;
+		//contador=3;
+		
+		Context context = this.getContext();
+		CharSequence text = "Hello toast!";
+		int duration = Toast.LENGTH_SHORT;
+
+		Toast toast = Toast.makeText(context, text, duration);
+		toast.show();
 		
 	}
 	
