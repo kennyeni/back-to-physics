@@ -1,5 +1,6 @@
 package menu;
 
+import entrada.Acelerometro;
 import exceptions.NoContextProvidedException;
 import graficas.Coordenadas;
 import graficas.Juego;
@@ -23,6 +24,7 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 	private MediaPlayer player;
 	private Pantalla pantalla;
 	private Coordenadas coordenadas;
+	private Acelerometro acel;
 	
 	//private Bitmap imgbtn = BitmapFactory.decodeResource(getResources(), mx.itesm.btp.R.drawable.btnb);
 
@@ -44,6 +46,8 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 		
 		widthArrow = juego.getArrow().getWidth();
 		heightArrow =juego.getArrow().getHeight();
+		
+		acel = new Acelerometro(this);
 		
 
 		
@@ -170,10 +174,16 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 	public void run() {
 		corriendo = true;
 		while (corriendo) {
+			juego.mueveY(acel.getY());
+			juego.mueveX(acel.getX());
+			juego.setY(acel.Y);
+			juego.setX(acel.X);
 			juego.postInvalidate();
+			
 			try {
+				
 				Thread.sleep(34);
-			} catch (InterruptedException e) {
+			} catch (Exception e) {
 
 			}
 		}
