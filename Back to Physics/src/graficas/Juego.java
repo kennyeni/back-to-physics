@@ -10,6 +10,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Paint.Style;
 import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
@@ -41,6 +42,7 @@ public class Juego extends View{
 	int missileworiginal;
 	int missilehoriginal;
 	int contador;
+	double X,Y;
 	
 	public Juego(Context context, Pantalla pantalla){
 		super(context);
@@ -81,8 +83,35 @@ public class Juego extends View{
 
 	}
 	
+	public void mueveX(double x){
+		X=x;
+		try {
+			fondo.mueveX((int)x);
+		} catch (NoContextProvidedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void mueveY(double y){
+		
+		try{
+			fondo.mueveY((int)y);
+		}
+		catch(Exception e){}
+	}
+	
+	public void setY(double y){
+		Y=y;
+	}
+	
+	public void setX(double x){
+		X=x;
+	}
+	
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
+		
 		canvas.drawRGB(0,0,0); 
 		mira = Bitmap.createScaledBitmap(mira, canvas.getWidth(), canvas.getHeight(), false);
 		canvas.drawBitmap(fondo.getBitmap(), 0, 0, p);
@@ -111,6 +140,8 @@ public class Juego extends View{
 		
 		missile=Bitmap.createScaledBitmap(missile, missileworiginal, missilehoriginal, false);
 		canvas.drawBitmap(missile, canvas.getWidth()/2-missile.getWidth()/2, canvas.getHeight()/2-missile.getHeight()/2,p);
+
+		canvas.drawText("AX: "+X+"\nAY: "+Y, 20, 20, p);
 		
 		
 		//if(disparo==true){
