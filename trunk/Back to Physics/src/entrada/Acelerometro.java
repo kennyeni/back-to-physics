@@ -37,18 +37,18 @@ public class Acelerometro {
 	
 	
 	private final double leftSlowBottomLimit = -0.3;
-	private final double leftSlowUpperLimit = -1.7;
-	private final double leftMedBottomLimit = -1.7;
-	private final double leftMedUpperLimit = -3.4;
-	private final double leftHiBottomLimit = -3.4;
-	private final double leftHiUpperLimit = -5.1;
+	private final double leftSlowUpperLimit = -2.6;
+	private final double leftMedBottomLimit = -2.2;
+	private final double leftMedUpperLimit = -5.2;
+	private final double leftHiBottomLimit = -5.2;
+	private final double leftHiUpperLimit = -8;
 	
 	private final double rightSlowBottomLimit = 0.3;
-	private final double rightSlowUpperLimit = 1.4;
-	private final double rightMedBottomLimit = 1.4;
-	private final double rightMedUpperLimit = 2.8;
-	private final double rightHiBottomLimit = 2.8;
-	private final double rightHiUpperLimit = 4.2;
+	private final double rightSlowUpperLimit = 2.1;
+	private final double rightMedBottomLimit = 2.1;
+	private final double rightMedUpperLimit = 4.1;
+	private final double rightHiBottomLimit = 4.1;
+	private final double rightHiUpperLimit = 6.3;
 
 	
 	Sensor acelerometro = null;
@@ -69,7 +69,7 @@ public class Acelerometro {
 	public Acelerometro(Activity act){
 		sensorManager = (SensorManager) act.getSystemService(Context.SENSOR_SERVICE);
 		acelerometro = sensorManager.getSensorList(Sensor.TYPE_ACCELEROMETER).get(0);
-		sensorManager.registerListener(listener, acelerometro, SensorManager.SENSOR_DELAY_FASTEST);
+		sensorManager.registerListener(listener, acelerometro, SensorManager.SENSOR_DELAY_NORMAL);
 	}
 	
 	

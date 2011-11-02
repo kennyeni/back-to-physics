@@ -111,6 +111,7 @@ public class Juego extends View{
 	
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
+		cbm = canvas;
 		
 		canvas.drawRGB(0,0,0); 
 		mira = Bitmap.createScaledBitmap(mira, canvas.getWidth(), canvas.getHeight(), false);
@@ -197,9 +198,19 @@ public class Juego extends View{
 		return cbm;
 	}
 	
+	public ImageView getIv(){
+		if(iv==null){
+			if(iv==null){
+				iv = new ImageView(getContext());
+				
+			}
+		}
+		return iv;
+	}
+	
 	public Bitmap getBm(){
 		if(bm==null){
-			bm=Bitmap.createBitmap(iv.getWidth(),iv.getHeight(),Bitmap.Config.ARGB_8888);
+			bm=Bitmap.createBitmap(getIv().getWidth(),getIv().getHeight(),Bitmap.Config.ARGB_8888);
 		}
 		return bm;
 	}
@@ -214,6 +225,20 @@ public class Juego extends View{
 	public void disparar(){
 		//disparo=true;
 		//contador=3;
+		missile= BitmapFactory.decodeResource(getResources(), mx.itesm.btp.R.drawable.cat2);
+		int tmp1 = getCbm().getWidth();
+		int tmp2 = missile.getWidth();
+		int x=  (tmp1-tmp2)/2;
+		int y= getCbm().getHeight()/2-missile.getHeight()/2;
+		for(int i=1;i<=3;i++){
+		          missile = Bitmap.createScaledBitmap(missile, ((int) missile.getWidth()/i), ((int) missile.getHeight()/i), true);
+		          this.invalidate();
+		          try{
+		              Thread.sleep(32);
+		          } catch(Exception e) {}
+		}
+		
+		/*
 		
 		Context context = this.getContext();
 		CharSequence text = "Hello toast!";
@@ -221,6 +246,7 @@ public class Juego extends View{
 
 		Toast toast = Toast.makeText(context, text, duration);
 		toast.show();
+		*/
 		
 	}
 	

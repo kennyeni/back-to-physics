@@ -42,7 +42,7 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 		juego = new Juego(this, pantalla);
 		juego.setOnTouchListener(this);
 		setContentView(juego);
-		reproducirAudio();
+		//reproducirAudio();
 		
 		widthArrow = juego.getArrow().getWidth();
 		heightArrow =juego.getArrow().getHeight();
