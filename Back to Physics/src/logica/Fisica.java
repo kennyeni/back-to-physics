@@ -26,7 +26,8 @@ public class Fisica {
 		double vx = v*Math.cos(phi*radian);
 		double vy = v*Math.sin(phi*radian);
 		double t = 2*vy/g;
-		for(double a = 0; a <= t; a+=.001){
+		double intervalo = t/30;
+		for(double a = 0; a <= t; a+=intervalo){
 			double hyp = vx*a;
 			float y = (float) a;
 			float x = (float) (hyp*Math.sin(theta*radian));
@@ -51,7 +52,8 @@ public class Fisica {
 		double vx = v*Math.cos(phi*radian);
 		double vy = v*Math.sin(phi*radian);
 		double t = 2*vy/g;
-		for(double a = 0; a <= t; a+=.001){	
+		double intervalo = t/30;
+		for(double a = 0; a <= t; a+=intervalo){
 			float x = (float) a;
 			float y = (float) (vy*a-.5*g*a*a);
 			puntos.add(new Coordenadas(x, y));

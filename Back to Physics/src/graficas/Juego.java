@@ -3,8 +3,11 @@ package graficas;
 import exceptions.NoContextProvidedException;
 
 
+import menu.PantallaJuego;
+import mx.itesm.btp.BacktoPhysics;
 import mx.itesm.btp.R;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -12,6 +15,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.media.MediaPlayer;
+import android.os.Bundle;
 import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
@@ -20,6 +24,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 import android.view.View.OnTouchListener;
+import animacion.Graficacion;
 
 public class Juego extends View{
 	private Canvas cbm;
@@ -149,6 +154,17 @@ public class Juego extends View{
 			if(i==2.5){
 				disparo=false;
 				i=1.0;
+				//double v, double theta, double phi, double g
+				Bundle params = new Bundle();
+				params.putDouble("v", 10); //en m/s
+				params.putDouble("theta", 20);
+				params.putDouble("phi", 20);
+				params.putDouble("g", 9.81);
+				
+				
+				Intent grafica = new Intent (getContext(), Graficacion.class); 
+				grafica.putExtras(params);
+			    getContext().startActivity(grafica);
 			}
 		
 		}
