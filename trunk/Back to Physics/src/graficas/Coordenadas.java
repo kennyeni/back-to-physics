@@ -11,18 +11,30 @@ public class Coordenadas {
 		this.Y=0;
 	}
 	
-	public Coordenadas(int X, int Y){
-		this.X=X;
-		this.Y=Y;
+	public Coordenadas(float x2, float y2){
+		this.X=x2;
+		this.Y=y2;
 	}
 	
+	/**
+	 * @return x
+	 */
 	public float getX(){
 		return X;
 	}
 	
+	/**
+	 * @return y
+	 */
+	
 	public float getY(){
 		return Y;
 	}
+	
+	/**
+	 * Clase que regresa un arreglo de X y Y
+	 * @return pos[]
+	 */
 	
 	public float[] getPos(){
 		float pos[] = {X,Y};
