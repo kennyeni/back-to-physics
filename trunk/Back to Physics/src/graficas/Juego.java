@@ -11,6 +11,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
+import android.media.MediaPlayer;
 import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
@@ -25,6 +26,7 @@ public class Juego extends View{
 	private ImageView iv;
 	private Bitmap bm;
 	private Paint p;
+	private MediaPlayer player;
 	public Fondo fondo;
 	private Bitmap imgMonito;
 	private Bitmap imgRoca;
@@ -43,6 +45,7 @@ public class Juego extends View{
 	int missilehoriginal;
 	int contador;
 	double X,Y;
+	public double i=1.0;
 	
 	public Juego(Context context, Pantalla pantalla){
 		super(context);
@@ -138,9 +141,20 @@ public class Juego extends View{
 		canvas.drawBitmap(arrow, canvas.getWidth()-canvas.getWidth()/4, canvas.getHeight()- canvas.getHeight()/3,p);
 		
 		
+		if(disparo==true){
+			missile= BitmapFactory.decodeResource(getResources(), mx.itesm.btp.R.drawable.cat2);
+			missile = Bitmap.createScaledBitmap(missile, (int)Math.round(missile.getWidth()/i), (int)Math.round(missile.getHeight()/i), true);
+			canvas.drawBitmap(missile, canvas.getWidth()/2-missile.getWidth()/2, canvas.getHeight()/2-missile.getHeight()/2,p);
+			i+=.3;
+			if(i==2.5){
+				disparo=false;
+				i=1.0;
+			}
 		
-		missile=Bitmap.createScaledBitmap(missile, missileworiginal, missilehoriginal, false);
-		canvas.drawBitmap(missile, canvas.getWidth()/2-missile.getWidth()/2, canvas.getHeight()/2-missile.getHeight()/2,p);
+		}
+		
+//		missile=Bitmap.createScaledBitmap(missile, missileworiginal, missilehoriginal, false);
+//		canvas.drawBitmap(missile, canvas.getWidth()/2-missile.getWidth()/2, canvas.getHeight()/2-missile.getHeight()/2,p);
 
 		canvas.drawText("AX: "+X+"\nAY: "+Y, 20, 20, p);
 		
@@ -225,17 +239,19 @@ public class Juego extends View{
 	public void disparar(){
 		//disparo=true;
 		//contador=3;
-		missile= BitmapFactory.decodeResource(getResources(), mx.itesm.btp.R.drawable.cat2);
-		int tmp1 = getCbm().getWidth();
-		int tmp2 = missile.getWidth();
-		int x=  (tmp1-tmp2)/2;
-		int y= getCbm().getHeight()/2-missile.getHeight()/2;
-		for(int i=1;i<=3;i++){
-		          missile = Bitmap.createScaledBitmap(missile, ((int) missile.getWidth()/i), ((int) missile.getHeight()/i), true);
-		          this.invalidate();
-		          try{
-		              Thread.sleep(32);
-		          } catch(Exception e) {}
+//		missile= BitmapFactory.decodeResource(getResources(), mx.itesm.btp.R.drawable.cat2);
+//		int tmp1 = getCbm().getWidth();
+//		int tmp2 = missile.getWidth();
+//		int x=  (tmp1-tmp2)/2;
+//		int y= getCbm().getHeight()/2-missile.getHeight()/2;
+//		for(int i=1;i<=3;i++){
+//		          missile = Bitmap.createScaledBitmap(missile, ((int) missile.getWidth()/i), ((int) missile.getHeight()/i), true);
+//		          this.invalidate();
+//		          try{
+//		              Thread.sleep(32);
+//		          } catch(Exception e) {}
+		
+		disparo=true;
 		}
 		
 		/*
@@ -248,7 +264,7 @@ public class Juego extends View{
 		toast.show();
 		*/
 		
-	}
+	
 	
 	public Bitmap getBoton(){
 		return imgbtn;
@@ -263,6 +279,7 @@ public class Juego extends View{
 		}
 		
 	}
+
 	
 	private void marcarVida(Bitmap enemigo, Bitmap bala,Canvas canvas) {
 		

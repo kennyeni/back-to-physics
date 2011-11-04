@@ -22,9 +22,11 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 	private Juego juego;
 	private boolean corriendo;
 	private MediaPlayer player;
+	private MediaPlayer player2;
 	private Pantalla pantalla;
 	private Coordenadas coordenadas;
 	private Acelerometro acel;
+	private int notifSonidogato=0;
 	
 	//private Bitmap imgbtn = BitmapFactory.decodeResource(getResources(), mx.itesm.btp.R.drawable.btnb);
 
@@ -52,6 +54,13 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 
 		
 
+	}
+	private void reproducirGato(){
+		 if(notifSonidogato==1 && player2!=null){
+			 player2.release();
+		 }
+		 player2=MediaPlayer.create(this, mx.itesm.btp.R.raw.gato);
+		 player2.start();
 	}
 	private void reproducirAudio(){
    	 if(player!=null){
@@ -151,7 +160,11 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 			
 			
 			if (((posx > (1/60)*widthPantalla)&&(posx < imgbtn.getWidth()))&&((posy > (5)*heightPantalla/7 )&&(posy < heightPantalla))){
+				notifSonidogato=1;
+				reproducirGato();
 				juego.disparar();
+				
+				
 			}
 			
 			
