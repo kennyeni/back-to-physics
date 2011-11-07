@@ -12,6 +12,8 @@ import java.util.LinkedList;
 
 public class Fisica {
 	
+	final static int MAX_PUNTOS = 40;
+	
 	/**
 	 * Clase que regresa una LL de puntos a graficar en la parte aerea
 	 * @param velocidad
@@ -26,7 +28,7 @@ public class Fisica {
 		double vx = v*Math.cos(phi*radian);
 		double vy = v*Math.sin(phi*radian);
 		double t = 2*vy/g;
-		double intervalo = t/30;
+		double intervalo = t/MAX_PUNTOS;
 		for(double a = 0; a <= t; a+=intervalo){
 			double hyp = vx*a;
 			float y = (float) a;
@@ -52,7 +54,7 @@ public class Fisica {
 		double vx = v*Math.cos(phi*radian);
 		double vy = v*Math.sin(phi*radian);
 		double t = 2*vy/g;
-		double intervalo = t/30;
+		double intervalo = t/MAX_PUNTOS;
 		for(double a = 0; a <= t; a+=intervalo){
 			float x = (float) a;
 			float y = (float) (vy*a-.5*g*a*a);
