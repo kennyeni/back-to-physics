@@ -156,7 +156,7 @@ public class Juego extends View{
 				i=1.0;
 				//double v, double theta, double phi, double g
 				Bundle params = new Bundle();
-				params.putDouble("v", 10); //en m/s
+				params.putDouble("v", 20); //en m/s
 				params.putDouble("theta", 20);
 				params.putDouble("phi", 20);
 				params.putDouble("g", 9.81);
