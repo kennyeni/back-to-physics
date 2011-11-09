@@ -155,15 +155,16 @@ public class Juego extends View{
 				disparo=false;
 				i=1.0;
 				//double v, double theta, double phi, double g
-				Bundle params = new Bundle();
-				params.putDouble("v", 20); //en m/s
-				params.putDouble("theta", 20);
-				params.putDouble("phi", 20);
-				params.putDouble("g", 9.81);
+				
 				
 				
 				Intent grafica = new Intent (getContext(), Graficacion.class); 
-				grafica.putExtras(params);
+				grafica.putExtra("v", 20); //en m/s
+				grafica.putExtra("theta", 20);
+				grafica.putExtra("phi", 20);
+				grafica.putExtra("g", 9.81);
+				grafica.putExtra("enemigoX", 10);
+				grafica.putExtra("enemigoY", 10);
 			    getContext().startActivity(grafica);
 			}
 		

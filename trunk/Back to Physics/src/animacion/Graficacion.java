@@ -7,6 +7,7 @@ import mx.itesm.btp.R;
 import graficas.Coordenadas;
 import graficas.Pantalla;
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,7 +18,6 @@ public class Graficacion extends Activity implements Runnable {
 	Pantalla pantalla = null;
 	boolean corriendo = true;
 	PlanoCartesiano plano = null;
-	//Bundle extras = getIntent().getExtras(); 
 	
 	
 	/**
@@ -27,11 +27,14 @@ public class Graficacion extends Activity implements Runnable {
 	 */
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		Intent intent = getIntent();
 		pantalla = new Pantalla(this);
-		double v = 40; //extras.getDouble("v");
-		double theta = 20; //extras.getDouble("theta");
-		double phi = 45; //extras.getDouble("phi");
-		double g = 10; //extras.getDouble("g");
+		double v = intent.getDoubleExtra("prueba", 0);
+		double theta = intent.getDoubleExtra("theta", 45);
+		double phi = intent.getDoubleExtra("phi", 45);
+		double g = intent.getDoubleExtra("g", 9.81);
+		double enemigoX = intent.getDoubleExtra("enemigoX", 10);
+		double enemigoY = intent.getDoubleExtra("enemigoY", 10);
 		float maxT = 100 //(float) (4*(v/g)) 
 				, maxH = 0, 
 				maxZ = 400; //(float) (v*maxT);
