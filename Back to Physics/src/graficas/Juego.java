@@ -52,6 +52,17 @@ public class Juego extends View{
 	double X,Y;
 	public double i=1.0;
 	
+	/**
+	 * En esta clase esta el desarrollo completo de las acciones del juego
+	 * @param context
+	 * @param pantalla
+	 */
+	
+	/**
+	 * Dibuja en pantalla todos los recursos que se utilizan. 
+	 * @param context
+	 * @param pantalla
+	 */
 	public Juego(Context context, Pantalla pantalla){
 		super(context);
 		p=new Paint();
@@ -80,17 +91,12 @@ public class Juego extends View{
 		missilehoriginal = missile.getHeight();
 		disparo = false;
 		
-		
-
-		
-
-
-
-
-
-
 	}
 	
+	/**
+	 * Mueve el fondo en X
+	 * @param x
+	 */
 	public void mueveX(double x){
 		X=x;
 		try {
@@ -101,6 +107,10 @@ public class Juego extends View{
 		}
 	}
 	
+	/**
+	 * Mueve el fondo en Y
+	 * @param y
+	 */
 	public void mueveY(double y){
 		
 		try{
@@ -109,10 +119,18 @@ public class Juego extends View{
 		catch(Exception e){}
 	}
 	
+	/**
+	 * Asigna valores a la instancia de Y
+	 * @param y
+	 */
 	public void setY(double y){
 		Y=y;
 	}
 	
+	/**
+	 * Asigna valores a la instancia en X
+	 * @param x
+	 */
 	public void setX(double x){
 		X=x;
 	}
@@ -220,6 +238,10 @@ public class Juego extends View{
 	}
 	
 	*/
+	
+	/**Obtiene el canvas
+	 * @return canvas
+	 */
 
 	public Canvas getCbm(){
 		if(cbm==null){
@@ -229,6 +251,10 @@ public class Juego extends View{
 		return cbm;
 	}
 	
+	/**
+	 * Obtiene un ImageView
+	 * @return iImageView
+	 */
 	public ImageView getIv(){
 		if(iv==null){
 			if(iv==null){
@@ -239,6 +265,10 @@ public class Juego extends View{
 		return iv;
 	}
 	
+	/**
+	 * Obtiene un Bitmap
+	 * @return bitmap
+	 */
 	public Bitmap getBm(){
 		if(bm==null){
 			bm=Bitmap.createBitmap(getIv().getWidth(),getIv().getHeight(),Bitmap.Config.ARGB_8888);
@@ -246,13 +276,17 @@ public class Juego extends View{
 		return bm;
 	}
 	
-	
-	
+	/**
+	 * Ontiene un bitmap del crosspad
+	 * @return imagen del crosspad
+	 */
 	public Bitmap getArrow(){
 		return arrow;
 	}
 	
-	
+	/**
+	 * Realiza el disparo de la bala.
+	 */
 	public void disparar(){
 		//disparo=true;
 		//contador=3;
@@ -282,12 +316,17 @@ public class Juego extends View{
 		*/
 		
 	
-	
+	/**
+	 * Obtiene el bitmap del boton de disparo
+	 * @return imagen de boton
+	 */
 	public Bitmap getBoton(){
 		return imgbtn;
 	}
 	
-
+	/**
+	 * Vuelve a pintar la pantalla
+	 */
 	public void refresh() {
 		try {
 			fondo.center();

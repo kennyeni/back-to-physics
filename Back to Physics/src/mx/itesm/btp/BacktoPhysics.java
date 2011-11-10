@@ -5,6 +5,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import animacion.Graficacion;
 
+/**
+ * Es la clase principal que manda llamar a todo el juego
+ * @author vero
+ *
+ */
 public class BacktoPhysics extends Activity {
     /** Called when the activity is first created. */
     @Override

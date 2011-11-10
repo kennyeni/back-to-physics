@@ -13,7 +13,20 @@ public class Fondo {
 	private Posicion pos = new Posicion();
 	private Pantalla pantalla;
 	
+	/**
+	 * Esta calse es la creación del fondo de los niveles.
+	 * @param idAImagen
+	 * @param pantalla
+	 * @param resources
+	 */
 	
+	
+	/**
+	 * Este método  dibuja el fondo con la imagen determinada
+	 * @param idAImagen
+	 * @param pantalla
+	 * @param resources
+	 */
 	public Fondo(int idAImagen, Pantalla pantalla, Resources resources){
 		grafico = BitmapFactory.decodeResource(resources, idAImagen); // Se crea el grafico con la imagen de parametro
 		this.pantalla = pantalla;
@@ -24,6 +37,10 @@ public class Fondo {
 		}
 	}
 	
+	/**
+	 * Obtine la imagen que se selecciono para el fondo
+	 * @return fondo
+	 */
 	public Bitmap getBitmap(){ //regresa el fondo cortado a la medida y pos
 		try {
 			return Bitmap.createBitmap(grafico, pos.x, pos.y, pantalla.getWidth(), pantalla.getHeight());
@@ -33,6 +50,12 @@ public class Fondo {
 		return null;
 	}
 	
+	/**
+	 * Pinta la mira cuando se mueve la pantala en X
+	 * @param X
+	 * @return
+	 * @throws NoContextProvidedException
+	 */
 	public boolean mueveX(double X) throws NoContextProvidedException{
 		boolean exitoso;
 		pos.x+=X;
@@ -51,6 +74,13 @@ public class Fondo {
 		return exitoso;
 	}
 	
+	/**
+	 * Pinta la mira cuando se mueve la pantala en Y
+	 * @param Y
+	 * @return
+	 * @throws NoContextProvidedException
+	 */
+	
 	public boolean mueveY(double Y) throws NoContextProvidedException{
 		boolean exitoso;
 		pos.y+=Y;
@@ -68,6 +98,11 @@ public class Fondo {
 		
 		return exitoso;
 	}
+	
+	/**
+	 * Centra la mira en el fondo
+	 * @throws NoContextProvidedException
+	 */
 
 	public void center() throws NoContextProvidedException {
 		int gHeight = grafico.getHeight()/2;

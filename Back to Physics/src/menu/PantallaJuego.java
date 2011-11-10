@@ -17,7 +17,11 @@ import android.view.View;
 import android.view.View.OnLongClickListener;
 import android.view.View.OnTouchListener;
 
-
+/**
+ * Clase que recibe todas las acciones que ser‡n realizadas en la pantalla de juego nuevo.
+ * @author vero
+ *
+ */
 public class PantallaJuego  extends Activity implements Runnable, OnTouchListener{
 	private Juego juego;
 	private boolean corriendo;
@@ -70,6 +74,9 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
    	 player.start();
     }
 	
+	/**
+	 * Inicia la actividad de empezar el juego.
+	 */
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if(keyCode == KeyEvent.KEYCODE_BACK){
@@ -108,7 +115,12 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 	/////////////////////////////////////////////////
 	
 	
-	
+	/**
+	 * Obtiene las coordenadas X y Y  de la pantalla
+	 * @param x
+	 * @param y
+	 * @return
+	 */
 	public Coordenadas getPos(int x, int y){
 		coordenadas = new Coordenadas(x,y);
 		
@@ -117,7 +129,9 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 	
 	
 	
-	
+	/**
+	 * Recibe la acci—n de tocar el bot—n y comenzar la acci—n
+	 */
 	public boolean onTouch(View v, MotionEvent event) {
 		
 		try {
@@ -183,7 +197,9 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 	}
 	
 
-	
+	/**
+	 * Empieza la accion de mover X y Y en la pantalla del juego
+	 */
 	public void run() {
 		corriendo = true;
 		while (corriendo) {

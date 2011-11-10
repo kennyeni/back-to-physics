@@ -18,7 +18,11 @@ import android.view.MotionEvent;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 
-
+/**
+ * Clase que muestra el menœ principal del juego
+ * @author vero
+ *
+ */
 public class Principal extends Activity implements OnTouchListener{
 	
     @Override
@@ -51,7 +55,10 @@ public class Principal extends Activity implements OnTouchListener{
          botonHighscores.setOnTouchListener(this);
          
     }
-
+    
+    /**
+     * Activa las acciones de cada bot—n presentado en el menœ principal
+     */
 	@Override
 	public boolean onTouch(View v, MotionEvent event) {		
 		if(v.getId()==R.id.btnJuegoNuevo){
@@ -73,6 +80,7 @@ public class Principal extends Activity implements OnTouchListener{
 		}
 		return false;
 	}
+	
 	
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if(keyCode == KeyEvent.KEYCODE_BACK){

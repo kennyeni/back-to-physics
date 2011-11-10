@@ -7,6 +7,7 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 
+
 public class Acelerometro {
 	//Variables de instancia
 	private float factorCorreccion[] = new float[2];
@@ -76,6 +77,10 @@ public class Acelerometro {
 	
 	SensorEventListener listener = new SensorEventListener() {
 		
+		/**
+		 * MŽtodo que refresca la pantalla al momento de mover el aceler—metro
+		 */
+		
 		@Override
 		public void onSensorChanged(SensorEvent event) {
 			float valores[] = event.values;
@@ -106,13 +111,13 @@ public class Acelerometro {
 		public void onAccuracyChanged(Sensor sensor, int accuracy) {};
 	};
 	
-	public void calibracion(){
+	public void calibracion(){ //Vero
 		
 	}
 	
 	
 	/**
-	 * Clase que regresa un arreglo de X
+	 * Clase que regresa un arreglo de Y
 	 * @return valor
 	 */
 	public int getY(){
@@ -140,6 +145,10 @@ public class Acelerometro {
 		
 	}
 	
+	/**
+	 * Clase que regresa un arrego de X
+	 * @return valor
+	 */
 	public int getX(){
 		if(X > rightSlowBottomLimit && X < rightSlowUpperLimit){
 			return sVel;

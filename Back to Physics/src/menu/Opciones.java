@@ -4,6 +4,7 @@ package menu;
 import graficas.Pantalla;
 
 
+
 import android.R;
 import android.app.Activity;
 import android.content.Intent;
@@ -15,6 +16,12 @@ import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.widget.TextView;
 
+
+/**
+ * Clase que manda llamar  y crea al layout que muestra las opciones de configuraci—n que tiene el juego
+ * @author vero
+ *
+ */
 public class Opciones extends Activity implements OnTouchListener 
 {
 	
@@ -41,6 +48,9 @@ public class Opciones extends Activity implements OnTouchListener
 		
 	}
 
+	/**
+	 * Recibe la acci—n que realiza el usuario al presionar el boton de ayuda
+	 */
 	@Override
 	public boolean onTouch(View v, MotionEvent event) {
 		if (v.getId()==mx.itesm.btp.R.id.btnAyuda) {
