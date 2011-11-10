@@ -13,6 +13,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 
+
 public class PlanoCartesiano extends View {
 	
 	private final int NUMERO_PUNTOS = 30;

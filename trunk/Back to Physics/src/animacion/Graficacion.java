@@ -52,7 +52,9 @@ public class Graficacion extends Activity implements Runnable {
 		th.start();
 	}
 	
-	
+	/**
+	 * Refresca la pantalla
+	 */
 	public void run() {
 		while (true) {
 			plano.postInvalidate();
