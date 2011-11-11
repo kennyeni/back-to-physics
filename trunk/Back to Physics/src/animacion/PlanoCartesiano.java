@@ -14,37 +14,62 @@ import android.util.Log;
 import android.view.View;
 
 
+/**
+ * Clase que genera un view que grafica respecto a 2 planos
+ * @author Kenny
+ *
+ */
 public class PlanoCartesiano extends View {
 	
-	private final int NUMERO_PUNTOS = 30;
-	private final int MARGEN = 80;
+	private static final float NUMERO_Puntos = 30;
+
+	private final int MARGEN = 25;
 	
 	private LinkedList<Coordenadas> aereo = null;
 	private LinkedList<Coordenadas> lateral = null;
 	private Paint p = null;
 	private Pantalla pantalla = null;
 	private float tiempo = 0;
-	private float maxTiempo = 0;
-	private float maxYAereo = 0;
-	private float maxYLateral = 0;
-	private int maxPuntos = 0;
-	private float relacion = 0;
+	private float relacionAVAereoY = 0;
+	private float relacionAVAereoX = 0;
+	private float relacionAVLateralY = 0;
+	private float relacionAVLateralX = 0;
+	private float width = 0;
+	private float height = 0;
+	private float enemigoX = 0;
+	private float enemigoY = 0;
 	private boolean termino = false;
+	
 
-	public PlanoCartesiano(Context context) {
-		super(context);
-	}
+	/**
+	 * Constructor principal (y œnico)
+	 * @param context
+	 * @param puntosAereos
+	 * @param puntosLaterales
+	 * @param pantalla
+	 * @param enemigoY
+	 * @param enemigoX
+	 */
 
-	public PlanoCartesiano(Context context, LinkedList<Coordenadas> puntosAereos, LinkedList<Coordenadas> puntosLaterales, Pantalla pantalla, float maxT, float maxH, float maxZ) {
+	public PlanoCartesiano(Context context, LinkedList<Coordenadas> puntosAereos, LinkedList<Coordenadas> puntosLaterales, Pantalla pantalla, float enemigoX, float enemigoY) {
 		super(context);
 		p = new Paint();
 		this.pantalla = pantalla;
+		this.enemigoX = enemigoX;
+		this.enemigoY = enemigoY;
 		aereo = puntosAereos;
 		lateral = puntosLaterales;
-		maxTiempo = aereo.getLast().getX();
-		maxYAereo = aereo.getLast().getY();
-		maxYLateral = lateral.getLast().getY();
-		relacion = maxTiempo/NUMERO_PUNTOS;
+		try {
+			width = (float)pantalla.getWidth();
+			height  = (float)pantalla.getHeight();
+			relacionAVAereoY = (float) ((enemigoY*1.1)/(height-MARGEN));
+			relacionAVAereoX = (float) (aereo.getLast().getX())/((width/2)-MARGEN);//(((.75)*relacionAVAereoY)/(4/2));
+			relacionAVLateralX = (float) (enemigoX*1.3)/(width/2);
+			int lugar = Math.round(lateral.size()/2);
+			float tmp = (lateral.get(lugar)).getY();
+			relacionAVLateralY = tmp/(height-MARGEN);
+		} catch (NoContextProvidedException e) {}
+		
 		
 		
 	}
@@ -57,45 +82,40 @@ public class PlanoCartesiano extends View {
 		if(!termino){
 			canvas.drawRGB(0, 0, 0);
 			LinkedList<Coordenadas> copiaAereo = (LinkedList<Coordenadas>) aereo.clone();
-			float factorX = 2, factorY=25;
-			try {
-				p.setARGB(200, 255, 255, 255);
-				p.setStrokeWidth(3);
-				canvas.drawLine(pantalla.getWidth()/2, pantalla.getHeight(), pantalla.getWidth()/2, 0, p);
-				//factorX = ((pantalla.getWidth()/2)-MARGEN)/maxTiempo;
-				//factorY = (pantalla.getHeight()-MARGEN)/maxYAereo;
-			} catch (NoContextProvidedException e) {}
-			// 30/width/2 - i/x
-			Log.i("Graficas", "Draw");
 			
+			p.setStrokeWidth(3);
+			canvas.drawLine(width/2, height, width/2, 0, p);
 			
-			for(float i = 0; i < tiempo; i+=relacion){
-				Coordenadas coor = null;
-				float x = 0;
-				float y = 0;
-				try{
-					coor = copiaAereo.poll();
-					x= coor.getX()*factorX;
-					y = pantalla.getHeight()-coor.getY()*factorY;
-				} catch(Exception e){}
-				canvas.drawCircle(x+MARGEN/2, y-MARGEN/2, 7, p);
-				Log.d("Graficas", "X:"+x+"Y:"+y);
+			p.setARGB(200, 90, 0, 60);
+			canvas.drawCircle((width/2)-(enemigoX/relacionAVAereoX), height-(enemigoY/relacionAVAereoY), 10, p);
+			canvas.drawCircle((width/4), width-MARGEN-10, 20, p);
+			
+			p.setARGB(200, 255, 255, 255);
+			for(float i = 0; i < tiempo; i++){
+				Coordenadas coor = copiaAereo.poll();
+				float x= coor.getX()/relacionAVAereoX;
+				float y = coor.getY()/relacionAVAereoY;
+				canvas.drawCircle(x+(width/4), height-y-MARGEN, 7, p);
+				Log.i("Graficas", "X:"+coor.getX()+"Y:"+coor.getY());
 			}
+			
+			
+			canvas.drawText("MaxT: "+aereo.getLast().getX(), 200, 200, p);
+			canvas.drawText("MaxY: "+aereo.getLast().getY(), 200, 250, p);
 			
 			if(copiaAereo.size()<1){
-				canvas.drawText("MaxT: "+aereo.getLast().getX(), 200, 200, p);
+				
 				p.setARGB(125, 100, 100, 100);
-				try {
-					
-					canvas.drawLine(aereo.getFirst().getX()*factorX+MARGEN/2, 
-							pantalla.getHeight()-aereo.getFirst().getY()*factorY-MARGEN/2, aereo.getLast().getX()*factorX+MARGEN/2, pantalla.getHeight()-aereo.getFirst().getY()*factorY-MARGEN/2, p);
-				} catch (NoContextProvidedException e) {}
+					//canvas.drawLine(aereo.getFirst().getX()*relacionAVAereoX+MARGEN/2, 
+						//	height-aereo.getFirst().getY()*relacionAVAereoY-MARGEN/2, aereo.getLast().getX()*relacionAVLateralX+MARGEN/2, height-aereo.getFirst().getY()*relacionAVAereoY-MARGEN/2, p);
 			}
 			
-			//if(tiempo <= relacion)
-				//termino = true;
 			
-			tiempo+=relacion;
+			
+			if(tiempo<NUMERO_Puntos)
+				tiempo+=1;
+			else
+				termino = false;
 		}
 		
 		

@@ -177,12 +177,12 @@ public class Juego extends View{
 				
 				
 				Intent grafica = new Intent (getContext(), Graficacion.class); 
-				grafica.putExtra("v", 20); //en m/s
-				grafica.putExtra("theta", 20);
-				grafica.putExtra("phi", 20);
+				grafica.putExtra("v", 20.0); //en m/s
+				grafica.putExtra("theta", 75.0);
+				grafica.putExtra("phi", 45.0);
 				grafica.putExtra("g", 9.81);
-				grafica.putExtra("enemigoX", 10);
-				grafica.putExtra("enemigoY", 10);
+				grafica.putExtra("enemigoX", 200.0);
+				grafica.putExtra("enemigoY", 100.0);
 			    getContext().startActivity(grafica);
 			}
 		

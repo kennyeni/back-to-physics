@@ -22,6 +22,8 @@
 		<activity android:name="menu.Ayuda" android:label="@string/app_name" android:screenOrientation="portrait"></activity>
 		<activity android:name="menu.Loading" android:noHistory="true" android:label="@string/app_name" android:screenOrientation="portrait"></activity>
 		<activity android:name="animacion.Graficacion" android:noHistory="true" android:label="@string/app_name" android:screenOrientation="landscape" android:configChanges="orientation|keyboardHidden"  android:theme="@android:style/Theme.NoTitleBar.Fullscreen" ></activity>
-		
+		<activity android:name="menu.Logo" android:label="@string/app_name" android:screenOrientation="portrait"  android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
+		<activity android:name="menu.PantallaMemes" android:label="@string/app_name" android:screenOrientation="landscape"  android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>    
+		    
     </application>
 </manifest>

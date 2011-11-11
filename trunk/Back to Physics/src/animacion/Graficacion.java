@@ -29,18 +29,16 @@ public class Graficacion extends Activity implements Runnable {
 		super.onCreate(savedInstanceState);
 		Intent intent = getIntent();
 		pantalla = new Pantalla(this);
-		double v = intent.getDoubleExtra("prueba", 0);
+		double v = intent.getDoubleExtra("v", 0);
 		double theta = intent.getDoubleExtra("theta", 45);
 		double phi = intent.getDoubleExtra("phi", 45);
 		double g = intent.getDoubleExtra("g", 9.81);
-		double enemigoX = intent.getDoubleExtra("enemigoX", 10);
-		double enemigoY = intent.getDoubleExtra("enemigoY", 10);
-		float maxT = 100 //(float) (4*(v/g)) 
-				, maxH = 0, 
-				maxZ = 400; //(float) (v*maxT);
+		float enemigoX = (float) intent.getDoubleExtra("enemigoX", 10);
+		float enemigoY = (float) intent.getDoubleExtra("enemigoY", 10);
+
 		LinkedList<Coordenadas> puntosA = Fisica.puntosAereos(v, theta, phi, g);
 		LinkedList<Coordenadas> puntosL = Fisica.puntosLaterales(v, theta, phi, g);
-		plano = new PlanoCartesiano(this, puntosA, puntosL, pantalla, maxT, maxH, maxZ);
+		plano = new PlanoCartesiano(this, puntosA, puntosL, pantalla, enemigoX, enemigoY);
 		
 		setContentView(plano);
 	}
