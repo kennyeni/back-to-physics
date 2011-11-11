@@ -12,7 +12,7 @@ import java.util.LinkedList;
 
 public class Fisica {
 	
-	final static int MAX_PUNTOS = 40;
+	final static int MAX_PUNTOS = 30;
 	
 	/**
 	 * Clase que regresa una LL de puntos a graficar en la parte aerea

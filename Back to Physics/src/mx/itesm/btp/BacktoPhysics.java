@@ -17,7 +17,7 @@ public class BacktoPhysics extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         
-        Intent intencion = new Intent (BacktoPhysics.this, menu.Principal.class); 
+        Intent intencion = new Intent (BacktoPhysics.this, menu.Logo.class); 
         startActivity (intencion);
         
         
