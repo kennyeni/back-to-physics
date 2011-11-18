@@ -82,6 +82,7 @@ public class PlanoCartesiano extends View {
 		if(!termino){
 			canvas.drawRGB(0, 0, 0);
 			LinkedList<Coordenadas> copiaAereo = (LinkedList<Coordenadas>) aereo.clone();
+			LinkedList<Coordenadas> copiaLateral = (LinkedList<Coordenadas>) lateral.clone();
 			
 			p.setStrokeWidth(3);
 			canvas.drawLine(width/2, height, width/2, 0, p);
@@ -91,17 +92,24 @@ public class PlanoCartesiano extends View {
 			canvas.drawCircle((width/4), width-MARGEN-10, 20, p);
 			
 			p.setARGB(200, 255, 255, 255);
-			for(float i = 0; i < tiempo; i++){
+			for(float i = 0; i < tiempo; i++){ //Aereo
 				Coordenadas coor = copiaAereo.poll();
-				float x= coor.getX()/relacionAVAereoX;
-				float y = coor.getY()/relacionAVAereoY;
-				canvas.drawCircle(x+(width/4), height-y-MARGEN, 7, p);
-				Log.i("Graficas", "X:"+coor.getX()+"Y:"+coor.getY());
+				float x= coor.getX()/relacionAVAereoY;
+				float y = coor.getY()/relacionAVAereoX;
+				canvas.drawCircle(y+(width/4), height-x, 7, p);
+				Log.i("Graficas Aereos", "X:"+x+"Y:"+y);
+				
+				coor = copiaLateral.poll();
+				x= coor.getX()/relacionAVLateralY;
+				y = coor.getY()/relacionAVLateralX;
+				canvas.drawCircle(y+(2*width/4), height-x, 7, p);
+				Log.i("Graficas Lateral", "X:"+x+"Y:"+y);
+				
 			}
 			
 			
 			canvas.drawText("MaxT: "+aereo.getLast().getX(), 200, 200, p);
-			canvas.drawText("MaxY: "+aereo.getLast().getY(), 200, 250, p);
+			//canvas.drawText("MaxY: "+aereo.getLast().getY(), 200, 250, p);
 			
 			if(copiaAereo.size()<1){
 				
