@@ -1,5 +1,6 @@
 package graficas;
 
+import personajes.Principal;
 import exceptions.NoContextProvidedException;
 
 
@@ -43,7 +44,7 @@ public class Juego extends View{
 	private Bitmap barra3;
 	private Bitmap barra4;
 	private Bitmap barra5;
-	private Bitmap missile;
+	//private Bitmap missile;
 	private int x=0;
 	private boolean disparo;
 	int missileworiginal;
@@ -51,6 +52,7 @@ public class Juego extends View{
 	int contador;
 	double X,Y;
 	public double i=1.0;
+	public Principal missile;
 	
 	/**
 	 * En esta clase esta el desarrollo completo de las acciones del juego
@@ -68,7 +70,7 @@ public class Juego extends View{
 		p=new Paint();
 		pantalla.setContext(context);
 		fondo = new Fondo(mx.itesm.btp.R.drawable.valley, pantalla, getResources());
-		
+		missile= new Principal(mx.itesm.btp.R.drawable.cat2, pantalla,getResources());
 		arrow = BitmapFactory.decodeResource(getResources(), mx.itesm.btp.R.drawable.cpad);
 		mira=BitmapFactory.decodeResource(getResources(), mx.itesm.btp.R.drawable.crosshair2);
 		imgMonito = BitmapFactory.decodeResource(getResources(), mx.itesm.btp.R.drawable.cat1);
@@ -79,16 +81,17 @@ public class Juego extends View{
 		barra3= BitmapFactory.decodeResource(getResources(), mx.itesm.btp.R.drawable.barra3);
 		barra4= BitmapFactory.decodeResource(getResources(), mx.itesm.btp.R.drawable.barra4);
 		barra5= BitmapFactory.decodeResource(getResources(), mx.itesm.btp.R.drawable.barra5);
-		missile= BitmapFactory.decodeResource(getResources(), mx.itesm.btp.R.drawable.cat2);
+		
 		contador = 0;
 		
 		
-		int missilew = missile.getWidth();
-		int missileh = missile.getHeight();
-		missile=Bitmap.createScaledBitmap(missile,5*missilew, 5*missileh, false);
+		int missilew = missile.getBitmap().getWidth();
+		int missileh = missile.getBitmap().getHeight();
+		missile.setBitmap(Bitmap.createScaledBitmap(missile.getBitmap(),5*missilew, 5*missileh, false));
+	
 		
-		missileworiginal = missile.getWidth();
-		missilehoriginal = missile.getHeight();
+		missileworiginal = missile.getBitmap().getWidth();
+		missilehoriginal = missile.getBitmap().getHeight();
 		disparo = false;
 		
 	}
@@ -165,9 +168,9 @@ public class Juego extends View{
 		
 		
 		if(disparo==true){
-			missile= BitmapFactory.decodeResource(getResources(), mx.itesm.btp.R.drawable.cat2);
-			missile = Bitmap.createScaledBitmap(missile, (int)Math.round(missile.getWidth()/i), (int)Math.round(missile.getHeight()/i), true);
-			canvas.drawBitmap(missile, canvas.getWidth()/2-missile.getWidth()/2, canvas.getHeight()/2-missile.getHeight()/2,p);
+			missile.setBitmap(BitmapFactory.decodeResource(getResources(), mx.itesm.btp.R.drawable.cat2));
+			missile.setBitmap(Bitmap.createScaledBitmap(missile.getBitmap(), (int)Math.round(missile.getBitmap().getWidth()/i), (int)Math.round(missile.getBitmap().getHeight()/i), true));
+			canvas.drawBitmap(missile.getBitmap(), canvas.getWidth()/2-missile.getBitmap().getWidth()/2, canvas.getHeight()/2-missile.getBitmap().getHeight()/2,p);
 			i+=.3;
 			if(i==2.5){
 				disparo=false;
