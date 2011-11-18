@@ -29,10 +29,10 @@ public class Fisica {
 		double vy = v*Math.sin(phi*radian);
 		double t = 2*vy/g;
 		double intervalo = t/MAX_PUNTOS;
-		for(double a = 0; a <= t; a+=intervalo){
+		for(double ti = 0, a=0; ti < MAX_PUNTOS+1; a+=intervalo, ti++){
 			double hyp = vx*a;
-			float y = (float) a;
-			float x = (float) (hyp*Math.sin(theta*radian));
+			float x = (float) (hyp*Math.cos(theta*radian));
+			float y = (float) (hyp*Math.sin(theta*radian));
 			puntos.add(new Coordenadas(x, y));
 		}
 		
@@ -55,9 +55,9 @@ public class Fisica {
 		double vy = v*Math.sin(phi*radian);
 		double t = 2*vy/g;
 		double intervalo = t/MAX_PUNTOS;
-		for(double a = 0; a <= t; a+=intervalo){
-			float x = (float) a;
-			float y = (float) (vy*a-.5*g*a*a);
+		for(double ti = 0, a=0; ti < MAX_PUNTOS+1; a+=intervalo, ti++){
+			float x = (float) (vx*a);
+			float y = (float) (x*Math.tan(phi*radian)-(g*x*x/(2*(vx*vx))));
 			puntos.add(new Coordenadas(x, y));
 		}
 		return puntos;
