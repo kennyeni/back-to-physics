@@ -50,6 +50,10 @@ public class Graficacion extends Activity implements Runnable {
 		th.start();
 	}
 	
+	public void detener(){
+		
+	}
+	
 	/**
 	 * Refresca la pantalla
 	 */
