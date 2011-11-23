@@ -6,12 +6,16 @@ import graficas.Coordenadas;
 import graficas.Juego;
 import graficas.Pantalla;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnLongClickListener;
@@ -23,6 +27,8 @@ import android.view.View.OnTouchListener;
  *
  */
 public class PantallaJuego  extends Activity implements Runnable, OnTouchListener{
+	private static final String MENU_PAUSE = null;
+	private static final String MENU_RESUME = null;
 	private Juego juego;
 	private boolean corriendo;
 	private MediaPlayer player;
@@ -31,6 +37,7 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 	private Coordenadas coordenadas;
 	private Acelerometro acel;
 	private int notifSonidogato=0;
+	private final int DIALOGO_SIMPLE =0;
 	
 	//private Bitmap imgbtn = BitmapFactory.decodeResource(getResources(), mx.itesm.btp.R.drawable.btnb);
 
@@ -108,6 +115,31 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 		
 
 	}
+	protected void onPause(){
+		super.onPause();
+		onCreateDialog(DIALOGO_SIMPLE);
+		
+	}
+	protected Dialog onCreateDialog(int id){
+    	
+		if(id==DIALOGO_SIMPLE){
+			Dialog cuadroDialogo=null;
+		
+    	AlertDialog.Builder simpleBuilder = new AlertDialog.Builder(this);
+		simpleBuilder.setMessage("         Pausa           ");
+		simpleBuilder.setPositiveButton("Reanudar", new DialogInterface.OnClickListener() {
+			
+			
+			public void onClick(DialogInterface dialogo, int which) {
+				dialogo.dismiss();
+				
+			}
+		});
+		cuadroDialogo = simpleBuilder.create();
+		return cuadroDialogo;
+		}return null;
+		
+	}
 	
 	//////////////////////////////////////////////////
 	//////////// Manejar aqui eventos
@@ -174,9 +206,11 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 			
 			
 			if (((posx > (1/60)*widthPantalla)&&(posx < imgbtn.getWidth()))&&((posy > (5)*heightPantalla/7 )&&(posy < heightPantalla))){
-				notifSonidogato=1;
-				reproducirGato();
-				juego.disparar();
+//				notifSonidogato=1;
+//				reproducirGato();
+//				juego.disparar();
+				onPause();
+				showDialog(DIALOGO_SIMPLE);
 				
 				
 			}
@@ -195,6 +229,8 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 		
 		return true;
 	}
+	
+
 	
 
 	/**
