@@ -7,7 +7,7 @@
     <string name="lblScores">High Scores</string>
     <string name="lblOpciones">Opciones</string>
     <string name="lblAcercaDe">Acerca De</string>
-    <string name="lblTitulo">BACK TO PHISICS</string>
+    <string name="lblTitulo">BACK TO PHYSICS</string>
     <string name="txtAcercaDe">
     \nBack to Physics
     \n
@@ -29,25 +29,12 @@
     <string name="txtSonidos">Sonido</string>
     <string name="txtMusica">Musica</string>
     <string name="txtAcelerometro">Acelerometro</string>
-    <string name="txtAyuda">   \nAYUDA
-    \n
-    \nRules: 
-    \n
-    \n Aqui se declarán las reglas del juego
-    \n 
-    \n 
-    \n 
-    \n
-    \n
-    \n
-    \n
-    \n
-    \n
-    \n</string>
     <string name="lblLoading">Cargando...</string>
     <string name="lblSabiasQue">¿Sabia que…?</string>
     <string name="cntSabiasQue">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis placerat cursus ipsum vitae mollis. Pellentesque.</string>
     <string name="lblSonido"></string>
     <string name="lblMusica"></string>
-    <string name="lblAyuda">Ayuda</string>
+    <string name="lblReglas">COMO JUGAR</string>
+    <string name="lblInstruccionesVertical">Para jugar primero encuentra posición adecuada donde se sienta cómodo, después poner el dispositivo en un buen ángulo.</string>
+    <string name="lblInstruccionesHorizontal">¡OH SI!  \n \n ¡También puedes jugar acostado!</string>
 </resources>

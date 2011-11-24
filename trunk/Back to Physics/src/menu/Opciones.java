@@ -40,7 +40,7 @@ public class Opciones extends Activity implements OnTouchListener
          TextView Musica = (TextView)findViewById(mx.itesm.btp.R.id.txtMusica);
          Musica.setTypeface(font);
          
-         TextView botonAyuda = (TextView)findViewById(mx.itesm.btp.R.id.btnAyuda);
+         TextView botonAyuda = (TextView)findViewById(mx.itesm.btp.R.id.btnReglas);
          botonAyuda.setTypeface(font);
          botonAyuda.setOnTouchListener(this);
     
@@ -53,7 +53,7 @@ public class Opciones extends Activity implements OnTouchListener
 	 */
 	@Override
 	public boolean onTouch(View v, MotionEvent event) {
-		if (v.getId()==mx.itesm.btp.R.id.btnAyuda) {
+		if (v.getId()==mx.itesm.btp.R.id.btnReglas) {
 			Intent intention = new Intent(Opciones.this, Ayuda.class);
 			startActivity(intention);
 		} 	return false;
