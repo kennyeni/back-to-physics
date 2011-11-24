@@ -1,5 +1,6 @@
 package graficas;
 
+import personajes.Enemigo;
 import personajes.Principal;
 import exceptions.NoContextProvidedException;
 
@@ -52,7 +53,7 @@ public class Juego extends View{
 	int contador;
 	double X,Y;
 	public double i=1.0;
-	//public Principal missile;
+	public Enemigo catapulta;
 	
 	/**
 	 * En esta clase esta el desarrollo completo de las acciones del juego
@@ -70,6 +71,7 @@ public class Juego extends View{
 		p=new Paint();
 		pantalla.setContext(context);
 		fondo = new Fondo(mx.itesm.btp.R.drawable.valley, pantalla, getResources());
+		catapulta= new Enemigo(mx.itesm.btp.R.drawable.cat1, pantalla, getResources());
 		
 		arrow = BitmapFactory.decodeResource(getResources(), mx.itesm.btp.R.drawable.cpad);
 		mira=BitmapFactory.decodeResource(getResources(), mx.itesm.btp.R.drawable.crosshair2);
@@ -145,7 +147,7 @@ public class Juego extends View{
 		canvas.drawRGB(0,0,0); 
 		mira = Bitmap.createScaledBitmap(mira, canvas.getWidth(), canvas.getHeight(), false);
 		canvas.drawBitmap(fondo.getBitmap(), 0, 0, p);
-		
+		//canvas.drawBitmap(catapulta.getBitmap(), 0,0, p);
 		canvas.drawBitmap(mira, 0, 0, p);
 		
 		
