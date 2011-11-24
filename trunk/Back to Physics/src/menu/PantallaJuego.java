@@ -206,11 +206,11 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 			
 			
 			if (((posx > (1/60)*widthPantalla)&&(posx < imgbtn.getWidth()))&&((posy > (5)*heightPantalla/7 )&&(posy < heightPantalla))){
-//				notifSonidogato=1;
-//				reproducirGato();
-//				juego.disparar();
-				onPause();
-				showDialog(DIALOGO_SIMPLE);
+				notifSonidogato=1;
+				reproducirGato();
+				juego.disparar();
+//				onPause();
+//				showDialog(DIALOGO_SIMPLE);
 				
 				
 			}
