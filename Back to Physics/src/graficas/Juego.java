@@ -81,7 +81,7 @@ public class Juego extends View{
 		barra3= BitmapFactory.decodeResource(getResources(), mx.itesm.btp.R.drawable.barra3);
 		barra4= BitmapFactory.decodeResource(getResources(), mx.itesm.btp.R.drawable.barra4);
 		barra5= BitmapFactory.decodeResource(getResources(), mx.itesm.btp.R.drawable.barra5);
-		missile=BitmapFactory.decodeResource(getResources(), mx.itesm.btp.R.drawable.rock2);
+		missile=BitmapFactory.decodeResource(getResources(), mx.itesm.btp.R.drawable.rockbn);
 		contador = 0;
 		
 		
@@ -168,7 +168,7 @@ public class Juego extends View{
 		
 		
 		if(disparo==true){
-			missile=BitmapFactory.decodeResource(getResources(), mx.itesm.btp.R.drawable.rock2);
+			missile=BitmapFactory.decodeResource(getResources(), mx.itesm.btp.R.drawable.rockbn);
 			missile=Bitmap.createScaledBitmap(missile, (int)Math.round(missile.getWidth()/i), (int)Math.round(missile.getHeight()/i), true);
 			canvas.drawBitmap(missile, canvas.getWidth()/2-missile.getWidth()/2, canvas.getHeight()/2-missile.getHeight()/2,p);
 			i+=.3;
