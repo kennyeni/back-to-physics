@@ -31,12 +31,12 @@ public class PantallaMemes extends Activity {
 			
 			@Override
 			public void run() {
-				Intent intencion = new Intent (PantallaMemes.this, menu.Principal.class); 
+				Intent intencion = new Intent (PantallaMemes.this, menu.SplashScreen.class); 
 		        startActivity(intencion);
 				
 			}
 		};
-		reloj.schedule(lanzaMemes, 4000);
+		reloj.schedule(lanzaMemes, 2000);
 		
 	}
 	

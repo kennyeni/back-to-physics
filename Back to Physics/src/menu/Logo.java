@@ -36,7 +36,7 @@ startActivity(intencion);
 
 }
 };
-reloj.schedule(lanzaPrincipal, 4000);
+reloj.schedule(lanzaPrincipal, 2000);
 
 }
 
