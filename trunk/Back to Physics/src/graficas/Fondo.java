@@ -10,7 +10,7 @@ import android.graphics.BitmapFactory;
 public class Fondo {
 	
 	private Bitmap grafico;
-	private Posicion pos = new Posicion();
+	private Posicion pos;
 	private Pantalla pantalla;
 	
 	/**
@@ -30,6 +30,7 @@ public class Fondo {
 	public Fondo(int idAImagen, Pantalla pantalla, Resources resources){
 		grafico = BitmapFactory.decodeResource(resources, idAImagen); // Se crea el grafico con la imagen de parametro
 		this.pantalla = pantalla;
+		pos = new Posicion();
 		try {
 			this.center();
 		} catch (NoContextProvidedException e) {

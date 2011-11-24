@@ -70,8 +70,9 @@ public class Juego extends View{
 		super(context);
 		p=new Paint();
 		pantalla.setContext(context);
-		fondo = new Fondo(mx.itesm.btp.R.drawable.valley, pantalla, getResources());
 		catapulta= new Enemigo(mx.itesm.btp.R.drawable.cat1, pantalla, getResources());
+		fondo = new Fondo(mx.itesm.btp.R.drawable.valley, pantalla, getResources());
+		
 		
 		arrow = BitmapFactory.decodeResource(getResources(), mx.itesm.btp.R.drawable.cpad);
 		mira=BitmapFactory.decodeResource(getResources(), mx.itesm.btp.R.drawable.crosshair2);
@@ -147,7 +148,7 @@ public class Juego extends View{
 		canvas.drawRGB(0,0,0); 
 		mira = Bitmap.createScaledBitmap(mira, canvas.getWidth(), canvas.getHeight(), false);
 		canvas.drawBitmap(fondo.getBitmap(), 0, 0, p);
-		//canvas.drawBitmap(catapulta.getBitmap(), 0,0, p);
+		canvas.drawBitmap(catapulta.getBitmap(), 0,0, p);
 		canvas.drawBitmap(mira, 0, 0, p);
 		
 		

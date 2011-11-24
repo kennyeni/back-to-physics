@@ -9,7 +9,7 @@ import graficas.Posicion;
 
 public class Enemigo {
 	private Bitmap grafico;
-	private Posicion pos = new Posicion();
+	private Posicion pos = null;
 	private Pantalla pantalla;
 	
 	/**
@@ -29,6 +29,7 @@ public class Enemigo {
 	public Enemigo(int idAImagen, Pantalla pantalla, Resources resources){
 		grafico = BitmapFactory.decodeResource(resources, idAImagen); // Se crea el grafico con la imagen de parametro
 		this.pantalla = pantalla;
+		pos = new Posicion();
 		
 	}
 	
@@ -37,12 +38,7 @@ public class Enemigo {
 	 * @return fondo
 	 */
 	public Bitmap getBitmap(){ //regresa el fondo cortado a la medida y pos
-		try {
-			return Bitmap.createBitmap(grafico, pos.x, pos.y, pantalla.getWidth(), pantalla.getHeight());
-		} catch (NoContextProvidedException e) {
-			e.printStackTrace();
-		} 
-		return null;
+		return grafico;
 	}
 	
 	/**
