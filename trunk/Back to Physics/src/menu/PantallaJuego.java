@@ -89,7 +89,7 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 		if(keyCode == KeyEvent.KEYCODE_BACK){
 			startActivity(new Intent(PantallaJuego.this, Principal.class));
 		}
-		return true;
+		return false;
 	}
 
 

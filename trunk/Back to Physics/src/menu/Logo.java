@@ -15,6 +15,8 @@ import android.view.View;
 
 public class Logo extends Activity {
 
+protected static final int RESULT_CLOSE_ALL = 0;
+
 @Override
 protected void onCreate(Bundle savedInstanceState) {
 super.onCreate(savedInstanceState);
@@ -32,12 +34,25 @@ TimerTask lanzaPrincipal = new TimerTask() {
 @Override
 public void run() {
 Intent intencion = new Intent (Logo.this, menu.PantallaMemes.class); 
-startActivity(intencion);
+startActivityForResult(intencion, RESULT_CLOSE_ALL);
 
 }
 };
 reloj.schedule(lanzaPrincipal, 2000);
 
+}
+
+@Override
+protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    switch(resultCode)
+    {
+    case RESULT_CLOSE_ALL:
+        setResult(RESULT_CLOSE_ALL);
+        Intent showOptions = new Intent(Intent.ACTION_MAIN);
+        showOptions.addCategory(Intent.CATEGORY_HOME);
+        startActivity(showOptions);
+    }
+    //super.onActivityResult(requestCode, resultCode, data);
 }
 
 
