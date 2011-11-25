@@ -5,12 +5,13 @@
   android:layout_width="fill_parent"
   android:layout_height="fill_parent" android:weightSum="1">
     <TextView android:layout_gravity="center" android:layout_marginBottom="12dp" android:layout_marginTop="12dp" android:textAppearance="?android:attr/textAppearanceLarge" android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/txtOpciones" android:text="@string/txtOpciones" android:textSize="30dp"></TextView>
-    <TextView android:layout_gravity="center" android:layout_marginBottom="12dp" android:layout_marginTop="12dp" android:textAppearance="?android:attr/textAppearanceLarge" android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/lblOpciones"></TextView>
-    <TextView android:layout_gravity="center" android:layout_marginBottom="12dp" android:layout_marginTop="12dp" android:textAppearance="?android:attr/textAppearanceMedium" android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/txtSonido" android:text="@string/txtSonidos"></TextView>
-    <RadioButton android:layout_gravity="center" android:layout_marginBottom="12dp" android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/txtSonido" android:text="@string/lblSonido"></RadioButton>
+    <TextView android:layout_gravity="center" android:layout_marginBottom="12dp" android:layout_marginTop="5dp" android:textAppearance="?android:attr/textAppearanceMedium" android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/txtSonido" android:text="@string/txtSonidos"></TextView>
+
+	<ToggleButton android:id="@+id/tgBtnSonido" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="ToggleButton" android:layout_gravity="center" android:textOn="Encendido" android:textOff="Apagado"/>
     <TextView android:layout_gravity="center" android:layout_marginBottom="12dp" android:layout_marginTop="12dp" android:textAppearance="?android:attr/textAppearanceMedium" android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/txtMusica" android:text="@string/txtMusica"></TextView>
-    <RadioButton android:layout_gravity="center" android:layout_marginBottom="20dp" android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/lblMusica" android:text="@string/lblMusica"></RadioButton>
-	<TextView android:textAppearance="?android:attr/textAppearanceMedium" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/lblReglas" android:id="@+id/btnReglas" android:layout_gravity="center" android:layout_marginTop="20dp" android:textSize="25dp"></TextView>
+    <ToggleButton android:id="@+id/tgBtnMusica" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="ToggleButton"  android:layout_gravity="center" android:textOn="Encendido" android:textOff="Apagado"/>
+	<TextView android:textAppearance="?android:attr/textAppearanceMedium" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/lblCalibracion" android:id="@+id/btnCalibracion" android:layout_gravity="center" android:layout_marginTop="20dp" android:textSize="25dp"></TextView>
+    <TextView android:textAppearance="?android:attr/textAppearanceMedium" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/lblReglas" android:id="@+id/btnReglas" android:layout_gravity="center" android:layout_marginTop="20dp" android:textSize="25dp"></TextView>
         
                                                                                                                                                     
 </LinearLayout>

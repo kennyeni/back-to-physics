@@ -37,4 +37,5 @@
     <string name="lblReglas">COMO JUGAR</string>
     <string name="lblInstruccionesVertical">Para jugar primero encuentra posición adecuada donde se sienta cómodo, después poner el dispositivo en un buen ángulo.</string>
     <string name="lblInstruccionesHorizontal">¡OH SI!  \n \n ¡También puedes jugar acostado!</string>
+    <string name="lblCalibracion">Calibración</string>
 </resources>

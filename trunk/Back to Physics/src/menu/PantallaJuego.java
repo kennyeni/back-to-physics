@@ -8,8 +8,10 @@ import graficas.Pantalla;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
@@ -36,7 +38,7 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 	private Pantalla pantalla;
 	private Coordenadas coordenadas;
 	private Acelerometro acel;
-	private int notifSonidogato=0;
+	private int notifSonido=0;
 	private final int DIALOGO_SIMPLE =0;
 	private int xinicial, yinicial;
 	private double theta,phi;
@@ -48,45 +50,76 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 	float widthArrow;
 	float heightArrow;
 	
+	public SharedPreferences preferenceSuena;
+	public SharedPreferences preferenceSonido;
+	boolean musica;
+	boolean sonido;
+	
+
+	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 	
+		preferenceSonido = getSharedPreferences("musica", Context.MODE_PRIVATE);
+		musica = preferenceSonido.getBoolean("musica", true);
 		
+		preferenceSuena =  getSharedPreferences("sonido", Context.MODE_PRIVATE);
+		sonido= preferenceSuena.getBoolean("sonido", true);
 		
 		
 		pantalla = new Pantalla();
 		juego = new Juego(this, pantalla);
 		juego.setOnTouchListener(this);
 		setContentView(juego);
-		//reproducirAudio();
+		reproducirAudio();
 		
 		widthArrow = juego.getArrow().getWidth();
 		heightArrow =juego.getArrow().getHeight();
 		
 		acel = new Acelerometro(this);
-		
-
 		xinicial = juego.getWidth();
 		yinicial = juego.getHeight();
-		
+	}
+	private void detenerSonido(){
+		if(sonido){
+			if(player2.isPlaying()){
+				player2.stop();
+				player2.release();
+			}
+		}
+	}
 	
-		
-
-	}
 	private void reproducirGato(){
-		 if(notifSonidogato==1 && player2!=null){
-			 player2.release();
-		 }
-		 player2=MediaPlayer.create(this, mx.itesm.btp.R.raw.gato);
-		 player2.start();
+				 if(notifSonido==1 && player2!=null){
+					 player2.release();
+				 }
+				 player2=MediaPlayer.create(this, mx.itesm.btp.R.raw.gato);
+				 player2.start();
 	}
+	
+	
+	
+	private void detenerAudio(){
+		if (musica) {
+			if (player.isPlaying()) {
+				player.stop();
+				player.release();			
+			}
+		}	
+	}
+	
+
 	private void reproducirAudio(){
-   	 if(player!=null){
-   		 player.release();
-   	 }
-   	 player=MediaPlayer.create(this,mx.itesm.btp.R.raw.pkmn);
-   	 player.start();
+   	 if (musica) {
+   		if(player!=null){
+      		 player.release();
+      	 }
+      	 player=MediaPlayer.create(this,mx.itesm.btp.R.raw.pkmn);
+      	 player.start();
+   	 	}
     }
+
+	
 	
 	/**
 	 * Inicia la actividad de empezar el juego.
@@ -110,6 +143,8 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 	
 	protected void onStop() {
 		super.onStop();
+		detenerSonido();
+		detenerAudio();
 		juego.refresh();
 		corriendo = false;
 		if(player!=null){
@@ -217,8 +252,10 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 			
 			
 			if (((posx > (1/60)*widthPantalla)&&(posx < imgbtn.getWidth()))&&((posy > (5)*heightPantalla/7 )&&(posy < heightPantalla))){
-				notifSonidogato=1;
-				reproducirGato();
+				notifSonido=1;
+				if (sonido) {
+					reproducirGato();
+				}
 				juego.disparar();
 //				onPause();
 //				showDialog(DIALOGO_SIMPLE);
