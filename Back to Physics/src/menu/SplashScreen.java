@@ -9,6 +9,8 @@ import android.os.Bundle;
 
 public class SplashScreen extends Activity {
 	
+	private static final int RESULT_CLOSE_ALL = 0;
+
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.splashscreen); 
@@ -25,12 +27,23 @@ public class SplashScreen extends Activity {
 			@Override
 			public void run() {
 				Intent intencion = new Intent (SplashScreen.this, menu.Principal.class); 
-		        startActivity(intencion);
+		        startActivityForResult(intencion, RESULT_CLOSE_ALL);
 				
 			}
 		};
 		reloj.schedule(lanzaSplash, 2000);
 		
+	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+	    switch(resultCode)
+	    {
+	    case RESULT_CLOSE_ALL:
+	        setResult(RESULT_CLOSE_ALL);
+	        finish();
+	    }
+	    super.onActivityResult(requestCode, resultCode, data);
 	}
 	
 

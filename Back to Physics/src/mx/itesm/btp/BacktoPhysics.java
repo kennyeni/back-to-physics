@@ -11,15 +11,31 @@ import animacion.Graficacion;
  *
  */
 public class BacktoPhysics extends Activity {
-    /** Called when the activity is first created. */
+    private static final int RESULT_CLOSE_ALL = 0;
+
+	/** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         
         Intent intencion = new Intent (BacktoPhysics.this, menu.Logo.class); 
-        startActivity (intencion);
+        startActivityForResult(intencion, RESULT_CLOSE_ALL);
         
         
     }
+    
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch(resultCode)
+        {
+        case RESULT_CLOSE_ALL:
+            //setResult(RESULT_CLOSE_ALL);
+            finish();
+            android.os.Process.killProcess(android.os.Process.myPid());
+            //System.exit(0);
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
 }
+

@@ -25,7 +25,9 @@ import android.view.View.OnTouchListener;
  */
 public class Principal extends Activity implements OnTouchListener{
 	
-    @Override
+    private static final int RESULT_CLOSE_ALL = 0;
+
+	@Override
     protected void onCreate(Bundle savedInstanceState) {
          super.onCreate(savedInstanceState);
          setContentView(mx.itesm.btp.R.layout.main);   
@@ -84,15 +86,27 @@ public class Principal extends Activity implements OnTouchListener{
 	
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if(keyCode == KeyEvent.KEYCODE_BACK){
-			super.onDestroy();
+			setResult(RESULT_CLOSE_ALL);
+			finish();
 		}
-		return true;
+		return false;
+	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+	    switch(resultCode)
+	    {
+	    case RESULT_CLOSE_ALL:
+	        setResult(RESULT_CLOSE_ALL);
+	        finish();
+	    }
+	    super.onActivityResult(requestCode, resultCode, data);
 	}
 
 	private void ejecutaJuego() {
 		
 		Intent intencion = new Intent(Principal.this,Loading.class);
-		startActivity(intencion);
+		startActivityForResult(intencion, RESULT_CLOSE_ALL);
 		
 		AsyncTask<Context, Integer, Intent> sync = new AsyncTask<Context, Integer, Intent>() {
 			@Override
@@ -111,7 +125,7 @@ public class Principal extends Activity implements OnTouchListener{
 			@Override
 			protected void onPostExecute(Intent result) {
 				super.onPostExecute(result);
-				startActivity(result);
+				startActivityForResult(result, RESULT_CLOSE_ALL);
 			}
 		}; 
 		
