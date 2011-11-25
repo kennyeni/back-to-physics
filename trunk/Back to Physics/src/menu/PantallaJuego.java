@@ -38,6 +38,9 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 	private Acelerometro acel;
 	private int notifSonidogato=0;
 	private final int DIALOGO_SIMPLE =0;
+	private int xinicial, yinicial;
+	private double theta,phi;
+	
 	
 	//private Bitmap imgbtn = BitmapFactory.decodeResource(getResources(), mx.itesm.btp.R.drawable.btnb);
 
@@ -63,6 +66,10 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 		acel = new Acelerometro(this);
 		
 
+		xinicial = juego.getWidth();
+		yinicial = juego.getHeight();
+		
+	
 		
 
 	}
@@ -215,6 +222,27 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 				juego.disparar();
 //				onPause();
 //				showDialog(DIALOGO_SIMPLE);
+				
+				
+				int x = juego.getWidth();
+				int y = juego.getHeight();
+				
+				if(xinicial == x){
+					theta= 90.0;
+				}else if (x>xinicial){
+					theta = x*50/(pantalla.getWidth() - xinicial);
+				}else{
+					theta = x*50/xinicial;
+				}
+				
+				if(yinicial == y){
+					phi= 30.0;
+				}else if (y>yinicial){
+					phi = y*50/(pantalla.getHeight() - yinicial);
+				}else{
+					phi = y*30/yinicial;
+				}
+				
 				
 				
 			}
