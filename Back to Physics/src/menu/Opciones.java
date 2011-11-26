@@ -1,6 +1,8 @@
 package menu;
 
 
+import java.io.FileOutputStream;
+
 import graficas.Pantalla;
 
 
@@ -16,6 +18,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.ToggleButton;
@@ -47,20 +50,25 @@ public class Opciones extends Activity implements OnTouchListener
          TextView botonAyuda = (TextView)findViewById(mx.itesm.btp.R.id.btnReglas);
          botonAyuda.setTypeface(font);
          botonAyuda.setOnTouchListener(this);
-         
-         
+                  
          ToggleButton tgBtnMusica = (ToggleButton) findViewById(mx.itesm.btp.R.id.tgBtnMusica);
-         SharedPreferences preferenceMusica = getSharedPreferences("musica", Context.MODE_PRIVATE);
+         SharedPreferences preferenceMusica = getSharedPreferences("sonido", Context.MODE_PRIVATE);
          boolean escucha = preferenceMusica.getBoolean("musica", true);
 		 tgBtnMusica.setChecked(escucha);
-         tgBtnMusica.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-			
+         tgBtnMusica.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
+         {
+         
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 				SharedPreferences preferenceMusica = getSharedPreferences("musica", Context.MODE_PRIVATE);
 				SharedPreferences.Editor editorMusica = preferenceMusica.edit();
 				editorMusica.putBoolean("musica", isChecked);
 				editorMusica.commit();
+				if (isChecked) {
+					buttonView.setBackgroundResource(mx.itesm.btp.R.drawable.quieromusica);
+				}else{
+				buttonView.setBackgroundResource(mx.itesm.btp.R.drawable.noquieromusica);
+				}
 			}
 		});
          
@@ -68,7 +76,7 @@ public class Opciones extends Activity implements OnTouchListener
          ToggleButton tgBtnSonido = (ToggleButton) findViewById(mx.itesm.btp.R.id.tgBtnSonido);
          SharedPreferences preferenceSonido = getSharedPreferences("sonido", Context.MODE_PRIVATE);
          boolean suena = preferenceSonido.getBoolean("sonido", true);
-		 tgBtnSonido.setChecked(suena);
+         tgBtnSonido.setChecked(suena);
          tgBtnSonido.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
 			@Override
@@ -77,6 +85,12 @@ public class Opciones extends Activity implements OnTouchListener
 				SharedPreferences.Editor editorSonido = preferenceSonido.edit();
 				editorSonido.putBoolean("sonido", isChecked);
 				editorSonido.commit();
+				if (isChecked) {
+					buttonView.setBackgroundResource(mx.itesm.btp.R.drawable.sisonido);
+				}else{
+					buttonView.setBackgroundResource(mx.itesm.btp.R.drawable.nosonido);
+				}
+				
 			}
          });
 	}
