@@ -38,4 +38,14 @@
     <string name="lblInstruccionesVertical">Para jugar primero encuentra posición adecuada donde se sienta cómodo, después poner el dispositivo en un buen ángulo.</string>
     <string name="lblInstruccionesHorizontal">¡OH SI!  \n \n ¡También puedes jugar acostado!</string>
     <string name="lblCalibracion">Calibración</string>
+    <string-array name="txtSabiasque">
+        <item >La catapulta  fue creada alrededor del año 400 a.C en la ciudad griega Siracusa.</item>
+        <item >En 885 Los Vikingos sitian la ciudad de Paris utilizando catapultas.</item>
+        <item >En 1191 Más de 300 catapultas de tracción y torsión son usadas por Ricardo Corazón de León, en el sitio de Acre durante la Tercera Cruzada.</item>
+        <item >El cañón fue el artefacto de artillería que desplazó a las catapultas en Europa.</item>
+        <item >La primera catapulta medía aproximadamente 8 metros.</item>
+        <item >En 399 aparece la primera catapulta con Dionysius I.</item>
+        <item >Existían diferentes tipos de proyectiles para las catapultas como: rocas, bolas de piedra talladas, flechas de hierro, cestos de serpientes venenosas, ollas con gas asfixiante, nidos de avispas y estiércol de ganado.</item>
+        <item >La catapulta también fue usada en la conquista de México y el hecho esta narrado en un pasaje del libro “La versión de los vencidos”.</item>
+    </string-array>
 </resources>
