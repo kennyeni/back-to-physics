@@ -6,7 +6,14 @@
   android:layout_height="fill_parent">
     <TextView android:id="@+id/textView1" android:layout_height="wrap_content" android:textAppearance="?android:attr/textAppearanceLarge" android:text="@string/lblLoading" android:layout_gravity="center" android:layout_width="wrap_content"></TextView>
     <TextView android:id="@+id/textView2" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="@string/lblSabiasQue"></TextView>
-    <TextView android:id="@+id/textView3" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textAppearance="?android:attr/textAppearanceSmall" android:text="@string/cntSabiasQue"></TextView>
+
+    <TextView
+        android:id="@+id/textoSabias"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/cntSabiasQue"
+        android:textAppearance="?android:attr/textAppearanceSmall" >
+</TextView>
     <ProgressBar android:layout_width="wrap_content" style="?android:attr/progressBarStyleLarge" android:layout_height="wrap_content" android:id="@+id/progressBar1" android:layout_gravity="center" android:layout_marginTop="20dp" android:indeterminate="true" android:indeterminateBehavior="cycle"></ProgressBar>
     
 </LinearLayout>
