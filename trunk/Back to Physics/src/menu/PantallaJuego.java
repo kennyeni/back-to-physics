@@ -93,7 +93,7 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 				 if(notifSonido==1 && player2!=null){
 					 player2.release();
 				 }
-				 player2=MediaPlayer.create(this, mx.itesm.btp.R.raw.gato);
+				 player2=MediaPlayer.create(this, mx.itesm.btp.R.raw.explosion);
 				 player2.start();
 	}
 	
