@@ -33,6 +33,7 @@ public class Juego extends View{
 	private Canvas cbm;
 	private ImageView iv;
 	private Bitmap bm;
+	private int xp,xd,offset;
 	private Paint p;
 	private MediaPlayer player;
 	public Fondo fondo;
@@ -144,6 +145,20 @@ public class Juego extends View{
 	public void setX(double x){
 		X=x;
 	}
+	private void calcularXdOffset() {
+		int ancho=getWidth();
+		if(xp<ancho/2){
+			xd=xp;
+			offset=0;
+		}else if(xd>fondo.getBitmap().getWidth()-ancho/2){
+			xd=xp-(fondo.getBitmap().getWidth()-ancho);
+			offset=fondo.getBitmap().getWidth()-ancho;
+		}else{
+			xd=ancho/2;
+			offset=xp-ancho/2;
+		}
+		
+	}
 	
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
@@ -152,7 +167,7 @@ public class Juego extends View{
 		canvas.drawRGB(0,0,0); 
 		mira = Bitmap.createScaledBitmap(mira, canvas.getWidth(), canvas.getHeight(), false);
 		canvas.drawBitmap(fondo.getBitmap(), 0, 0, p);
-		canvas.drawBitmap(vehiculoEnemigo.getBitmap(), 0,0, p);
+		canvas.drawBitmap(vehiculoEnemigo.getBitmap(), 100,100, p);
 		canvas.drawBitmap(mira, 0, 0, p);
 		
 		
