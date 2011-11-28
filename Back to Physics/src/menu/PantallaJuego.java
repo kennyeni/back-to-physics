@@ -11,6 +11,7 @@ import graficas.Juego;
 import graficas.Pantalla;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -50,6 +51,7 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 	private Acelerometro acel;
 	private int notifSonido=0;
 	private final int DIALOGO_SIMPLE =0;
+	private final int DIALOGO_SIMPLE2 =1;
 	private double v=20, theta=1, phi=1, g=9.81;
 	private float enemigoX, enemigoY;
 	private int yinicial, xinicial;
@@ -180,13 +182,35 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 	}
 
 	protected Dialog onCreateDialog(int id){
-    	
-		if(id==DIALOGO_SIMPLE){
+    	if(id==DIALOGO_SIMPLE2){
+    		Dialog cuadroDialogo2=null;
+    		
+        	AlertDialog.Builder builder2 = new AlertDialog.Builder(this);
+    		builder2.setMessage("         Seguro?           ");
+    		builder2.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+				
+				
+				public void onClick(DialogInterface dialog, int which) {
+					
+					startActivity(new Intent(PantallaJuego.this, Principal.class));
+				}
+			});
+    		builder2.setNegativeButton("No", new DialogInterface.OnClickListener() {
+				
+				
+				public void onClick(DialogInterface dialog, int which) {
+					dialog.dismiss();
+					
+				}
+			});cuadroDialogo2 = builder2.create();
+			return cuadroDialogo2;
+    	}
+    	else if(id==DIALOGO_SIMPLE){
 			Dialog cuadroDialogo=null;
 		
-    	AlertDialog.Builder simpleBuilder = new AlertDialog.Builder(this);
-		simpleBuilder.setMessage("         Pausa           ");
-		simpleBuilder.setPositiveButton("Reanudar", new DialogInterface.OnClickListener() {
+    	AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setMessage("         Pausa           ");
+		builder.setPositiveButton("Reanudar", new DialogInterface.OnClickListener() {
 			
 			
 			public void onClick(DialogInterface dialogo, int which) {
@@ -194,7 +218,14 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 				
 			}
 		});
-		cuadroDialogo = simpleBuilder.create();
+		builder.setNegativeButton("Salir", new DialogInterface.OnClickListener() {
+			
+			
+			public void onClick(DialogInterface dialog, int which) {
+			showDialog(DIALOGO_SIMPLE2);
+			}	
+		});
+		cuadroDialogo = builder.create();
 		return cuadroDialogo;
 		}return null;
 		
@@ -266,8 +297,7 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 					reproducirGato();
 				}
 				juego.disparar();
-//				onPause();
-//				showDialog(DIALOGO_SIMPLE);
+			
 				
 				
 				int x = juego.getWidth();
@@ -290,6 +320,10 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 					
 				}
 				
+				
+			}else{
+				onPause();
+				showDialog(DIALOGO_SIMPLE);
 			}
 			
 			
