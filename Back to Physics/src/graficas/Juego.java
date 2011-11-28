@@ -18,6 +18,7 @@ import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
@@ -48,12 +49,14 @@ public class Juego extends View{
 	private Bitmap missile;
 	private int x=0;
 	private boolean disparo;
-	int missileworiginal;
-	int missilehoriginal;
-	int contador;
-	double X,Y;
-	public double i=1.0;
-	public Enemigo catapulta;
+	private int missileworiginal;
+	private int missilehoriginal;
+	private int contador;
+	private double X,Y;
+	private double i=1.0;
+	public Enemigo vehiculoEnemigo;
+	public boolean graficaFlag = false;
+	private float poderDeProyectil;
 	
 	/**
 	 * En esta clase esta el desarrollo completo de las acciones del juego
@@ -70,9 +73,10 @@ public class Juego extends View{
 		super(context);
 		p=new Paint();
 		pantalla.setContext(context);
-		catapulta= new Enemigo(mx.itesm.btp.R.drawable.cat1, pantalla, getResources());
+		float vida = (float) 100.0;
+		vehiculoEnemigo= new Enemigo(mx.itesm.btp.R.drawable.cat1, vida, pantalla, getResources());
 		fondo = new Fondo(mx.itesm.btp.R.drawable.valley, pantalla, getResources());
-		
+		graficaFlag = false;
 		
 		arrow = BitmapFactory.decodeResource(getResources(), mx.itesm.btp.R.drawable.cpad);
 		mira=BitmapFactory.decodeResource(getResources(), mx.itesm.btp.R.drawable.crosshair2);
@@ -109,7 +113,7 @@ public class Juego extends View{
 			fondo.mueveX((int)x);
 		} catch (NoContextProvidedException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Log.d("ERROR", "No se cre— correctamente una pantalla");
 		}
 	}
 	
@@ -148,7 +152,7 @@ public class Juego extends View{
 		canvas.drawRGB(0,0,0); 
 		mira = Bitmap.createScaledBitmap(mira, canvas.getWidth(), canvas.getHeight(), false);
 		canvas.drawBitmap(fondo.getBitmap(), 0, 0, p);
-		canvas.drawBitmap(catapulta.getBitmap(), 0,0, p);
+		canvas.drawBitmap(vehiculoEnemigo.getBitmap(), 0,0, p);
 		canvas.drawBitmap(mira, 0, 0, p);
 		
 		
@@ -178,18 +182,7 @@ public class Juego extends View{
 			if(i==2.5){
 				disparo=false;
 				i=1.0;
-				//double v, double theta, double phi, double g
-				
-				
-				
-				Intent grafica = new Intent (getContext(), Graficacion.class); 
-				grafica.putExtra("v", 20.0); //en m/s
-				grafica.putExtra("theta", 75.0);
-				grafica.putExtra("phi", 45.0);
-				grafica.putExtra("g", 9.81);
-				grafica.putExtra("enemigoX", 200.0);
-				grafica.putExtra("enemigoY", 100.0);
-			    getContext().startActivity(grafica);
+				graficaFlag = true;
 			}
 		
 		}
@@ -337,7 +330,7 @@ public class Juego extends View{
 		try {
 			fondo.center();
 		} catch (NoContextProvidedException e) {
-			e.printStackTrace();
+			Log.d("ERROR", "No se cre— correctamente una pantalla");
 		}
 		
 	}
@@ -373,6 +366,13 @@ public class Juego extends View{
 		
 
 }
+
+	
+	public void infringirDano(float distanciaParaDano) {
+		vehiculoEnemigo.bajarVida(poderDeProyectil, distanciaParaDano);
+		Log.d("DEP", "Se bajo:"+distanciaParaDano);
+	}
+	
 
 
 }

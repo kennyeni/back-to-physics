@@ -1,5 +1,9 @@
 package menu;
 
+import java.util.LinkedList;
+
+import logica.Fisica;
+
 import entrada.Acelerometro;
 import exceptions.NoContextProvidedException;
 import graficas.Coordenadas;
@@ -16,12 +20,16 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnLongClickListener;
 import android.view.View.OnTouchListener;
+import android.widget.FrameLayout;
+import animacion.PlanoCartesiano;
 
 /**
  * Clase que recibe todas las acciones que ser‡n realizadas en la pantalla de juego nuevo.
@@ -31,6 +39,8 @@ import android.view.View.OnTouchListener;
 public class PantallaJuego  extends Activity implements Runnable, OnTouchListener{
 	private static final String MENU_PAUSE = null;
 	private static final String MENU_RESUME = null;
+	private static final int GRAFICAS = 1;
+	private static final int JUEGO = 0;
 	private Juego juego;
 	private boolean corriendo;
 	private MediaPlayer player;
@@ -40,20 +50,19 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 	private Acelerometro acel;
 	private int notifSonido=0;
 	private final int DIALOGO_SIMPLE =0;
-	private int xinicial, yinicial;
-	private double theta,phi;
-	
-	
-	//private Bitmap imgbtn = BitmapFactory.decodeResource(getResources(), mx.itesm.btp.R.drawable.btnb);
-
-	
-	float widthArrow;
-	float heightArrow;
-	
-	public SharedPreferences preferenceSuena;
-	public SharedPreferences preferenceSonido;
-	boolean musica;
-	boolean sonido;
+	private double v=20, theta=1, phi=1, g=9.81;
+	private float enemigoX, enemigoY;
+	private int yinicial, xinicial;
+	private int modoDeJuego = 0;
+	private PlanoCartesiano plano = null;
+	private float widthArrow;
+	private float heightArrow;
+	private SharedPreferences preferenceSuena;
+	private SharedPreferences preferenceSonido;
+	private boolean musica;
+	private boolean sonido;
+	private Thread th = null;
+	private boolean modoNyan = false;
 	
 
 	
@@ -70,7 +79,18 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 		pantalla = new Pantalla();
 		juego = new Juego(this, pantalla);
 		juego.setOnTouchListener(this);
-		setContentView(juego);
+		FrameLayout layoutPrincipal = new FrameLayout(getBaseContext());
+		
+		layoutPrincipal.addView(juego);
+		
+		LinkedList<Coordenadas> puntosA = Fisica.puntosAereos(v, theta, phi, g);
+		LinkedList<Coordenadas> puntosL = Fisica.puntosLaterales(v, theta, phi, g);
+		plano = new PlanoCartesiano(this, puntosA, puntosL, pantalla, enemigoX, enemigoY, modoNyan);
+		layoutPrincipal.addView(plano);
+		plano.setVisibility(View.INVISIBLE);
+		
+		setContentView(layoutPrincipal);
+		
 		reproducirAudio();
 		
 		widthArrow = juego.getArrow().getWidth();
@@ -80,6 +100,7 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 		xinicial = juego.getWidth();
 		yinicial = juego.getHeight();
 	}
+	
 	private void detenerSonido(){
 		if(sonido){
 			if(player2.isPlaying()){
@@ -97,8 +118,6 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 				 player2.start();
 	}
 	
-	
-	
 	private void detenerAudio(){
 		if (musica) {
 			if (player.isPlaying()) {
@@ -108,7 +127,6 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 		}	
 	}
 	
-
 	private void reproducirAudio(){
    	 if (musica) {
    		if(player!=null){
@@ -119,8 +137,6 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
    	 	}
     }
 
-	
-	
 	/**
 	 * Inicia la actividad de empezar el juego.
 	 */
@@ -132,13 +148,12 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 		return false;
 	}
 
-
 	protected void onResume() {
 		super.onResume();
 		juego.refresh();
-		Thread th = new Thread(this);
-		th.start();
-		
+		corriendo=true;
+		th = new Thread(this);
+		th.start();	
 	}
 	
 	protected void onStop() {
@@ -157,11 +172,13 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 		
 
 	}
+
 	protected void onPause(){
 		super.onPause();
 		onCreateDialog(DIALOGO_SIMPLE);
 		
 	}
+
 	protected Dialog onCreateDialog(int id){
     	
 		if(id==DIALOGO_SIMPLE){
@@ -183,12 +200,6 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 		
 	}
 	
-	//////////////////////////////////////////////////
-	//////////// Manejar aqui eventos
-	/////////// Para todo lo que suceda :)
-	/////////////////////////////////////////////////
-	
-	
 	/**
 	 * Obtiene las coordenadas X y Y  de la pantalla
 	 * @param x
@@ -200,9 +211,7 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 		
 		return coordenadas;
 	}
-	
-	
-	
+		
 	/**
 	 * Recibe la acci—n de tocar el bot—n y comenzar la acci—n
 	 */
@@ -224,7 +233,7 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 					(posy > (3*heightPantalla/5)  && posy < (3*heightPantalla/5)+2*heightArrow/5)		 
 					){
 				juego.fondo.mueveY(-10.5);
-				juego.catapulta.mueveY(-10.5);
+				juego.vehiculoEnemigo.mueveY(-10.5);
 			}
 			
 			
@@ -233,7 +242,7 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 					(posy > (4*heightPantalla/5)  && posy < (4*heightPantalla/5)+2*heightArrow/5)		 
 					){
 				juego.fondo.mueveY(10.5);
-				juego.catapulta.mueveY(10.5);
+				juego.vehiculoEnemigo.mueveY(10.5);
 			}
 			
 			
@@ -241,13 +250,13 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 
 			if (((posx > 7*widthPantalla/10)&&(posx < 7*widthPantalla/10 + 2*widthArrow/5))&&((posy > 3*heightPantalla/5+2*heightArrow/5 )&&(posy < 3*heightPantalla/5+4*heightArrow/5))){
 				juego.fondo.mueveX(-10);
-				juego.catapulta.mueveX(-10);
+				juego.vehiculoEnemigo.mueveX(-10);
 			}
 			
 			
 			if (((posx > (4*widthPantalla/5)+ 2*widthArrow/5)&&(posx < (4*widthPantalla/5)+ 4*widthArrow/5))&&((posy > 3*heightPantalla/5+2*heightArrow/5 )&&(posy < 3*heightPantalla/5+4*heightArrow/5))){
 				juego.fondo.mueveX(10);
-				juego.catapulta.mueveX(10);
+				juego.vehiculoEnemigo.mueveX(10);
 			}
 			
 			
@@ -278,9 +287,8 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 					phi = y*50/(pantalla.getHeight() - yinicial);
 				}else{
 					phi = y*30/yinicial;
+					
 				}
-				
-				
 				
 			}
 			
@@ -298,29 +306,127 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 		
 		return true;
 	}
-	
 
-	
 
 	/**
 	 * Empieza la accion de mover X y Y en la pantalla del juego
 	 */
 	public void run() {
-		corriendo = true;
 		while (corriendo) {
-			juego.mueveY(acel.getY());
-			juego.mueveX(acel.getX());
-			juego.setY(acel.Y);
-			juego.setX(acel.X);
-			juego.postInvalidate();
-			
-			try {
-				
-				Thread.sleep(34);
-			} catch (Exception e) {
-
+			if(modoDeJuego==JUEGO){
+				moverJuego();
+			} else if(modoDeJuego==GRAFICAS){
+				if(plano!=null||!plano.hasEnded()){
+					//plano.bringToFront();
+					graficarJuego();
+				} else {
+					modoDeJuego = JUEGO;
+					juego.graficaFlag = false;
+				}
 			}
+			try {Thread.sleep(34);}
+			catch (Exception e) { Log.d("ERROR!", "Sucedi— lo impensable!, se interrumpio el thread principal.");}
 		}
+	}
+	
+	private void cambiarView(int id){
+		Log.d("DEP", "Se cambio el view a:"+id);
+		if(id==GRAFICAS){
+			modoDeJuego = GRAFICAS;
+			juego.post(new Runnable() {
+			    public void run() {
+			    	juego.setVisibility(View.INVISIBLE);
+			    }
+			});
+			plano = getPlano();
+			plano.post(new Runnable() {
+			    public void run() {
+			    	plano.setVisibility(View.VISIBLE);
+			    }
+			});
+			
+		} else if(id==JUEGO){
+			modoDeJuego = JUEGO;
+			juego.post(new Runnable() {
+			    public void run() {
+			    	juego.setVisibility(View.VISIBLE);
+			    }
+			});
+			plano.post(new Runnable() {
+			    public void run() {
+			    	plano.setVisibility(View.INVISIBLE);
+			    }
+			});
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			//refrescarGrafica();			
+		}
+	}
+	
+	private PlanoCartesiano getPlano(){
+		if(plano==null){
+			Log.d("DEP", "Regenerando graficas");
+			LinkedList<Coordenadas> puntosA = Fisica.puntosAereos(v, theta, phi, g);
+			LinkedList<Coordenadas> puntosL = Fisica.puntosLaterales(v, theta, phi, g);
+			plano = new PlanoCartesiano(this, puntosA, puntosL, pantalla, enemigoX, enemigoY, modoNyan);
+		}
+		return plano;
+	}
+	
+	private void graficarJuego(){
+		getPlano().postInvalidate();
+		Log.d("DEP", "Graficando graficas");
+		if(plano.hasEnded()){ //acabo la graficacion
+			/*
+			try {
+				th.join();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			*/
+			modoDeJuego = JUEGO;
+			float dis = plano.getDistanciaDano();
+			juego.infringirDano(dis);
+			juego.graficaFlag = false;
+			cambiarView(JUEGO);
+			
+			
+			
+			
+		}
+		
+	}
+	
+	private void refrescarGrafica(){
+		Log.d("DEP", "Borrando graficas");
+		plano = null;
+	}
+	
+	private void moverJuego() {
+		Log.d("DEP", "Graficando Juego");
+		juego.bringToFront();
+		
+		juego.mueveY(acel.getY());
+		juego.mueveX(acel.getX());
+		juego.setY(acel.Y);
+		juego.setX(acel.X);
+		juego.postInvalidate();
+		
+		if(juego.graficaFlag){
+			modoDeJuego = GRAFICAS;
+			cambiarView(GRAFICAS);
+			LinkedList<Coordenadas> puntosA = Fisica.puntosAereos(v, theta, phi, g);
+			LinkedList<Coordenadas> puntosL = Fisica.puntosLaterales(v, theta, phi, g);
+			plano.regenerar(puntosA, puntosL, enemigoX, enemigoY, modoNyan);
+		}
+		
+		
 	}
 
 }
+

@@ -7,7 +7,10 @@
 
     <application android:icon="@drawable/icone" android:label="@string/app_name">
         <activity android:name=".BacktoPhysics"
-                  android:label="@string/app_name">
+                  android:label="@string/app_name"
+                  android:screenOrientation="portrait"
+                  android:configChanges="orientation|keyboardHidden"  
+                  android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
              <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -22,10 +25,6 @@
 		<activity android:name="menu.Ayuda" android:label="@string/app_name" android:screenOrientation="portrait"></activity>
 		<activity android:name="menu.Loading" android:noHistory="true" android:label="@string/app_name" android:screenOrientation="portrait"></activity>
 		<activity android:name="animacion.Graficacion" android:noHistory="true" android:label="@string/app_name" android:screenOrientation="landscape" android:configChanges="orientation|keyboardHidden"  android:theme="@android:style/Theme.NoTitleBar.Fullscreen" ></activity>
-		<activity android:name="menu.Logo" android:label="@string/app_name" android:screenOrientation="portrait"  android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
-		<activity android:name="menu.PantallaMemes" android:label="@string/app_name" android:screenOrientation="landscape"  android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>    
-		<activity android:name="menu.SplashScreen" android:label="@string/app_name" android:screenOrientation="portrait"  android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>    
-		    
-		    		    
+		 		    
     </application>
 </manifest>

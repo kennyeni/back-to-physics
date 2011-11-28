@@ -84,29 +84,11 @@ public class Principal extends Activity implements OnTouchListener{
 	}
 	
 	
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if(keyCode == KeyEvent.KEYCODE_BACK){
-			setResult(RESULT_CLOSE_ALL);
-			finish();
-		}
-		return false;
-	}
-	
-	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-	    switch(resultCode)
-	    {
-	    case RESULT_CLOSE_ALL:
-	        setResult(RESULT_CLOSE_ALL);
-	        finish();
-	    }
-	    super.onActivityResult(requestCode, resultCode, data);
-	}
 
 	private void ejecutaJuego() {
 		
 		Intent intencion = new Intent(Principal.this,Loading.class);
-		startActivityForResult(intencion, RESULT_CLOSE_ALL);
+		startActivity(intencion);
 		
 		AsyncTask<Context, Integer, Intent> sync = new AsyncTask<Context, Integer, Intent>() {
 			@Override
@@ -125,7 +107,7 @@ public class Principal extends Activity implements OnTouchListener{
 			@Override
 			protected void onPostExecute(Intent result) {
 				super.onPostExecute(result);
-				startActivityForResult(result, RESULT_CLOSE_ALL);
+				startActivity(result);
 			}
 		}; 
 		

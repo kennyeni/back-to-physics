@@ -18,12 +18,12 @@ public class Loading extends Activity {
 		super.onCreate(savedInstanceState);
 		
 		setContentView(R.layout.loading);
-		TextView texto = (TextView) findViewById(R.id.textoSabias);
+		//TextView texto = (TextView) findViewById(R.id.textoSabias);
 		ProgressBar barra = (ProgressBar) findViewById(R.id.progressBar1);
 		
 		int res = (int) Math.round(Math.random()*8);
-		String[] texto2 = getResources().getStringArray(R.array.txtSabiasque);
-		texto.setText(texto2[res]);
+		//String[] texto2 = getResources().getStringArray(R.array.txtSabiasque);
+		//texto.setText(texto2[res]);
 		
 		
 	}
