@@ -191,7 +191,7 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 				
 				
 				public void onClick(DialogInterface dialog, int which) {
-					
+					finish();
 					startActivity(new Intent(PantallaJuego.this, Principal.class));
 				}
 			});
@@ -264,7 +264,7 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 					(posy > (3*heightPantalla/5)  && posy < (3*heightPantalla/5)+2*heightArrow/5)		 
 					){
 				juego.fondo.mueveY(-10.5);
-				juego.vehiculoEnemigo.mueveY(-10.5);
+				juego.vehiculoEnemigo.mueveY(10.5);
 			}
 			
 			
@@ -273,7 +273,7 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 					(posy > (4*heightPantalla/5)  && posy < (4*heightPantalla/5)+2*heightArrow/5)		 
 					){
 				juego.fondo.mueveY(10.5);
-				juego.vehiculoEnemigo.mueveY(10.5);
+				juego.vehiculoEnemigo.mueveY(-10.5);
 			}
 			
 			
@@ -281,13 +281,13 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 
 			if (((posx > 7*widthPantalla/10)&&(posx < 7*widthPantalla/10 + 2*widthArrow/5))&&((posy > 3*heightPantalla/5+2*heightArrow/5 )&&(posy < 3*heightPantalla/5+4*heightArrow/5))){
 				juego.fondo.mueveX(-10);
-				juego.vehiculoEnemigo.mueveX(-10);
+				juego.vehiculoEnemigo.mueveX(10);
 			}
 			
 			
 			if (((posx > (4*widthPantalla/5)+ 2*widthArrow/5)&&(posx < (4*widthPantalla/5)+ 4*widthArrow/5))&&((posy > 3*heightPantalla/5+2*heightArrow/5 )&&(posy < 3*heightPantalla/5+4*heightArrow/5))){
 				juego.fondo.mueveX(10);
-				juego.vehiculoEnemigo.mueveX(10);
+				juego.vehiculoEnemigo.mueveX(-10);
 			}
 			
 			

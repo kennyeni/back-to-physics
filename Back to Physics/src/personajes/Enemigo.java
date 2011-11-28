@@ -98,5 +98,6 @@ public class Enemigo {
 		// TODO Auto-generated method stub
 		
 	}
+	
 
 }
