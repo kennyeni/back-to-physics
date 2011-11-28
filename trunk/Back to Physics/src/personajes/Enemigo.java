@@ -11,6 +11,8 @@ public class Enemigo {
 	private Bitmap grafico;
 	private Posicion pos = null;
 	private Pantalla pantalla;
+	private float vidaMax =100;
+	private float vida=100;
 	
 	/**
 	 * Esta calse es la creación del fondo de los niveles.
@@ -23,13 +25,15 @@ public class Enemigo {
 	/**
 	 * Este método  dibuja el fondo con la imagen determinada
 	 * @param idAImagen
+	 * @param vida 
 	 * @param pantalla
 	 * @param resources
 	 */
-	public Enemigo(int idAImagen, Pantalla pantalla, Resources resources){
+	public Enemigo(int idAImagen, float vida, Pantalla pantalla, Resources resources){
 		grafico = BitmapFactory.decodeResource(resources, idAImagen); // Se crea el grafico con la imagen de parametro
 		this.pantalla = pantalla;
 		pos = new Posicion();
+		this.vida = vidaMax = vida;
 		
 	}
 	
@@ -88,6 +92,11 @@ public class Enemigo {
 		}
 		
 		return exitoso;
+	}
+
+	public void  bajarVida(float poderDeProyectil, float distanciaParaDano) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
