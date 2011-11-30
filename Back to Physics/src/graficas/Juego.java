@@ -58,6 +58,8 @@ public class Juego extends View{
 	public Enemigo vehiculoEnemigo;
 	public boolean graficaFlag = false;
 	private float poderDeProyectil;
+	public final int NIVEL_1 =1;
+	public final int NIVEL_2 =2;
 	
 	/**
 	 * En esta clase esta el desarrollo completo de las acciones del juego
@@ -70,13 +72,21 @@ public class Juego extends View{
 	 * @param context
 	 * @param pantalla
 	 */
-	public Juego(Context context, Pantalla pantalla){
+	public Juego(Context context, Pantalla pantalla, int selectorNivel){
 		super(context);
 		p=new Paint();
 		pantalla.setContext(context);
 		float vida = (float) 100.0;
-		vehiculoEnemigo= new Enemigo(mx.itesm.btp.R.drawable.cat1, vida, pantalla, getResources());
-		fondo = new Fondo(mx.itesm.btp.R.drawable.valley, pantalla, getResources());
+		switch(selectorNivel){
+		case NIVEL_1:
+			vehiculoEnemigo= new Enemigo(mx.itesm.btp.R.drawable.cat1, vida, pantalla, getResources());
+			fondo = new Fondo(mx.itesm.btp.R.drawable.valley, pantalla, getResources());
+			break;
+		case NIVEL_2:
+			vehiculoEnemigo= new Enemigo(mx.itesm.btp.R.drawable.enemigo2, vida, pantalla, getResources());
+			fondo = new Fondo(mx.itesm.btp.R.drawable.fondo2, pantalla, getResources());
+		}
+		
 		graficaFlag = false;
 		
 		arrow = BitmapFactory.decodeResource(getResources(), mx.itesm.btp.R.drawable.cpad);

@@ -65,6 +65,8 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 	private boolean sonido;
 	private Thread th = null;
 	private boolean modoNyan = false;
+	public final int NIVEL_1 =1;
+	public final int NIVEL_2 =2;
 	
 
 	
@@ -79,7 +81,7 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 		
 		
 		pantalla = new Pantalla();
-		juego = new Juego(this, pantalla);
+		juego = new Juego(this, pantalla,NIVEL_2);
 		juego.setOnTouchListener(this);
 		FrameLayout layoutPrincipal = new FrameLayout(getBaseContext());
 		
@@ -93,7 +95,7 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 		
 		setContentView(layoutPrincipal);
 		
-		reproducirAudio();
+		reproducirAudio(NIVEL_2);
 		
 		widthArrow = juego.getArrow().getWidth();
 		heightArrow =juego.getArrow().getHeight();
@@ -129,14 +131,26 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 		}	
 	}
 	
-	private void reproducirAudio(){
-   	 if (musica) {
+	private void reproducirAudio(int selectorNivel){
+		switch(selectorNivel){
+		case NIVEL_1:
+			if (musica) {
    		if(player!=null){
       		 player.release();
       	 }
       	 player=MediaPlayer.create(this,mx.itesm.btp.R.raw.pkmn);
       	 player.start();
-   	 	}
+   	 	}break;
+		case NIVEL_2:
+			if (musica) {
+		   		if(player!=null){
+		      		 player.release();
+		      	 }
+		      	 player=MediaPlayer.create(this,mx.itesm.btp.R.raw.metalslug);
+		      	 player.start();
+		   	 	}break;
+		}
+   	 
     }
 
 	/**
