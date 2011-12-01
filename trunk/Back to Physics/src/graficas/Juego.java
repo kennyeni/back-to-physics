@@ -37,8 +37,6 @@ public class Juego extends View{
 	private Paint p;
 	private MediaPlayer player;
 	public Fondo fondo;
-	private Bitmap imgMonito;
-	private Bitmap imgRoca;
 	private Bitmap imgbtn;
 	private Bitmap arrow;
 	private Bitmap mira;
@@ -60,6 +58,7 @@ public class Juego extends View{
 	private float poderDeProyectil;
 	public final int NIVEL_1 =1;
 	public final int NIVEL_2 =2;
+	private int Indicadorvida;
 	
 	/**
 	 * En esta clase esta el desarrollo completo de las acciones del juego
@@ -91,8 +90,8 @@ public class Juego extends View{
 		
 		arrow = BitmapFactory.decodeResource(getResources(), mx.itesm.btp.R.drawable.cpad);
 		mira=BitmapFactory.decodeResource(getResources(), mx.itesm.btp.R.drawable.crosshair2);
-		imgMonito = BitmapFactory.decodeResource(getResources(), mx.itesm.btp.R.drawable.cat1);
-		imgRoca= BitmapFactory.decodeResource(getResources(), mx.itesm.btp.R.drawable.rock);
+	
+		
 		imgbtn= BitmapFactory.decodeResource(getResources(), mx.itesm.btp.R.drawable.btnb);
 		barra1= BitmapFactory.decodeResource(getResources(), mx.itesm.btp.R.drawable.barra1);
 		barra2= BitmapFactory.decodeResource(getResources(), mx.itesm.btp.R.drawable.barra2);
@@ -197,6 +196,22 @@ public class Juego extends View{
 		
 		arrow=Bitmap.createScaledBitmap(arrow,canvas.getWidth()/4, canvas.getHeight()/3, false);
 		canvas.drawBitmap(arrow, canvas.getWidth()-canvas.getWidth()/4, canvas.getHeight()- canvas.getHeight()/3,p);
+		marcarVida(vehiculoEnemigo, missile, canvas);
+		if(Indicadorvida==0){
+			canvas.drawBitmap(barra1, 0,0, p);
+		}
+		else if(Indicadorvida==1){
+			canvas.drawBitmap(barra2, 0,0, p);
+		}
+		else if(Indicadorvida==2){
+			canvas.drawBitmap(barra3, 0,0, p);
+		}
+		else if(Indicadorvida==3){
+			canvas.drawBitmap(barra4, 0,0, p);
+		}
+		else if(Indicadorvida==4){
+			canvas.drawBitmap(barra5, 0,0, p);
+		}
 		
 		
 		if(disparo==true){
@@ -361,10 +376,10 @@ public class Juego extends View{
 	}
 
 	
-	private void marcarVida(Bitmap enemigo, Bitmap bala,Canvas canvas) {
+	private void marcarVida(Enemigo enemigo, Bitmap bala,Canvas canvas) {
 		
 		
-		if(enemigo.getHeight()==bala.getHeight()&&enemigo.getWidth()==bala.getWidth()){
+		if(canvas.getHeight()-enemigo.getBitmap().getHeight()==canvas.getHeight()-bala.getHeight()&&canvas.getWidth()-enemigo.getBitmap().getHeight()==canvas.getHeight()-bala.getWidth()){
 		x=x++;
 	}
 	else{
@@ -372,19 +387,19 @@ public class Juego extends View{
 	}
 	switch(x){
 	case 1: if(x==0){
-		canvas.drawBitmap(barra1, 200, 100,p);
+		Indicadorvida=0;;
 	}break;
 	case 2:if(x==1){
-		canvas.drawBitmap(barra2, 200, 100,p);
+		Indicadorvida=1;
 	}break;
 	case 3: if(x==2){
-		canvas.drawBitmap(barra3, 200, 100,p);
+		Indicadorvida=2;
 	}break;
 	case 4: if(x==3){
-		canvas.drawBitmap(barra4, 200, 100,p);
+		Indicadorvida=3;
 	}break;
 	case 5: if(x==4){
-		canvas.drawBitmap(barra5, 200, 100,p);
+		Indicadorvida=4;
 	}break;
 		
 	}
