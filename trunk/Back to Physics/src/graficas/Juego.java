@@ -46,6 +46,7 @@ public class Juego extends View{
 	private Bitmap barra4;
 	private Bitmap barra5;
 	private Bitmap missile;
+	private Bitmap pausebtn;
 	private int x=0;
 	private boolean disparo;
 	private int missileworiginal;
@@ -60,6 +61,7 @@ public class Juego extends View{
 	public final int NIVEL_2 =2;
 	public final int NIVEL_3 =3;
 	private int Indicadorvida;
+	
 	
 	/**
 	 * En esta clase esta el desarrollo completo de las acciones del juego
@@ -85,17 +87,18 @@ public class Juego extends View{
 		case NIVEL_2:
 			vehiculoEnemigo= new Enemigo(mx.itesm.btp.R.drawable.enemigo2, vida, pantalla, getResources());
 			fondo = new Fondo(mx.itesm.btp.R.drawable.fondobn, pantalla, getResources());
-			break;
+		
 		case NIVEL_3:
-			vehiculoEnemigo= new Enemigo(mx.itesm.btp.R.drawable.nave, vida, pantalla, getResources());
+			vehiculoEnemigo= new Enemigo(mx.itesm.btp.R.drawable.nave1, vida, pantalla, getResources());
 			fondo = new Fondo(mx.itesm.btp.R.drawable.fondo3bn, pantalla, getResources());
+		
 		}
 		
 		graficaFlag = false;
 		
 		arrow = BitmapFactory.decodeResource(getResources(), mx.itesm.btp.R.drawable.cpad);
 		mira=BitmapFactory.decodeResource(getResources(), mx.itesm.btp.R.drawable.crosshair2);
-	
+		pausebtn= BitmapFactory.decodeResource(getResources(), mx.itesm.btp.R.drawable.pause);
 		
 		imgbtn= BitmapFactory.decodeResource(getResources(), mx.itesm.btp.R.drawable.btnb);
 		barra1= BitmapFactory.decodeResource(getResources(), mx.itesm.btp.R.drawable.barra1);
@@ -197,7 +200,7 @@ public class Juego extends View{
 		
 		//canvas.drawBitmap(imgMonito, 200, 500, p);
 		//canvas.drawBitmap(imgbtn, x, 630,p);
-		
+		canvas.drawBitmap(pausebtn, 0,0, p);
 		
 		arrow=Bitmap.createScaledBitmap(arrow,canvas.getWidth()/4, canvas.getHeight()/3, false);
 		canvas.drawBitmap(arrow, canvas.getWidth()-canvas.getWidth()/4, canvas.getHeight()- canvas.getHeight()/3,p);

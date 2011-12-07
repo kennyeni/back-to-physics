@@ -68,6 +68,7 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 	public final int NIVEL_1 =1;
 	public final int NIVEL_2 =2;
 	public final int NIVEL_3 =3;
+	private int SelectorNivel;
 	
 
 	
@@ -80,9 +81,20 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 		preferenceSuena =  getSharedPreferences("sonido", Context.MODE_PRIVATE);
 		sonido= preferenceSuena.getBoolean("sonido", true);
 		
-		
+		SelectorNivel=NIVEL_1;
 		pantalla = new Pantalla();
-		juego = new Juego(this, pantalla,NIVEL_2);
+		switch(SelectorNivel){
+		case NIVEL_1:
+			juego = new Juego(this, pantalla,NIVEL_1);
+			break;
+		case NIVEL_2:
+			juego = new Juego(this, pantalla,NIVEL_2);
+			break;
+		case NIVEL_3:
+			juego= new Juego(this,pantalla,NIVEL_3);
+			break;
+		}
+		
 		juego.setOnTouchListener(this);
 		FrameLayout layoutPrincipal = new FrameLayout(getBaseContext());
 		
@@ -96,7 +108,7 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 		
 		setContentView(layoutPrincipal);
 		
-		reproducirAudio(NIVEL_3);
+		reproducirAudio(SelectorNivel);
 		
 		widthArrow = juego.getArrow().getWidth();
 		heightArrow =juego.getArrow().getHeight();
@@ -344,7 +356,7 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 				}
 				
 				
-			}else{
+			}if(posx==0 && posy ==0){
 				onPause();
 				showDialog(DIALOGO_SIMPLE);
 			}
