@@ -42,6 +42,7 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 	private static final String MENU_RESUME = null;
 	private static final int GRAFICAS = 1;
 	private static final int JUEGO = 0;
+	private static final int DIALOGO_GRAFICAS = 40;
 	private Juego juego;
 	private boolean corriendo;
 	private MediaPlayer player;
@@ -102,7 +103,7 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 		
 		LinkedList<Coordenadas> puntosA = Fisica.puntosAereos(v, theta, phi, g);
 		LinkedList<Coordenadas> puntosL = Fisica.puntosLaterales(v, theta, phi, g);
-		plano = new PlanoCartesiano(this, puntosA, puntosL, pantalla, enemigoX, enemigoY, modoNyan);
+		plano = new PlanoCartesiano(this, puntosA, puntosL, theta, phi, pantalla, enemigoX, enemigoY, modoNyan);
 		layoutPrincipal.addView(plano);
 		plano.setVisibility(View.INVISIBLE);
 		
@@ -179,8 +180,9 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 	 */
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if(keyCode == KeyEvent.KEYCODE_BACK){
-			startActivity(new Intent(PantallaJuego.this, Principal.class));
+		if(keyCode == KeyEvent.KEYCODE_BACK&&modoDeJuego==GRAFICAS){
+			//startActivity(new Intent(PantallaJuego.this, Principal.class));
+			showDialog(DIALOGO_GRAFICAS);
 		}
 		return false;
 	}
@@ -262,7 +264,30 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 		});
 		cuadroDialogo = builder.create();
 		return cuadroDialogo;
-		}return null;
+		}else if(id==DIALOGO_GRAFICAS){
+			Dialog dialogoGraficas=null;
+			
+	    	AlertDialog.Builder builder = new AlertDialog.Builder(this);
+			builder.setMessage("ÀAnalizar grafica?");
+			builder.setPositiveButton("Analizar", new DialogInterface.OnClickListener() {
+				
+				
+				@Override
+				public void onClick(DialogInterface dialogo, int which) {
+					dialogo.dismiss();
+					
+				}
+			});
+			builder.setNegativeButton("Jugar", new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					plano.termino = true;
+				}	
+			});
+			dialogoGraficas = builder.create();
+			return dialogoGraficas;
+			}
+    	return null;
 		
 	}
 	
@@ -449,7 +474,7 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 			Log.d("DEP", "Regenerando graficas");
 			LinkedList<Coordenadas> puntosA = Fisica.puntosAereos(v, theta, phi, g);
 			LinkedList<Coordenadas> puntosL = Fisica.puntosLaterales(v, theta, phi, g);
-			plano = new PlanoCartesiano(this, puntosA, puntosL, pantalla, enemigoX, enemigoY, modoNyan);
+			plano = new PlanoCartesiano(this, puntosA, puntosL, theta, phi, pantalla, enemigoX, enemigoY, modoNyan);
 		}
 		return plano;
 	}
@@ -499,7 +524,7 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 			cambiarView(GRAFICAS);
 			LinkedList<Coordenadas> puntosA = Fisica.puntosAereos(v, theta, phi, g);
 			LinkedList<Coordenadas> puntosL = Fisica.puntosLaterales(v, theta, phi, g);
-			plano.regenerar(puntosA, puntosL, enemigoX, enemigoY, modoNyan);
+			plano.regenerar(puntosA, puntosL, theta, phi, enemigoX, enemigoY, modoNyan);
 		}
 		
 		
