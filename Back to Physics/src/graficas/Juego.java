@@ -61,6 +61,7 @@ public class Juego extends View{
 	public final int NIVEL_2 =2;
 	public final int NIVEL_3 =3;
 	private int Indicadorvida;
+	public double theta, phi;
 	
 	
 	/**
