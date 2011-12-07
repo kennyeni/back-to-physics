@@ -38,6 +38,14 @@ public class Fondo {
 		}
 	}
 	
+	public double getWidth(){
+		return pos.x;
+	}
+	
+	public double getHeight(){
+		return pos.y;
+	}
+	
 	/**
 	 * Obtine la imagen que se selecciono para el fondo
 	 * @return fondo
