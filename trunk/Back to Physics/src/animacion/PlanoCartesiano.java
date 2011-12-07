@@ -109,7 +109,7 @@ public class PlanoCartesiano extends View {
 			else
 				p.setARGB(200, 255, 255, 255);
 			canvas.drawCircle(x + (width / 4) + MARGEN, height - y - MARGEN, 7, p);
-			Log.i("Graficas Aereos", "X:" + x + "Y:" + y);
+			//Log.i("Graficas Aereos", "X:" + x + "Y:" + y);
 
 			coor = copiaLateral.poll();
 			x = coor.getX() / relacionAVLateralX;
@@ -131,7 +131,7 @@ public class PlanoCartesiano extends View {
 				p.setARGB(200, 255, 255, 255);
 			}
 			canvas.drawCircle(x + (2 * width / 4) + MARGEN,height - y - MARGEN, 7, p);
-			Log.i("Graficas Lateral", "X:" + x + "Y:" + y);
+			//log.i("Graficas Lateral", "X:" + x + "Y:" + y);
 
 		}
 
