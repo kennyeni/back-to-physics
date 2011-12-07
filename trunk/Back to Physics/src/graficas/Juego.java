@@ -119,7 +119,8 @@ public class Juego extends View{
 		missileworiginal = missile.getWidth();
 		missilehoriginal = missile.getHeight();
 		disparo = false;
-		
+		mira = Bitmap.createScaledBitmap(mira, getCbm().getWidth(), getCbm().getHeight(), false);
+		arrow=Bitmap.createScaledBitmap(arrow,getCbm().getWidth()/4, getCbm().getHeight()/3, false);
 	}
 	
 	/**
@@ -183,7 +184,7 @@ public class Juego extends View{
 		cbm = canvas;
 		
 		canvas.drawRGB(0,0,0); 
-		mira = Bitmap.createScaledBitmap(mira, canvas.getWidth(), canvas.getHeight(), false);
+		
 		canvas.drawBitmap(fondo.getBitmap(), 0, 0, p);
 		canvas.drawBitmap(vehiculoEnemigo.getBitmap(), 100,100, p);
 		canvas.drawBitmap(mira, 0, 0, p);
@@ -203,7 +204,7 @@ public class Juego extends View{
 		//canvas.drawBitmap(imgbtn, x, 630,p);
 		canvas.drawBitmap(pausebtn, 0,0, p);
 		
-		arrow=Bitmap.createScaledBitmap(arrow,canvas.getWidth()/4, canvas.getHeight()/3, false);
+		
 		canvas.drawBitmap(arrow, canvas.getWidth()-canvas.getWidth()/4, canvas.getHeight()- canvas.getHeight()/3,p);
 		marcarVida(vehiculoEnemigo, missile, canvas);
 		if(Indicadorvida==0){
@@ -420,6 +421,10 @@ public class Juego extends View{
 	public void infringirDano(float distanciaParaDano) {
 		vehiculoEnemigo.bajarVida(poderDeProyectil, distanciaParaDano);
 		Log.d("DEP", "Se bajo:"+distanciaParaDano);
+	}
+
+	public boolean isOver() {
+		return vehiculoEnemigo.isDead();
 	}
 	
 

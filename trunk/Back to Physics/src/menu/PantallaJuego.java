@@ -1,6 +1,13 @@
 package menu;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.security.Timestamp;
+import java.util.Date;
 import java.util.LinkedList;
+
+import preferencias.HighScore;
+
 
 import logica.Fisica;
 
@@ -70,7 +77,10 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 	public final int NIVEL_2 =2;
 	public final int NIVEL_3 =3;
 	private int SelectorNivel;
-	
+	private long tiempoInicio;
+	private int score =0, misiles=5;
+	private final String FILENAME = "btpPrefs";
+	private final String highscores = "hs";
 
 	
 	protected void onCreate(Bundle savedInstanceState) {
@@ -95,6 +105,9 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 			juego= new Juego(this,pantalla,NIVEL_3);
 			break;
 		}
+		
+		Date inicio = new Date();
+		tiempoInicio = inicio.getTime();
 		
 		juego.setOnTouchListener(this);
 		FrameLayout layoutPrincipal = new FrameLayout(getBaseContext());
@@ -494,6 +507,9 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 			modoDeJuego = JUEGO;
 			float dis = plano.getDistanciaDano();
 			juego.infringirDano(dis);
+			if(juego.isOver()){
+				generarScore();
+			}
 			juego.graficaFlag = false;
 			cambiarView(JUEGO);
 			
@@ -502,6 +518,12 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 			
 		}
 		
+	}
+	
+	private void generarScore(){
+		Date t = new Date();
+		double tiempo = (t.getTime()-tiempoInicio)*1000;
+		score = (int) ((1/tiempo)*misiles*10);
 	}
 	
 	private void refrescarGrafica(){

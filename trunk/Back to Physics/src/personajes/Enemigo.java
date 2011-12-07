@@ -98,6 +98,11 @@ public class Enemigo {
 		// TODO Auto-generated method stub
 		
 	}
+
+	public boolean isDead() {
+		// TODO Auto-generated method stub
+		return (vida<=0);
+	}
 	
 
 }
