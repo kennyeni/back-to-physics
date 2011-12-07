@@ -10,6 +10,7 @@ import preferencias.HighScore;
 
 
 import logica.Fisica;
+import mx.itesm.btp.R;
 
 import entrada.Acelerometro;
 import exceptions.NoContextProvidedException;
@@ -24,6 +25,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
@@ -75,6 +77,8 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 	private boolean modoNyan = false;
 	public final int NIVEL_1 =1;
 	public final int NIVEL_2 =2;
+	private final String PNivel = "nivel";
+	private int nivel;
 	public final int NIVEL_3 =3;
 	private int SelectorNivel;
 	private long tiempoInicio;
@@ -86,11 +90,13 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 	
-		preferenceSonido = getSharedPreferences("musica", Context.MODE_PRIVATE);
-		musica = preferenceSonido.getBoolean("musica", true);
+		musica = (getSharedPreferences("musica", Context.MODE_PRIVATE)).getBoolean("musica", true);
+		sonido = (getSharedPreferences("sonido", Context.MODE_PRIVATE)).getBoolean("sonido", true);
+		nivel = (getSharedPreferences(PNivel, Context.MODE_PRIVATE)).getInt(PNivel, 1);
 		
-		preferenceSuena =  getSharedPreferences("sonido", Context.MODE_PRIVATE);
-		sonido= preferenceSuena.getBoolean("sonido", true);
+		//(getSharedPreferences(PNivel, Context.MODE_PRIVATE)).registerOnSharedPreferenceChangeListener((OnSharedPreferenceChangeListener) this); 
+		//Cada ves que se cambie una propiedad se llama
+
 		
 		SelectorNivel=NIVEL_1;
 		pantalla = new Pantalla();
@@ -130,6 +136,14 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 		acel = new Acelerometro(this);
 		xinicial = juego.getWidth();
 		yinicial = juego.getHeight();
+	}
+	
+
+	public void onSharedPreferenceChanged(SharedPreferences pref, String key) {
+		if(key==PNivel){
+			juego.setNivel(pref.getInt(PNivel, 1));
+		}
+		
 	}
 	
 	private void detenerSonido(){
@@ -445,7 +459,7 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 	}
 	
 	private void cambiarView(int id){
-		Log.d("DEP", "Se cambio el view a:"+id);
+		//Log.d("DEP", "Se cambio el view a:"+id);
 		if(id==GRAFICAS){
 			modoDeJuego = GRAFICAS;
 			juego.post(new Runnable() {
@@ -484,7 +498,7 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 	
 	private PlanoCartesiano getPlano(){
 		if(plano==null){
-			Log.d("DEP", "Regenerando graficas");
+			//Log.d("DEP", "Regenerando graficas");
 			LinkedList<Coordenadas> puntosA = Fisica.puntosAereos(v, theta, phi, g);
 			LinkedList<Coordenadas> puntosL = Fisica.puntosLaterales(v, theta, phi, g);
 			plano = new PlanoCartesiano(this, puntosA, puntosL, theta, phi, pantalla, enemigoX, enemigoY, modoNyan);
@@ -494,7 +508,7 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 	
 	private void graficarJuego(){
 		getPlano().postInvalidate();
-		Log.d("DEP", "Graficando graficas");
+		//Log.d("DEP", "Graficando graficas");
 		if(plano.hasEnded()){ //acabo la graficacion
 			/*
 			try {
@@ -509,6 +523,10 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 			juego.infringirDano(dis);
 			if(juego.isOver()){
 				generarScore();
+				if(juego.selectorNivel==1){
+					setContentView(R.layout.nivel2);
+					juego.setNivel(2);
+				}
 			}
 			juego.graficaFlag = false;
 			cambiarView(JUEGO);
@@ -527,12 +545,12 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 	}
 	
 	private void refrescarGrafica(){
-		Log.d("DEP", "Borrando graficas");
+		//Log.d("DEP", "Borrando graficas");
 		plano = null;
 	}
 	
 	private void moverJuego() {
-		Log.d("DEP", "Graficando Juego");
+		//Log.d("DEP", "Graficando Juego");
 		juego.bringToFront();
 		
 		juego.mueveY(acel.getY());

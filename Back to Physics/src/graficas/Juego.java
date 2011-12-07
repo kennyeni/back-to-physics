@@ -15,6 +15,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Typeface;
 import android.graphics.Paint.Style;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -25,6 +26,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.view.View.OnTouchListener;
 import animacion.Graficacion;
@@ -61,8 +63,12 @@ public class Juego extends View{
 	public final int NIVEL_2 =2;
 	public final int NIVEL_3 =3;
 	private int Indicadorvida;
+	public int selectorNivel;
+	private Pantalla pantalla;
 	public double theta, phi;
+	private boolean resized=false;
 	
+
 	
 	/**
 	 * En esta clase esta el desarrollo completo de las acciones del juego
@@ -79,6 +85,7 @@ public class Juego extends View{
 		super(context);
 		p=new Paint();
 		pantalla.setContext(context);
+		this.pantalla=pantalla;
 		float vida = (float) 100.0;
 		switch(selectorNivel){
 		case NIVEL_1:
@@ -119,10 +126,35 @@ public class Juego extends View{
 		missileworiginal = missile.getWidth();
 		missilehoriginal = missile.getHeight();
 		disparo = false;
-		mira = Bitmap.createScaledBitmap(mira, getCbm().getWidth(), getCbm().getHeight(), false);
-		arrow=Bitmap.createScaledBitmap(arrow,getCbm().getWidth()/4, getCbm().getHeight()/3, false);
+		
+	}
+
+	public void setNivel(int nivel){
+		selectorNivel = nivel;
+		
+		float vida = (float) 100.0;
+		
+		
+		switch(selectorNivel){
+		case NIVEL_1:
+			vehiculoEnemigo= new Enemigo(mx.itesm.btp.R.drawable.cat1, vida, pantalla, getResources());
+			fondo = new Fondo(mx.itesm.btp.R.drawable.valley, pantalla, getResources());
+	        break;
+		
+		case NIVEL_2:
+			vehiculoEnemigo= new Enemigo(mx.itesm.btp.R.drawable.enemigo2, vida, pantalla, getResources());
+			fondo = new Fondo(mx.itesm.btp.R.drawable.fondobn, pantalla, getResources());
+		
+		}
+		
 	}
 	
+
+	private void setContentView(int nivel1) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	/**
 	 * Mueve el fondo en X
 	 * @param x
@@ -182,7 +214,11 @@ public class Juego extends View{
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
 		cbm = canvas;
-		
+		if(!resized){
+			mira = Bitmap.createScaledBitmap(mira, getCbm().getWidth(), getCbm().getHeight(), false);
+			arrow=Bitmap.createScaledBitmap(arrow,getCbm().getWidth()/4, getCbm().getHeight()/3, false);
+			resized=true;
+		}
 		canvas.drawRGB(0,0,0); 
 		
 		canvas.drawBitmap(fondo.getBitmap(), 0, 0, p);
