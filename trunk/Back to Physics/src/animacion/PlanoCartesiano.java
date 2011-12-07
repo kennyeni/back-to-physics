@@ -48,9 +48,10 @@ public class PlanoCartesiano extends View {
 	private float height = 0;
 	private float enemigoX = 0;
 	private float enemigoY = 0;
-	private boolean termino = false;
+	public boolean termino = false;
 	private float distanciaDano;
 	private boolean modoNyan;
+	private double phi, theta;
 
 	/**
 	 * Constructor principal (y único)
@@ -66,12 +67,13 @@ public class PlanoCartesiano extends View {
 
 	public PlanoCartesiano(Context context,
 			LinkedList<Coordenadas> puntosAereos,
-			LinkedList<Coordenadas> puntosLaterales, Pantalla pantalla,
+			LinkedList<Coordenadas> puntosLaterales, double theta, double phi, Pantalla pantalla,
 			float enemigoX, float enemigoY, boolean modoNyan) {
 		super(context);
 		this.modoNyan = modoNyan;
 		p = new Paint();
-
+		this.theta = theta;
+		this.phi = phi;
 		this.pantalla = pantalla;
 		this.enemigoX = enemigoX;
 		this.enemigoY = enemigoY;
@@ -201,7 +203,7 @@ public class PlanoCartesiano extends View {
 		canvas.drawText("\"Vista Aerea\"", (width / 4) - 26, 15, p);
 		float angulo = (float) Math.atan(aereo.getLast().getY()
 				/ aereo.getLast().getX());
-		canvas.drawText("θ: " + dec.format(angulo * 180 / Math.PI),
+		canvas.drawText("θ: " + dec.format(theta),
 				(width / 2) - 83, 15, p);
 
 		canvas.drawText(
@@ -211,7 +213,7 @@ public class PlanoCartesiano extends View {
 		canvas.drawText("\"Vista Lateral\"", (3 * width / 4) - 36, 15, p);
 		float angulo2 = (float) Math.atan(lateral.get(20).getY()
 				/ aereo.get(20).getX());
-		canvas.drawText("φ: " + dec.format(angulo2 * 180 / Math.PI),
+		canvas.drawText("φ: " + dec.format(phi),
 				(width) - 83, 15, p);
 
 		// ////////////////////////////////////////
@@ -234,17 +236,13 @@ public class PlanoCartesiano extends View {
 			// Regresar distancia neta
 			distanciaDano = (float) Math.abs(Math.hypot(aereo.getLast().getX()
 					- enemigoX, aereo.getLast().getY() - enemigoY));
-			terminarGrafica();
 		}
 
 	}
 
-	private void terminarGrafica() {
-
-	}
 
 	public boolean hasEnded() {
-		return tiempo >= NUMERO_PUNTOS + 1;
+		return (tiempo >= NUMERO_PUNTOS + 1)&&termino;
 	}
 
 	/**
@@ -255,13 +253,16 @@ public class PlanoCartesiano extends View {
 	}
 
 	public void regenerar(LinkedList<Coordenadas> puntosA,
-			LinkedList<Coordenadas> puntosL, float enemigoX, float enemigoY, boolean nyan) {
+			LinkedList<Coordenadas> puntosL, double theta, double phi, float enemigoX, float enemigoY, boolean nyan) {
 		this.enemigoX = enemigoX;
 		this.enemigoY = enemigoY;
+		this.theta = theta;
+		this.phi = phi;
 		aereo = puntosA;
 		lateral = puntosL;
 		generarRelaciones();
 		tiempo = 0;
+		termino = false;
 		modoNyan = nyan;
 
 	}
@@ -279,6 +280,7 @@ public class PlanoCartesiano extends View {
 				: ((maxLateral.getX() * 1.1) / ((width / 2) - MARGEN * 2)));
 		int lugar = Math.round(lateral.size() / 2);
 		float tmp = (lateral.get(lugar)).getY();
+		termino = false;
 		relacionAVLateralY = (float) ((tmp * 1.1) / (height - MARGEN * 2));
 	}
 
