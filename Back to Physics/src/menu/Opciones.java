@@ -36,6 +36,10 @@ public class Opciones extends Activity implements OnTouchListener
 	{
 		 super.onCreate(savedInstanceState);
 		 setContentView(mx.itesm.btp.R.layout.opciones);
+		 
+		 
+		 
+		 
          Typeface font = Typeface.createFromAsset(getAssets(), "fonts/spin.otf");
          
          TextView Opciones = (TextView)findViewById(mx.itesm.btp.R.id.txtOpciones);
@@ -55,6 +59,11 @@ public class Opciones extends Activity implements OnTouchListener
          SharedPreferences preferenceMusica = getSharedPreferences("sonido", Context.MODE_PRIVATE);
          boolean escucha = preferenceMusica.getBoolean("musica", true);
 		 tgBtnMusica.setChecked(escucha);
+		 if (tgBtnMusica.isChecked()) {
+				tgBtnMusica.setBackgroundResource(mx.itesm.btp.R.drawable.quieromusica);
+			}else{
+				tgBtnMusica.setBackgroundResource(mx.itesm.btp.R.drawable.noquieromusica);
+			}
          tgBtnMusica.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
          {
          
@@ -77,6 +86,11 @@ public class Opciones extends Activity implements OnTouchListener
          SharedPreferences preferenceSonido = getSharedPreferences("sonido", Context.MODE_PRIVATE);
          boolean suena = preferenceSonido.getBoolean("sonido", true);
          tgBtnSonido.setChecked(suena);
+         if (tgBtnSonido.isChecked()) {
+				tgBtnSonido.setBackgroundResource(mx.itesm.btp.R.drawable.sisonido);
+		}else{
+				tgBtnSonido.setBackgroundResource(mx.itesm.btp.R.drawable.nosonido);
+		}
          tgBtnSonido.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
 			@Override
