@@ -37,9 +37,6 @@ public class Opciones extends Activity implements OnTouchListener
 		 super.onCreate(savedInstanceState);
 		 setContentView(mx.itesm.btp.R.layout.opciones);
 		 
-		 
-		 
-		 
          Typeface font = Typeface.createFromAsset(getAssets(), "fonts/spin.otf");
          
          TextView Opciones = (TextView)findViewById(mx.itesm.btp.R.id.txtOpciones);

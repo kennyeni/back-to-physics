@@ -52,6 +52,7 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 	private static final int GRAFICAS = 1;
 	private static final int JUEGO = 0;
 	private static final int DIALOGO_GRAFICAS = 40;
+	private static final int DIALOGO_CALIBRACION = 10;
 	private Juego juego;
 	private boolean corriendo;
 	private MediaPlayer player;
@@ -79,6 +80,8 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 	public final int NIVEL_2 =2;
 	private final String PNivel = "nivel";
 	private int nivel;
+	private int calibracionX;
+	private int calibracionY;
 	public final int NIVEL_3 =3;
 	private int SelectorNivel;
 	private long tiempoInicio;
@@ -93,10 +96,15 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 		musica = (getSharedPreferences("musica", Context.MODE_PRIVATE)).getBoolean("musica", true);
 		sonido = (getSharedPreferences("sonido", Context.MODE_PRIVATE)).getBoolean("sonido", true);
 		nivel = (getSharedPreferences(PNivel, Context.MODE_PRIVATE)).getInt(PNivel, 1);
+		calibracionX = (getSharedPreferences("calibracionX",Context.MODE_PRIVATE)).getInt("calibracionX", 0);
+		calibracionY = (getSharedPreferences("calibracionY",Context.MODE_PRIVATE)).getInt("calibracionY", 0);
 		
 		//(getSharedPreferences(PNivel, Context.MODE_PRIVATE)).registerOnSharedPreferenceChangeListener((OnSharedPreferenceChangeListener) this); 
 		//Cada ves que se cambie una propiedad se llama
 
+		if (calibracionX==0) {
+			showDialog(DIALOGO_CALIBRACION);
+		}
 		
 		SelectorNivel=NIVEL_1;
 		pantalla = new Pantalla();
@@ -269,6 +277,7 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 			});cuadroDialogo2 = builder2.create();
 			return cuadroDialogo2;
     	}
+    	
     	else if(id==DIALOGO_SIMPLE){
 			Dialog cuadroDialogo=null;
 		
@@ -313,7 +322,28 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 			});
 			dialogoGraficas = builder.create();
 			return dialogoGraficas;
-			}
+			
+			}else if(id==DIALOGO_CALIBRACION){
+				Dialog dialogoCalibracion=null;
+				
+		    	AlertDialog.Builder builder = new AlertDialog.Builder(this);
+				builder.setMessage("Pon tu dispositivo en un ‡ngulo c—modo");
+				builder.setPositiveButton("Calibrar", new DialogInterface.OnClickListener() {
+					
+					@Override
+					public void onClick(DialogInterface dialogo, int which) {
+						acel.calibracion();	
+					}
+				});
+				builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						dialog.dismiss();
+					}	
+				});
+				dialogoCalibracion = builder.create();
+				return dialogoCalibracion;
+				}
     	return null;
 		
 	}
