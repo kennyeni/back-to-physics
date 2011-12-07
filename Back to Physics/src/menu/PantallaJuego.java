@@ -52,7 +52,7 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 	private int notifSonido=0;
 	private final int DIALOGO_SIMPLE =0;
 	private final int DIALOGO_SIMPLE2 =1;
-	private double v=20, theta=1, phi=1, g=9.81;
+	public double v=20, theta=1, phi=1, g=9.81;
 	private float enemigoX, enemigoY;
 	private int yinicial, xinicial;
 	private int modoDeJuego = 0;
@@ -338,6 +338,7 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 				int x = juego.getWidth();
 				int y = juego.getHeight();
 				
+				/*
 				if(xinicial == x){
 					theta= 90.0;
 				}else if (x>xinicial){
@@ -354,6 +355,13 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 					phi = y*30/yinicial;
 					
 				}
+				*/
+				theta = 140-((x*100)/juego.fondo.getWidth());
+				phi= 100-((y*80)/juego.fondo.getHeight());
+				
+
+				juego.phi = phi;
+				juego.theta = theta;
 				
 				
 			}if(posx==0 && posy ==0){
