@@ -238,7 +238,7 @@ public class Juego extends View{
 
 		//canvas.drawBitmap(imgMonito, 200, 500, p);
 		//canvas.drawBitmap(imgbtn, x, 630,p);
-		canvas.drawBitmap(pausebtn, 0,0, p);
+		canvas.drawBitmap(pausebtn, 725,20, p);
 
 
 		canvas.drawBitmap(arrow, canvas.getWidth()-canvas.getWidth()/4, canvas.getHeight()- canvas.getHeight()/3,p);
