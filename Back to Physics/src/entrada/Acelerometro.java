@@ -50,6 +50,7 @@ public class Acelerometro {
 	private final double rightMedUpperLimit = 4.1;
 	private final double rightHiBottomLimit = 4.1;
 	private final double rightHiUpperLimit = 6.3;
+	private float valores[] = null;
 
 	
 	Sensor acelerometro = null;
@@ -71,6 +72,9 @@ public class Acelerometro {
 		sensorManager = (SensorManager) act.getSystemService(Context.SENSOR_SERVICE);
 		acelerometro = sensorManager.getSensorList(Sensor.TYPE_ACCELEROMETER).get(0);
 		sensorManager.registerListener(listener, acelerometro, SensorManager.SENSOR_DELAY_NORMAL);
+		factorCorreccion[0] = (act.getSharedPreferences("calibracionX",Context.MODE_PRIVATE)).getInt("calibracionX", 0);
+		factorCorreccion[1] = (act.getSharedPreferences("calibracionY",Context.MODE_PRIVATE)).getInt("calibracionY", 0);
+		
 	}
 	
 	
@@ -83,7 +87,8 @@ public class Acelerometro {
 		
 		@Override
 		public void onSensorChanged(SensorEvent event) {
-			float valores[] = event.values;
+			valores = event.values;
+			//valores1 = valores;
 			int tiempo = (int) (event.timestamp/1000000);
 			
 			if(tiempo > tiempos[0]+(3*refreshRate)){
@@ -111,7 +116,9 @@ public class Acelerometro {
 		public void onAccuracyChanged(Sensor sensor, int accuracy) {};
 	};
 	
-	public void calibracion(){ //Vero
+	public void calibracion(){ 
+		factorCorreccion[0] = (float) Y;
+		factorCorreccion[1] = (float) X;
 		
 	}
 	
