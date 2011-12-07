@@ -67,6 +67,7 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 	private boolean modoNyan = false;
 	public final int NIVEL_1 =1;
 	public final int NIVEL_2 =2;
+	public final int NIVEL_3 =3;
 	
 
 	
@@ -95,7 +96,7 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 		
 		setContentView(layoutPrincipal);
 		
-		reproducirAudio(NIVEL_2);
+		reproducirAudio(NIVEL_3);
 		
 		widthArrow = juego.getArrow().getWidth();
 		heightArrow =juego.getArrow().getHeight();
@@ -147,6 +148,14 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 		      		 player.release();
 		      	 }
 		      	 player=MediaPlayer.create(this,mx.itesm.btp.R.raw.metalslug);
+		      	 player.start();
+		   	 	}break;
+		case NIVEL_3:
+			if (musica) {
+		   		if(player!=null){
+		      		 player.release();
+		      	 }
+		      	 player=MediaPlayer.create(this,mx.itesm.btp.R.raw.sonidoespacio);
 		      	 player.start();
 		   	 	}break;
 		}
@@ -206,7 +215,7 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 				
 				public void onClick(DialogInterface dialog, int which) {
 					finish();
-					startActivity(new Intent(PantallaJuego.this, Principal.class));
+					//startActivity(new Intent(PantallaJuego.this, Principal.class));
 				}
 			});
     		builder2.setNegativeButton("No", new DialogInterface.OnClickListener() {

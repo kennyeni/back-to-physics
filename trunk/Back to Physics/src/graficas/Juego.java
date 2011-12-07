@@ -58,6 +58,7 @@ public class Juego extends View{
 	private float poderDeProyectil;
 	public final int NIVEL_1 =1;
 	public final int NIVEL_2 =2;
+	public final int NIVEL_3 =3;
 	private int Indicadorvida;
 	
 	/**
@@ -83,7 +84,11 @@ public class Juego extends View{
 			break;
 		case NIVEL_2:
 			vehiculoEnemigo= new Enemigo(mx.itesm.btp.R.drawable.enemigo2, vida, pantalla, getResources());
-			fondo = new Fondo(mx.itesm.btp.R.drawable.fondo2, pantalla, getResources());
+			fondo = new Fondo(mx.itesm.btp.R.drawable.fondobn, pantalla, getResources());
+			break;
+		case NIVEL_3:
+			vehiculoEnemigo= new Enemigo(mx.itesm.btp.R.drawable.nave, vida, pantalla, getResources());
+			fondo = new Fondo(mx.itesm.btp.R.drawable.fondo3bn, pantalla, getResources());
 		}
 		
 		graficaFlag = false;
