@@ -7,7 +7,9 @@
     <ImageView
         android:id="@+id/imageView1"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/logotec" android:scaleType="matrix"/>
+        android:layout_height="fill_parent"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="8.80"
+        android:src="@drawable/logotec2" />
 
 </LinearLayout>
