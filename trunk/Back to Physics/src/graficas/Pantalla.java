@@ -29,11 +29,11 @@ public class Pantalla {
 		width = display.getWidth();
 		height = display.getHeight();
 	}
-	
-	public Pantalla(){
-		//Se incializo una pantalla sin propiedades... :(
+
+	public Pantalla() {
+		// TODO Auto-generated constructor stub
 	}
-    
+
 	/**
 	 * Obtiene la altura de la pantalla
 	 * @return altura de la pantalla

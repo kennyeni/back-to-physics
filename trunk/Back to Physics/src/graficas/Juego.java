@@ -1,7 +1,6 @@
 package graficas;
 
 import personajes.Enemigo;
-import personajes.Principal;
 import exceptions.NoContextProvidedException;
 
 
@@ -134,6 +133,10 @@ public class Juego extends View{
 		//getCbm().drawBitmap(vehiculoEnemigo.getBitmap(), 100,100, p);
 	}
 
+	/**
+	 * Metodo que se encarga de hacer el cambio entre niveles
+	 * @param nivel
+	 */
 	public void setNivel(int nivel){
 		selectorNivel = nivel;
 		
@@ -201,6 +204,7 @@ public class Juego extends View{
 	public void setX(double x){
 		X=x;
 	}
+	
 	private void calcularXdOffset() {
 		int ancho=getWidth();
 		if(xp<ancho/2){
@@ -289,7 +293,6 @@ public class Juego extends View{
 	/**Obtiene el canvas
 	 * @return canvas
 	 */
-
 	public Canvas getCbm(){
 		if(cbm==null){
 			cbm=new Canvas(getBm());
@@ -393,12 +396,19 @@ public class Juego extends View{
 
 	}
 
-
+	/**
+	 * Metodo que baja vida al enemigo
+	 * @param distanciaParaDano
+	 */
 	public void infringirDano(float distanciaParaDano) {
 		vehiculoEnemigo.bajarVida(poderDeProyectil, distanciaParaDano);
 		Log.d("DEP", "Se bajo:"+distanciaParaDano);
 	}
 
+	/**
+	 * Metodo que nos regresa si el nivel ha terminado
+	 * @return
+	 */
 	public boolean isOver() {
 		return vehiculoEnemigo.isDead();
 	}

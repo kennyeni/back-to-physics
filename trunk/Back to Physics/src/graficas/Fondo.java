@@ -38,16 +38,24 @@ public class Fondo {
 		}
 	}
 	
+	/**
+	 * Regresa la posicion de la pantalla respecto al fondo en X
+	 * @return
+	 */
 	public double getWidth(){
 		return pos.x;
 	}
 	
+	/**
+	 * Regresa la posicion de la pantalla respecto al fondo en Y
+	 * @return
+	 */
 	public double getHeight(){
 		return pos.y;
 	}
 	
 	/**
-	 * Obtine la imagen que se selecciono para el fondo
+	 * Obtiene la imagen que se selecciono para el fondo
 	 * @return fondo
 	 */
 	public Bitmap getBitmap(){ //regresa el fondo cortado a la medida y pos

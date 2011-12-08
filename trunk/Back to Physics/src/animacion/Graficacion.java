@@ -55,10 +55,6 @@ public class Graficacion extends Activity implements Runnable {
 		th.start();
 	}
 	
-	public void detener(float distancia){
-		
-	}
-	
 	/**
 	 * Refresca la pantalla
 	 */

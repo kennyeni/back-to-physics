@@ -51,16 +51,6 @@ public class BacktoPhysics extends Activity {
         handler.postDelayed(lanzaSplash, 4000);
         handler.postDelayed(lanzaJuego, 6000);
     }
-    
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-		/*
-		if(keyCode == KeyEvent.KEYCODE_BACK){
-			setResult(RESULT_CLOSE_ALL);
-			finish();
-		}
-		*/
-		return true;
-	}
 
 }
 
