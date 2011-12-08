@@ -32,7 +32,6 @@ public class Enemigo {
 	public Enemigo(int idAImagen, float vida, Pantalla pantalla, Resources resources){
 		grafico = BitmapFactory.decodeResource(resources, idAImagen); // Se crea el grafico con la imagen de parametro
 		this.pantalla = pantalla;
-		pos = new Posicion();
 		this.vida = vidaMax = -5;
 		
 	}
@@ -75,6 +74,14 @@ public class Enemigo {
 	 * @return
 	 * @throws NoContextProvidedException
 	 */
+	public void setX(int x){
+		this.pos.x=x;
+	}
+	
+	public void setY(int y){
+		this.pos.y=y;
+	}
+	
 	public boolean mueveY(double Y) throws NoContextProvidedException{
 		boolean exitoso;
 		pos.y+=Y;
