@@ -1,4 +1,4 @@
-package preferencias;
+package logica;
 
 public class HighScore implements Comparable<HighScore> {
 	private String name;

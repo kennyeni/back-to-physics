@@ -15,10 +15,10 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.Scanner;
 
-import preferencias.HighScore;
 
 
 import logica.Fisica;
+import logica.HighScore;
 import mx.itesm.btp.R;
 
 import entrada.Acelerometro;
@@ -560,7 +560,7 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 		boolean existe=false;
 		String files[] = fileList();
 		for(int i=0; i<files.length; i++){
-			if(files[i]=="scores"){
+			if(files[i].toString()=="scores"){
 				existe=true;
 			}
 		}
@@ -572,16 +572,30 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 			} catch (FileNotFoundException e) {Log.i("ERROR", "No sirve la busqueda :S");}
 		}
 		ArrayList<HighScore> scoreList = new ArrayList<HighScore>();
-		while(scores.hasNext()){
+		while(scores!=null&&scores.hasNext()){
 			HighScore tmp = new HighScore(scores.next(), scores.nextInt());
 			scoreList.add(tmp);
 		}
 		String nombre = (getSharedPreferences("usuario",Context.MODE_PRIVATE)).getString("usuario", "anonymous");
 		scoreList.add(new HighScore(nombre, score));
 		Collections.sort(scoreList);
-		scores.close();
+		if(scores!=null)
+			scores.close();
 
-		//FileWriter file = new FileWriter();
+		Object[] hs = scoreList.toArray();
+		String[] str = new String[5];
+		FileOutputStream fos = null;
+		try {
+			fos = openFileOutput("scores", Context.MODE_PRIVATE);
+			for(int i=0;i<5;i++){
+				str[i] = hs[i].toString();
+				fos.write(str[i].getBytes());
+			}
+			fos.close();
+		} catch (IOException e) {
+			Log.i("ERROR","No se pudieron guardar los hs");
+		}
+		
 		
 	}
 	
