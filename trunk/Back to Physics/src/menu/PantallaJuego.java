@@ -445,7 +445,7 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 				juego.theta = theta;
 				
 				
-			}if(posx>=725 && posy >=20){
+			}if(posx>= widthPantalla-25 && posy >=20){
 				onPause();
 				showDialog(DIALOGO_SIMPLE);
 			}
