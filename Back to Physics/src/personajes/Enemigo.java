@@ -75,7 +75,6 @@ public class Enemigo {
 	 * @return
 	 * @throws NoContextProvidedException
 	 */
-	
 	public boolean mueveY(double Y) throws NoContextProvidedException{
 		boolean exitoso;
 		pos.y+=Y;
@@ -94,11 +93,20 @@ public class Enemigo {
 		return exitoso;
 	}
 
+	/**
+	 * Se baja vida del enemigo proporcional
+	 * @param poderDeProyectil
+	 * @param distanciaParaDano
+	 */
 	public void  bajarVida(float poderDeProyectil, float distanciaParaDano) {
-		// TODO Auto-generated method stub
+		vida -= poderDeProyectil/distanciaParaDano;
 		
 	}
 
+	/**
+	 * Indica si el enemigo esta muerto
+	 * @return
+	 */
 	public boolean isDead() {
 		// TODO Auto-generated method stub
 		return (vida<=0);

@@ -156,6 +156,11 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 	}
 	
 
+	/**
+	 * Listener de cuando un nivel ha cambiado
+	 * @param pref
+	 * @param key
+	 */
 	public void onSharedPreferenceChanged(SharedPreferences pref, String key) {
 		if(key==PNivel){
 			juego.setNivel(pref.getInt(PNivel, 1));
@@ -367,7 +372,6 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 	 */
 	public Coordenadas getPos(int x, int y){
 		coordenadas = new Coordenadas(x,y);
-		
 		return coordenadas;
 	}
 		

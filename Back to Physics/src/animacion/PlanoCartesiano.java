@@ -246,12 +246,23 @@ public class PlanoCartesiano extends View {
 	}
 
 	/**
+	 * Regresa la distancia lineal que ha habido del disparo al enemigo
 	 * @return the distanciaDano
 	 */
 	public float getDistanciaDano() {
 		return distanciaDano;
 	}
 
+	/**
+	 * Metodo que se encarga de reinicializar las graficas
+	 * @param puntosA
+	 * @param puntosL
+	 * @param theta
+	 * @param phi
+	 * @param enemigoX
+	 * @param enemigoY
+	 * @param nyan
+	 */
 	public void regenerar(LinkedList<Coordenadas> puntosA,
 			LinkedList<Coordenadas> puntosL, double theta, double phi, float enemigoX, float enemigoY, boolean nyan) {
 		this.enemigoX = enemigoX;
