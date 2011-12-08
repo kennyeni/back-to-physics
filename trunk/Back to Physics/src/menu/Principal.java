@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -80,6 +81,12 @@ public class Principal extends Activity implements OnTouchListener{
 				}else{
 					if(v.getId()==R.id.btnContinuar){
 						continuarJuego();
+					}else{
+						if(v.getId()==R.id.btnScores){
+							Intent intencion = new Intent(Principal.this,Highs.class); 
+							startActivity(intencion); 
+							return false;
+						}
 					}
 				}
 			}
@@ -130,8 +137,7 @@ public class Principal extends Activity implements OnTouchListener{
 				try {
 					Thread.sleep(3000);
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					Log.e("ERROR", "El thread de mh muri—");
 				}
 				Intent intencion = new Intent(Principal.this,PantallaJuego.class);
 				intencion.putExtra("CONTINUAR", false);

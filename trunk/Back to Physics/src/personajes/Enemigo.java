@@ -12,7 +12,7 @@ public class Enemigo {
 	private Posicion pos = null;
 	private Pantalla pantalla;
 	private float vidaMax =100;
-	private float vida=100;
+	private float vida=1;
 	
 	/**
 	 * Esta calse es la creaci—n del fondo de los niveles.
@@ -33,7 +33,7 @@ public class Enemigo {
 		grafico = BitmapFactory.decodeResource(resources, idAImagen); // Se crea el grafico con la imagen de parametro
 		this.pantalla = pantalla;
 		pos = new Posicion();
-		this.vida = vidaMax = vida;
+		this.vida = vidaMax = -5;
 		
 	}
 	
