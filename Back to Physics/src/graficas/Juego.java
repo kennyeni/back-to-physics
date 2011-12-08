@@ -69,6 +69,8 @@ public class Juego extends View{
 	private Pantalla pantalla;
 	public double theta, phi;
 	private boolean resized=false;
+	private int hmax_enemigo = 0, xmax_enemigo = 0, xenemigo = 0, yenemigo = 0;
+	
 
 
 
@@ -130,7 +132,25 @@ public class Juego extends View{
 		disparo = false;
 
 		
-		//getCbm().drawBitmap(vehiculoEnemigo.getBitmap(), 100,100, p);
+		
+			hmax_enemigo = (int)fondo.getHeight()/2;
+			xmax_enemigo = (int)fondo.getWidth();
+
+		
+		
+		
+		
+		
+		do {
+			xenemigo = (int) (Math.random()*1000); 
+			} while (xenemigo>0 && xenemigo< xmax_enemigo);
+		
+		do {
+			yenemigo = (int) (Math.random()*1000); 
+			} while (yenemigo>0 && yenemigo< hmax_enemigo);
+		
+		
+		
 	}
 
 	/**
@@ -236,6 +256,7 @@ public class Juego extends View{
 
 
 		canvas.drawBitmap(imgbtn,canvas.getWidth()/60,(5)*canvas.getHeight()/7,p);
+		getCbm().drawBitmap(vehiculoEnemigo.getBitmap(), xenemigo,yenemigo, p);
 
 
 		///////////////////////////////////////////////////////
