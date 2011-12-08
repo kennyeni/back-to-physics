@@ -10,6 +10,7 @@ import mx.itesm.btp.BacktoPhysics;
 import mx.itesm.btp.R;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -25,9 +26,11 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 import android.view.View.OnTouchListener;
 import animacion.Graficacion;
 
@@ -131,6 +134,11 @@ public class Juego extends View{
 
 	public void setNivel(int nivel){
 		selectorNivel = nivel;
+		
+		SharedPreferences preferenceNivel = getContext().getSharedPreferences("nivel", Context.MODE_PRIVATE);
+		SharedPreferences.Editor editorMusica = preferenceNivel.edit();
+		editorMusica.putInt("nivel", nivel);
+		editorMusica.commit();
 
 		float vida = (float) 100.0;
 

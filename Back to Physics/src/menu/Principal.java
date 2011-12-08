@@ -77,10 +77,43 @@ public class Principal extends Activity implements OnTouchListener{
 					Intent intencion = new Intent(Principal.this,acercaDe.class); 
 					startActivity(intencion); 
 					return false;
+				}else{
+					if(v.getId()==R.id.btnContinuar){
+						continuarJuego();
+					}
 				}
 			}
 		}
 		return false;
+	}
+	
+	private void continuarJuego(){
+		Intent intencion = new Intent(Principal.this,Loading.class);
+		startActivity(intencion);
+		
+		AsyncTask<Context, Integer, Intent> sync = new AsyncTask<Context, Integer, Intent>() {
+			@Override
+			protected Intent doInBackground(Context... params) {
+				
+				try {
+					Thread.sleep(3000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				Intent intencion = new Intent(Principal.this,PantallaJuego.class);
+				intencion.putExtra("CONTINUAR", true);
+				return intencion;
+			}
+			
+			@Override
+			protected void onPostExecute(Intent result) {
+				super.onPostExecute(result);
+				startActivity(result);
+			}
+		}; 
+		
+		sync.execute(this);
 	}
 	
 	
@@ -101,6 +134,7 @@ public class Principal extends Activity implements OnTouchListener{
 					e.printStackTrace();
 				}
 				Intent intencion = new Intent(Principal.this,PantallaJuego.class);
+				intencion.putExtra("CONTINUAR", false);
 				return intencion;
 			}
 			
