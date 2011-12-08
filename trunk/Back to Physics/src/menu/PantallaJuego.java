@@ -437,8 +437,8 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 				int x = juego.getWidth();
 				int y = juego.getHeight();
 				
-				theta = 140-((x*100)/juego.fondo.getWidth());
-				phi= 100-((y*80)/juego.fondo.getHeight());
+				theta = 140-((x*100)/juego.fondo.getXRespectoAFondo());
+				phi= 100-((y*80)/juego.fondo.getYRespectoAFondo());
 				
 
 				juego.phi = phi;

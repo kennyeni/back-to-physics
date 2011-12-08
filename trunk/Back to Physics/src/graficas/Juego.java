@@ -133,8 +133,8 @@ public class Juego extends View{
 
 		
 		
-			hmax_enemigo = (int)fondo.getHeight()/2;
-			xmax_enemigo = (int)fondo.getWidth();
+			hmax_enemigo = (int)fondo.getYRespectoAFondo()/2;
+			xmax_enemigo = (int)fondo.getXRespectoAFondo();
 
 		
 		
@@ -148,6 +148,9 @@ public class Juego extends View{
 		do {
 			yenemigo = (int) (Math.random()*1000); 
 			} while (yenemigo>0 && yenemigo< hmax_enemigo);
+		
+		vehiculoEnemigo.setX(xenemigo);
+		vehiculoEnemigo.setY(yenemigo);
 		
 		
 		
@@ -256,7 +259,21 @@ public class Juego extends View{
 
 
 		canvas.drawBitmap(imgbtn,canvas.getWidth()/60,(5)*canvas.getHeight()/7,p);
-		getCbm().drawBitmap(vehiculoEnemigo.getBitmap(), xenemigo,yenemigo, p);
+		
+		
+		try {
+			if(xenemigo>fondo.getXRespectoAFondo()&&xenemigo<pantalla.getWidth()+fondo.getXRespectoAFondo()){
+				if(xenemigo>fondo.getYRespectoAFondo()&&xenemigo<pantalla.getWidth()+fondo.getYRespectoAFondo()){
+					float x = (float) (xenemigo-fondo.getXRespectoAFondo());
+					float y = (float) ((float) yenemigo-fondo.getYRespectoAFondo());
+					canvas.drawBitmap(vehiculoEnemigo.getBitmap(), x, y, p);
+				}
+			}
+		} catch (NoContextProvidedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 
 
 		///////////////////////////////////////////////////////

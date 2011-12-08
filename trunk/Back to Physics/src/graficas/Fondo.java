@@ -42,7 +42,7 @@ public class Fondo {
 	 * Regresa la posicion de la pantalla respecto al fondo en X
 	 * @return
 	 */
-	public double getWidth(){
+	public double getXRespectoAFondo(){
 		return pos.x;
 	}
 	
@@ -50,7 +50,7 @@ public class Fondo {
 	 * Regresa la posicion de la pantalla respecto al fondo en Y
 	 * @return
 	 */
-	public double getHeight(){
+	public double getYRespectoAFondo(){
 		return pos.y;
 	}
 	
