@@ -38,7 +38,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnLongClickListener;
 import android.view.View.OnTouchListener;
+import android.widget.CompoundButton;
 import android.widget.FrameLayout;
+import android.widget.ToggleButton;
 import animacion.PlanoCartesiano;
 
 /**
@@ -84,7 +86,8 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 	private int calibracionX;
 	private int calibracionY;
 	public final int NIVEL_3 =3;
-	private int SelectorNivel;
+	private int selectorNivel;
+	private boolean juegoViejo;
 	private long tiempoInicio;
 	private int score =0, misiles=5;
 	private final String FILENAME = "btpPrefs";
@@ -107,10 +110,14 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 		if (calibracionX==0) {
 			showDialog(DIALOGO_CALIBRACION);
 		}
+		juegoViejo =getIntent().getBooleanExtra("CONTINUAR", true);
+		if(juegoViejo){
+	         SharedPreferences preferenceNivel = getSharedPreferences("nivel", Context.MODE_PRIVATE);
+	         selectorNivel = preferenceNivel.getInt("nivel", 1);
+		}
 		
-		SelectorNivel=NIVEL_1;
 		pantalla = new Pantalla();
-		switch(SelectorNivel){
+		switch(selectorNivel){
 		case NIVEL_1:
 			juego = new Juego(this, pantalla,NIVEL_1);
 			break;
@@ -138,7 +145,7 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 		
 		setContentView(layoutPrincipal);
 		
-		reproducirAudio(SelectorNivel);
+		reproducirAudio(selectorNivel);
 		
 		widthArrow = juego.getArrow().getWidth();
 		heightArrow =juego.getArrow().getHeight();
