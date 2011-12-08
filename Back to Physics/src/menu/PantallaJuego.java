@@ -1,10 +1,19 @@
 package menu;
 
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
 import java.security.Timestamp;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.LinkedList;
+import java.util.Scanner;
 
 import preferencias.HighScore;
 
@@ -48,7 +57,7 @@ import animacion.PlanoCartesiano;
  * @author vero
  *
  */
-public class PantallaJuego  extends Activity implements Runnable, OnTouchListener{
+public class PantallaJuego  extends Activity implements Runnable, OnTouchListener, OnSharedPreferenceChangeListener{
 	private static final String MENU_PAUSE = null;
 	private static final String MENU_RESUME = null;
 	private static final int GRAFICAS = 1;
@@ -86,7 +95,7 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 	private int calibracionX;
 	private int calibracionY;
 	public final int NIVEL_3 =3;
-	private int selectorNivel;
+	private int selectorNivel=1;
 	private boolean juegoViejo;
 	private long tiempoInicio;
 	private int score =0, misiles=5;
@@ -100,11 +109,10 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 		musica = (getSharedPreferences("musica", Context.MODE_PRIVATE)).getBoolean("musica", true);
 		sonido = (getSharedPreferences("sonido", Context.MODE_PRIVATE)).getBoolean("sonido", true);
 		acelerometro = (getSharedPreferences("acelerometro", Context.MODE_PRIVATE)).getBoolean("acelerometro", true);
-		nivel = (getSharedPreferences(PNivel, Context.MODE_PRIVATE)).getInt(PNivel, 1);
 		calibracionX = (getSharedPreferences("calibracionX",Context.MODE_PRIVATE)).getInt("calibracionX", 0);
 		calibracionY = (getSharedPreferences("calibracionY",Context.MODE_PRIVATE)).getInt("calibracionY", 0);
 		
-		//(getSharedPreferences(PNivel, Context.MODE_PRIVATE)).registerOnSharedPreferenceChangeListener((OnSharedPreferenceChangeListener) this); 
+		(getSharedPreferences(PNivel, Context.MODE_PRIVATE)).registerOnSharedPreferenceChangeListener(this); 
 		//Cada ves que se cambie una propiedad se llama
 
 		if (calibracionX==0) {
@@ -112,21 +120,21 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 		}
 		juegoViejo =getIntent().getBooleanExtra("CONTINUAR", true);
 		if(juegoViejo){
-	         SharedPreferences preferenceNivel = getSharedPreferences("nivel", Context.MODE_PRIVATE);
-	         selectorNivel = preferenceNivel.getInt("nivel", 1);
+	         SharedPreferences preferenceNivel = getSharedPreferences(PNivel, Context.MODE_PRIVATE);
+	         selectorNivel = preferenceNivel.getInt(PNivel, 1);
 		}
 		
 		pantalla = new Pantalla();
 		switch(selectorNivel){
-		case NIVEL_1:
-			juego = new Juego(this, pantalla,NIVEL_1);
-			break;
 		case NIVEL_2:
 			juego = new Juego(this, pantalla,NIVEL_2);
 			break;
 		case NIVEL_3:
 			juego= new Juego(this,pantalla,NIVEL_3);
 			break;
+			default:
+				juego = new Juego(this,pantalla, NIVEL_1);
+				break;
 		}
 		
 		Date inicio = new Date();
@@ -170,7 +178,7 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 	
 	private void detenerSonido(){
 		if(sonido){
-			if(player2.isPlaying()){
+			if(player2!=null&&player2.isPlaying()){
 				player2.stop();
 				player2.release();
 			}
@@ -187,7 +195,7 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 	
 	private void detenerAudio(){
 		if (musica) {
-			if (player.isPlaying()) {
+			if (player!=null&&player.isPlaying()) {
 				player.stop();
 				player.release();			
 			}
@@ -198,31 +206,31 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 		switch(selectorNivel){
 		case NIVEL_1:
 			if (musica) {
-   		if(player!=null){
-      		 player.release();
-      	 }
-      	 player=MediaPlayer.create(this,mx.itesm.btp.R.raw.pkmn);
-      	 player.start();
-   	 	}break;
+				if(player!=null){
+					player.release();
+				}
+				player=MediaPlayer.create(this,mx.itesm.btp.R.raw.pkmn);
+				player.start();
+			}break;
 		case NIVEL_2:
 			if (musica) {
-		   		if(player!=null){
-		      		 player.release();
-		      	 }
-		      	 player=MediaPlayer.create(this,mx.itesm.btp.R.raw.metalslug);
-		      	 player.start();
-		   	 	}break;
+				if(player!=null){
+					player.release();
+				}
+				player=MediaPlayer.create(this,mx.itesm.btp.R.raw.metalslug);
+				player.start();
+			}break;
 		case NIVEL_3:
 			if (musica) {
-		   		if(player!=null){
-		      		 player.release();
-		      	 }
-		      	 player=MediaPlayer.create(this,mx.itesm.btp.R.raw.sonidoespacio);
-		      	 player.start();
-		   	 	}break;
+				if(player!=null){
+					player.release();
+				}
+				player=MediaPlayer.create(this,mx.itesm.btp.R.raw.sonidoespacio);
+				player.start();
+			}break;
 		}
-   	 
-    }
+
+	}
 
 	/**
 	 * Inicia la actividad de empezar el juego.
@@ -252,12 +260,6 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 		detenerAudio();
 		juego.refresh();
 		corriendo = false;
-		if(player!=null){
-	   		 if(player.isPlaying()){
-	   			 player.stop();
-	   			 player.release();
-	   		 }
-	   	 }
 	   	 super.onStop();
 		
 
@@ -270,64 +272,64 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 	}
 
 	protected Dialog onCreateDialog(int id){
-    	if(id==DIALOGO_SIMPLE2){
-    		Dialog cuadroDialogo2=null;
-    		
-        	AlertDialog.Builder builder2 = new AlertDialog.Builder(this);
-    		builder2.setMessage("         Seguro?           ");
-    		builder2.setPositiveButton("Si", new DialogInterface.OnClickListener() {
-				
-				
+		if(id==DIALOGO_SIMPLE2){
+			Dialog cuadroDialogo2=null;
+
+			AlertDialog.Builder builder2 = new AlertDialog.Builder(this);
+			builder2.setMessage("         Seguro?           ");
+			builder2.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+
+
 				public void onClick(DialogInterface dialog, int which) {
 					finish();
 					//startActivity(new Intent(PantallaJuego.this, Principal.class));
 				}
 			});
-    		builder2.setNegativeButton("No", new DialogInterface.OnClickListener() {
-				
-				
+			builder2.setNegativeButton("No", new DialogInterface.OnClickListener() {
+
+
 				public void onClick(DialogInterface dialog, int which) {
 					dialog.dismiss();
-					
+
 				}
 			});cuadroDialogo2 = builder2.create();
 			return cuadroDialogo2;
-    	}
-    	
-    	else if(id==DIALOGO_SIMPLE){
+		}
+
+		else if(id==DIALOGO_SIMPLE){
 			Dialog cuadroDialogo=null;
-		
-    	AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setMessage("         Pausa           ");
-		builder.setPositiveButton("Reanudar", new DialogInterface.OnClickListener() {
-			
-			
-			public void onClick(DialogInterface dialogo, int which) {
-				dialogo.dismiss();
-				
-			}
-		});
-		builder.setNegativeButton("Salir", new DialogInterface.OnClickListener() {
-			
-			
-			public void onClick(DialogInterface dialog, int which) {
-			showDialog(DIALOGO_SIMPLE2);
-			}	
-		});
-		cuadroDialogo = builder.create();
-		return cuadroDialogo;
+
+			AlertDialog.Builder builder = new AlertDialog.Builder(this);
+			builder.setMessage("         Pausa           ");
+			builder.setPositiveButton("Reanudar", new DialogInterface.OnClickListener() {
+
+
+				public void onClick(DialogInterface dialogo, int which) {
+					dialogo.dismiss();
+
+				}
+			});
+			builder.setNegativeButton("Salir", new DialogInterface.OnClickListener() {
+
+
+				public void onClick(DialogInterface dialog, int which) {
+					showDialog(DIALOGO_SIMPLE2);
+				}	
+			});
+			cuadroDialogo = builder.create();
+			return cuadroDialogo;
 		}else if(id==DIALOGO_GRAFICAS){
 			Dialog dialogoGraficas=null;
-			
-	    	AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+			AlertDialog.Builder builder = new AlertDialog.Builder(this);
 			builder.setMessage("ÀAnalizar grafica?");
 			builder.setPositiveButton("Analizar", new DialogInterface.OnClickListener() {
-				
-				
+
+
 				@Override
 				public void onClick(DialogInterface dialogo, int which) {
 					dialogo.dismiss();
-					
+
 				}
 			});
 			builder.setNegativeButton("Jugar", new DialogInterface.OnClickListener() {
@@ -338,30 +340,30 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 			});
 			dialogoGraficas = builder.create();
 			return dialogoGraficas;
-			
-			}else if(id==DIALOGO_CALIBRACION){
-				Dialog dialogoCalibracion=null;
-				
-		    	AlertDialog.Builder builder = new AlertDialog.Builder(this);
-				builder.setMessage("Pon tu dispositivo en un ‡ngulo c—modo");
-				builder.setPositiveButton("Calibrar", new DialogInterface.OnClickListener() {
-					
-					@Override
-					public void onClick(DialogInterface dialogo, int which) {
-						acel.calibracion();	
-					}
-				});
-				builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						dialog.dismiss();
-					}	
-				});
-				dialogoCalibracion = builder.create();
-				return dialogoCalibracion;
+
+		}else if(id==DIALOGO_CALIBRACION){
+			Dialog dialogoCalibracion=null;
+
+			AlertDialog.Builder builder = new AlertDialog.Builder(this);
+			builder.setMessage("Pon tu dispositivo en un ‡ngulo c—modo");
+			builder.setPositiveButton("Calibrar", new DialogInterface.OnClickListener() {
+
+				@Override
+				public void onClick(DialogInterface dialogo, int which) {
+					acel.calibracion();	
 				}
-    	return null;
-		
+			});
+			builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					dialog.dismiss();
+				}	
+			});
+			dialogoCalibracion = builder.create();
+			return dialogoCalibracion;
+		}
+		return null;
+
 	}
 	
 	/**
@@ -527,14 +529,6 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 		getPlano().postInvalidate();
 		//Log.d("DEP", "Graficando graficas");
 		if(plano.hasEnded()){ //acabo la graficacion
-			/*
-			try {
-				th.join();
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			*/
 			modoDeJuego = JUEGO;
 			float dis = plano.getDistanciaDano();
 			juego.infringirDano(dis);
@@ -559,6 +553,36 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 		Date t = new Date();
 		double tiempo = (t.getTime()-tiempoInicio)*1000;
 		score = (int) ((1/tiempo)*misiles*10);
+		escribirScore(score);
+	}
+	
+	private void escribirScore(int score){
+		boolean existe=false;
+		String files[] = fileList();
+		for(int i=0; i<files.length; i++){
+			if(files[i]=="scores"){
+				existe=true;
+			}
+		}
+		
+		Scanner scores = null;
+		if(existe){
+			try {
+				scores = new Scanner(openFileInput("scores"));
+			} catch (FileNotFoundException e) {Log.i("ERROR", "No sirve la busqueda :S");}
+		}
+		ArrayList<HighScore> scoreList = new ArrayList<HighScore>();
+		while(scores.hasNext()){
+			HighScore tmp = new HighScore(scores.next(), scores.nextInt());
+			scoreList.add(tmp);
+		}
+		String nombre = (getSharedPreferences("usuario",Context.MODE_PRIVATE)).getString("usuario", "anonymous");
+		scoreList.add(new HighScore(nombre, score));
+		Collections.sort(scoreList);
+		scores.close();
+
+		//FileWriter file = new FileWriter();
+		
 	}
 	
 	private void refrescarGrafica(){

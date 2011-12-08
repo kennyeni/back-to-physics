@@ -161,9 +161,9 @@ public class Juego extends View{
 		selectorNivel = nivel;
 		
 		SharedPreferences preferenceNivel = getContext().getSharedPreferences("nivel", Context.MODE_PRIVATE);
-		SharedPreferences.Editor editorMusica = preferenceNivel.edit();
-		editorMusica.putInt("nivel", nivel);
-		editorMusica.commit();
+		SharedPreferences.Editor editorNivel = preferenceNivel.edit();
+		editorNivel.putInt("nivel", nivel);
+		editorNivel.commit();
 
 		float vida = (float) 100.0;
 
