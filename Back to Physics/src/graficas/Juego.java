@@ -130,6 +130,8 @@ public class Juego extends View{
 		missilehoriginal = missile.getHeight();
 		disparo = false;
 
+		
+		//getCbm().drawBitmap(vehiculoEnemigo.getBitmap(), 100,100, p);
 	}
 
 	public void setNivel(int nivel){
@@ -225,7 +227,7 @@ public class Juego extends View{
 		canvas.drawRGB(0,0,0); 
 
 		canvas.drawBitmap(fondo.getBitmap(), 0, 0, p);
-		canvas.drawBitmap(vehiculoEnemigo.getBitmap(), 100,100, p);
+		
 		canvas.drawBitmap(mira, 0, 0, p);
 
 
