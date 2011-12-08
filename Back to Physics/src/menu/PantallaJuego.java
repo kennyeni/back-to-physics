@@ -95,7 +95,7 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 	private int calibracionX;
 	private int calibracionY;
 	public final int NIVEL_3 =3;
-	private int selectorNivel=1;
+	private int selectorNivel=2;
 	private boolean juegoViejo;
 	private long tiempoInicio;
 	private int score =0, misiles=5;
@@ -121,7 +121,7 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 		juegoViejo =getIntent().getBooleanExtra("CONTINUAR", true);
 		if(juegoViejo){
 	         SharedPreferences preferenceNivel = getSharedPreferences(PNivel, Context.MODE_PRIVATE);
-	         selectorNivel = preferenceNivel.getInt(PNivel, 1);
+	         selectorNivel = 2;// preferenceNivel.getInt(PNivel, 1);
 		}
 		
 		pantalla = new Pantalla();

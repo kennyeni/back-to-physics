@@ -54,6 +54,14 @@ public class Fondo {
 		return pos.y;
 	}
 	
+	public double getWidth(){
+		return grafico.getWidth();
+	}
+	
+	public double getHeight(){
+		return grafico.getHeight();
+	}
+	
 	/**
 	 * Obtiene la imagen que se selecciono para el fondo
 	 * @return fondo
