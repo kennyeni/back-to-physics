@@ -74,6 +74,7 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 	private SharedPreferences preferenceSonido;
 	private boolean musica;
 	private boolean sonido;
+	private boolean acelerometro;
 	private Thread th = null;
 	private boolean modoNyan = false;
 	public final int NIVEL_1 =1;
@@ -95,6 +96,7 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 	
 		musica = (getSharedPreferences("musica", Context.MODE_PRIVATE)).getBoolean("musica", true);
 		sonido = (getSharedPreferences("sonido", Context.MODE_PRIVATE)).getBoolean("sonido", true);
+		acelerometro = (getSharedPreferences("acelerometro", Context.MODE_PRIVATE)).getBoolean("acelerometro", true);
 		nivel = (getSharedPreferences(PNivel, Context.MODE_PRIVATE)).getInt(PNivel, 1);
 		calibracionX = (getSharedPreferences("calibracionX",Context.MODE_PRIVATE)).getInt("calibracionX", 0);
 		calibracionY = (getSharedPreferences("calibracionY",Context.MODE_PRIVATE)).getInt("calibracionY", 0);
@@ -218,6 +220,8 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 		if(keyCode == KeyEvent.KEYCODE_BACK&&modoDeJuego==GRAFICAS){
 			//startActivity(new Intent(PantallaJuego.this, Principal.class));
 			showDialog(DIALOGO_GRAFICAS);
+		}else{
+			return super.onKeyDown(keyCode, event);
 		}
 		return false;
 	}
@@ -420,24 +424,6 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 				int x = juego.getWidth();
 				int y = juego.getHeight();
 				
-				/*
-				if(xinicial == x){
-					theta= 90.0;
-				}else if (x>xinicial){
-					theta = x*50/(pantalla.getWidth() - xinicial);
-				}else{
-					theta = x*50/xinicial;
-				}
-				
-				if(yinicial == y){
-					phi= 30.0;
-				}else if (y>yinicial){
-					phi = y*50/(pantalla.getHeight() - yinicial);
-				}else{
-					phi = y*30/yinicial;
-					
-				}
-				*/
 				theta = 140-((x*100)/juego.fondo.getWidth());
 				phi= 100-((y*80)/juego.fondo.getHeight());
 				
@@ -450,17 +436,7 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 				onPause();
 				showDialog(DIALOGO_SIMPLE);
 			}
-			
-			
-			
-			
-			
-
-			
-			
-
-			
-		
+					
 		} catch (NoContextProvidedException e){}
 		
 		return true;
@@ -579,14 +555,24 @@ public class PantallaJuego  extends Activity implements Runnable, OnTouchListene
 		plano = null;
 	}
 	
+	
+	 
+	
 	private void moverJuego() {
 		//Log.d("DEP", "Graficando Juego");
 		juego.bringToFront();
+		if (acelerometro) {
+			juego.mueveY(acel.getY());
+			juego.mueveX(acel.getX());
+			juego.setY(acel.Y);
+			juego.setX(acel.X);
+			//arrow.realease();
+			//}
+		//coso que dibuja el acelerometro= dibuja (this, mx.itesm.btpn.R.NOMBRE);
+		//COSO QUE DIBUJA.start();
+			
+		}
 		
-		juego.mueveY(acel.getY());
-		juego.mueveX(acel.getX());
-		juego.setY(acel.Y);
-		juego.setX(acel.X);
 		juego.postInvalidate();
 		
 		if(juego.graficaFlag){

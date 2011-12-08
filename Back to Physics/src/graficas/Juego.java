@@ -150,11 +150,6 @@ public class Juego extends View{
 	}
 
 
-	private void setContentView(int nivel1) {
-		// TODO Auto-generated method stub
-
-	}
-
 	/**
 	 * Mueve el fondo en X
 	 * @param x
@@ -273,56 +268,13 @@ public class Juego extends View{
 
 		}
 
-		//		missile=Bitmap.createScaledBitmap(missile, missileworiginal, missilehoriginal, false);
-		//		canvas.drawBitmap(missile, canvas.getWidth()/2-missile.getWidth()/2, canvas.getHeight()/2-missile.getHeight()/2,p);
-
 		canvas.drawText("AX: "+X+"\nAY: "+Y, 20, 20, p);
 
 
-		//if(disparo==true){
-
-		//if(contador!=0){
-		//missile=Bitmap.createScaledBitmap(missile, (int).9*missile.getWidth(), (int).9*missile.getHeight(), false);
-		//canvas.drawBitmap(missile, canvas.getWidth()/2-missile.getWidth()/2, canvas.getHeight()/2-missile.getHeight(),p);
-		//contador --;
-		//}else{
-		//	disparo = false;
-		//	}
-
-
-		//}else{
-
-		//missile=Bitmap.createScaledBitmap(missile, missileworiginal, missilehoriginal, false);
-		//canvas.drawBitmap(missile, canvas.getWidth()/2-missile.getWidth()/2, canvas.getHeight()/2-missile.getHeight(),p);
-		//}
-
-		//canvas.drawBitmap(imgRoca, 230, -100,p);
 	}
 
 
 
-	///////////////////////////////////////////////////////
-	////// Pasar estos a municion
-	///// Utilizando propiedades relativas a pantalla
-	//////////////////////////////////////////////////////
-
-	/*
-	protected void dibujarRoca(Canvas canvas,int y, Paint p){
-		super.onDraw(canvas);
-		canvas.drawBitmap(imgRoca, y, 230,p);
-
-	}
-
-
-
-	protected void lanzarRoca(Canvas canvas){
-			super.onDraw(canvas);
-			dibujarRoca(canvas, y, p);
-			y = (y+20)%canvas.getWidth();
-
-	}
-
-	 */
 
 	/**Obtiene el canvas
 	 * @return canvas
@@ -373,32 +325,10 @@ public class Juego extends View{
 	 * Realiza el disparo de la bala.
 	 */
 	public void disparar(){
-		//disparo=true;
-		//contador=3;
-		//		missile= BitmapFactory.decodeResource(getResources(), mx.itesm.btp.R.drawable.cat2);
-		//		int tmp1 = getCbm().getWidth();
-		//		int tmp2 = missile.getWidth();
-		//		int x=  (tmp1-tmp2)/2;
-		//		int y= getCbm().getHeight()/2-missile.getHeight()/2;
-		//		for(int i=1;i<=3;i++){
-		//		          missile = Bitmap.createScaledBitmap(missile, ((int) missile.getWidth()/i), ((int) missile.getHeight()/i), true);
-		//		          this.invalidate();
-		//		          try{
-		//		              Thread.sleep(32);
-		//		          } catch(Exception e) {}
-
+	
 		disparo=true;
 	}
 
-	/*
-
-		Context context = this.getContext();
-		CharSequence text = "Hello toast!";
-		int duration = Toast.LENGTH_SHORT;
-
-		Toast toast = Toast.makeText(context, text, duration);
-		toast.show();
-	 */
 
 
 	/**
