@@ -16,7 +16,7 @@
     \n Verónica Fajardo A01163407
     \n Andrés Duran Kenny Espinoza A01162492 
     \n Gerardo Caballero Soto A01163487
-    \n Luis Ivan Campos Soriano A01163407
+    \n Luis Ivan Campos Soriano A01167949
     \n
     \n
     \nVersion: 1.0
@@ -48,4 +48,6 @@
         <item >Existían diferentes tipos de proyectiles para las catapultas como: rocas, bolas de piedra talladas, flechas de hierro, cestos de serpientes venenosas, ollas con gas asfixiante, nidos de avispas y estiércol de ganado.</item>
         <item >La catapulta también fue usada en la conquista de México y el hecho esta narrado en un pasaje del libro “La versión de los vencidos”.</item>
     </string-array>
+        <string name="txtCalibracion">Calibración</string>
+        <string name="txtModo">Modo de Juego</string>
 </resources>
